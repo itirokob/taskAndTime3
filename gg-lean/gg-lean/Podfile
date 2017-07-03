@@ -1,0 +1,9 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+project '../gg-lean.xcodeproj'
+
+target "gg-lean" do
+    pod 'FontAwesome.swift'
+end
