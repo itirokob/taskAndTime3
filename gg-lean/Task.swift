@@ -27,4 +27,12 @@ class Task: NSObject {
         self.isActive = isActive
         self.id = id
     }
+    
+    func getTimeString() -> String{
+    
+        let minutes :Int = totalTime / 60
+        let seconds :Int = totalTime - 60*minutes
+        
+        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
+    }
 }

@@ -13,7 +13,7 @@ enum buttonsState {
     case pause
 }
 
-class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TasksViewController: UIViewController {
     let manager = DataBaseManager.shared
 
     @IBOutlet weak var tableView: UITableView!
@@ -25,6 +25,9 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var tasksArray = [Task]()
 
     var refresh: UIRefreshControl!
+    
+    var selectedIndex:IndexPath?
+    var isExpanded = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +49,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self, action: #selector(TasksViewController.loadTasks), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresh)
+    
         
         var _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(updateTimers), userInfo: nil, repeats: true)
+        
+        
+       // let nib = UINib.init(nibName: "CustomTableViewCell", bundle: nil)
+       // self.tableView.register(nib, forCellReuseIdentifier: "customCell")
+        
+       self.tableView.estimatedRowHeight = 40
         
     }
     
@@ -117,7 +127,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: Table View
+}
+
+
+//MARK: Table View Extension
+extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasksArray.count
@@ -127,20 +141,41 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return 1
     }
     
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        if isExpanded && self.selectedIndex == indexPath{
+            return 200
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
+        
+        /*
+        let cell:CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        cell.timeLabel.text = String(tasksArray[indexPath.row].totalTime)
+        cell.timeLabel.text = tasksArray[indexPath.row].getTimeString()
         
         cell.taskLabel.text = tasksArray[indexPath.row].name
-                
+        
         cell.tag = indexPath.row
         
         cell.playPauseButton.tag = indexPath.row
         cell.playPauseButton.addTarget(self, action: #selector(TasksViewController.playPauseButton), for: .touchUpInside);
-
+        
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
+ */
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "celola", for: indexPath) as! MyTableViewCell
+        
+        cell.label.text = indexPath.row % 2 == 0 ? "Blah!" : "Blah\nBlah\n"
+        
         return cell
     }
     //Swipe to delete a task
@@ -157,9 +192,18 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath) as! Cell
-        print("Abobora " + currentCell.taskLabel.text!)
-        currentCell.collapse()
+        //let currentCell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
+        //self.isExpanded = currentCell.collapse()
+        
+        self.selectedIndex = indexPath
+        self.didExpandCell()
+        
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
         self.view.layoutIfNeeded()
+    }
+    
+    func didExpandCell(){
+        self.isExpanded = !self.isExpanded
+        self.tableView.reloadRows(at: [selectedIndex!], with: .automatic)
     }
 }
