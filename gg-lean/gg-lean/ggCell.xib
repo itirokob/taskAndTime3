@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ggCell" id="bmz-9D-PXC" userLabel="ggCell" customClass="ggCell" customModule="gg_lean" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bmz-9D-PXC" id="Iko-vX-yXP">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-5a-tcq" customClass="taskView" customModule="gg_lean" customModuleProvider="target">
+                        <rect key="frame" x="13" y="13" width="349" height="223.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-Qn-Yp6" userLabel="Task Content">
+                                <rect key="frame" x="5" y="5" width="339" height="213.5"/>
+                                <subviews>
+                                    <button opaque="NO" tag="999" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39r-uP-SxH">
+                                        <rect key="frame" x="10" y="95" width="30" height="22"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEM-ZE-Zeg">
+                                        <rect key="frame" x="50" y="23" width="239" height="167.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sm7-gq-Jl1">
+                                        <rect key="frame" x="279" y="96" width="50" height="20.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="aXx-9Y-Yzf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="lEM-ZE-Zeg" firstAttribute="trailing" secondItem="sm7-gq-Jl1" secondAttribute="leading" constant="10" id="BxP-xd-Wjh"/>
+                                    <constraint firstItem="lEM-ZE-Zeg" firstAttribute="leading" secondItem="39r-uP-SxH" secondAttribute="trailing" constant="10" id="Ce1-6i-wUn"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="lEM-ZE-Zeg" secondAttribute="bottom" constant="15" id="ENO-rG-O1S"/>
+                                    <constraint firstItem="lEM-ZE-Zeg" firstAttribute="centerX" secondItem="Rzk-Qn-Yp6" secondAttribute="centerX" id="I1S-ng-9fb"/>
+                                    <constraint firstItem="39r-uP-SxH" firstAttribute="leading" secondItem="Rzk-Qn-Yp6" secondAttribute="leading" constant="10" id="cnf-Wc-PUe"/>
+                                    <constraint firstItem="sm7-gq-Jl1" firstAttribute="centerY" secondItem="lEM-ZE-Zeg" secondAttribute="centerY" id="gXw-DV-jsp"/>
+                                    <constraint firstItem="lEM-ZE-Zeg" firstAttribute="top" secondItem="Rzk-Qn-Yp6" secondAttribute="topMargin" constant="15" id="j28-Gq-9Yl"/>
+                                    <constraint firstAttribute="trailing" secondItem="sm7-gq-Jl1" secondAttribute="trailing" constant="10" id="oEb-H1-3CL"/>
+                                    <constraint firstItem="lEM-ZE-Zeg" firstAttribute="centerY" secondItem="Rzk-Qn-Yp6" secondAttribute="centerY" id="rtH-EF-8r7"/>
+                                    <constraint firstItem="39r-uP-SxH" firstAttribute="centerY" secondItem="lEM-ZE-Zeg" secondAttribute="centerY" id="vJU-pv-pi5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Rzk-Qn-Yp6" secondAttribute="bottom" constant="5" id="6Gu-yI-Yn0"/>
+                            <constraint firstAttribute="trailing" secondItem="Rzk-Qn-Yp6" secondAttribute="trailing" constant="5" id="6La-cb-RAd"/>
+                            <constraint firstItem="Rzk-Qn-Yp6" firstAttribute="leading" secondItem="bQl-5a-tcq" secondAttribute="leading" constant="5" id="Bs9-F2-MlZ"/>
+                            <constraint firstItem="Rzk-Qn-Yp6" firstAttribute="top" secondItem="bQl-5a-tcq" secondAttribute="top" constant="5" id="d5f-PT-tBI"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bQl-5a-tcq" firstAttribute="top" secondItem="Iko-vX-yXP" secondAttribute="topMargin" constant="5" id="6jf-MB-ycQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bQl-5a-tcq" secondAttribute="bottom" constant="5" id="CxT-H2-mmh"/>
+                    <constraint firstItem="bQl-5a-tcq" firstAttribute="leading" secondItem="Iko-vX-yXP" secondAttribute="leadingMargin" constant="5" id="Kw5-mK-d08"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bQl-5a-tcq" secondAttribute="trailing" constant="5" id="xK5-Fw-hO6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="playPauseButton" destination="39r-uP-SxH" id="fEe-5m-XHs"/>
+                <outlet property="taskLabel" destination="lEM-ZE-Zeg" id="t75-YU-jcg"/>
+                <outlet property="timeLabel" destination="sm7-gq-Jl1" id="ghI-ws-wik"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

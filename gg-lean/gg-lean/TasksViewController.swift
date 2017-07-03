@@ -54,8 +54,8 @@ class TasksViewController: UIViewController {
         var _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(updateTimers), userInfo: nil, repeats: true)
         
         
-       // let nib = UINib.init(nibName: "CustomTableViewCell", bundle: nil)
-       // self.tableView.register(nib, forCellReuseIdentifier: "customCell")
+       let nib = UINib.init(nibName: "ggCell", bundle: nil)
+       self.tableView.register(nib, forCellReuseIdentifier: "ggCell")
         
        self.tableView.estimatedRowHeight = 40
         
@@ -153,8 +153,7 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        /*
-        let cell:CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ggCell", for: indexPath) as! ggCell
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
@@ -166,15 +165,9 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.playPauseButton.tag = indexPath.row
         cell.playPauseButton.addTarget(self, action: #selector(TasksViewController.playPauseButton), for: .touchUpInside);
-        
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
- */
+
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "celola", for: indexPath) as! MyTableViewCell
-        
-        cell.label.text = indexPath.row % 2 == 0 ? "Blah!" : "Blah\nBlah\n"
         
         return cell
     }
@@ -192,8 +185,6 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let currentCell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
-        //self.isExpanded = currentCell.collapse()
         
         self.selectedIndex = indexPath
         self.didExpandCell()
