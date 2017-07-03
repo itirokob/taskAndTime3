@@ -117,6 +117,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
     }
     
+    //MARK: Table View
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasksArray.count
     }
@@ -152,5 +154,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             tasksArray.remove(at: indexPath.row)
             self.tableView.isEditing=false;
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCell = tableView.cellForRow(at: indexPath) as! Cell
+        print("Abobora " + currentCell.taskLabel.text!)
+        currentCell.collapse()
+        self.view.layoutIfNeeded()
     }
 }

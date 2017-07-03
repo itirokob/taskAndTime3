@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,29 +55,23 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4aP-Vl-Rul" id="wAq-Tu-bWg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-lk-wI7" customClass="taskView" customModule="gg_lean" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="359" height="75"/>
                                                     <subviews>
-                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6np-8y-kUQ" userLabel="id">
-                                                            <rect key="frame" x="317" y="54" width="0.0" height="0.0"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="123" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doP-kK-e2u">
-                                                            <rect key="frame" x="51" y="27" width="198" height="21"/>
+                                                            <rect key="frame" x="51" y="27" width="200" height="21"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="198" id="QxM-rm-n0W"/>
+                                                                <constraint firstAttribute="width" constant="200" id="rtL-tf-NNB"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" tag="999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgY-Fg-zrM">
-                                                            <rect key="frame" x="15" y="22" width="22" height="22"/>
+                                                            <rect key="frame" x="15" y="26.5" width="22" height="22"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8h8-nk-aIC">
                                                             <rect key="frame" x="296" y="27" width="46" height="21"/>
@@ -85,22 +79,43 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-ZC-12t">
+                                                            <rect key="frame" x="8" y="88" width="351" height="69"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
                                                     </subviews>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="doP-kK-e2u" firstAttribute="leading" secondItem="HgY-Fg-zrM" secondAttribute="trailing" constant="14" id="2yQ-tO-Rux"/>
-                                                        <constraint firstItem="8h8-nk-aIC" firstAttribute="leading" secondItem="doP-kK-e2u" secondAttribute="trailing" constant="47" id="5xz-0o-pou"/>
-                                                        <constraint firstItem="doP-kK-e2u" firstAttribute="centerY" secondItem="5Qv-lk-wI7" secondAttribute="centerY" id="N1y-qM-o5A"/>
-                                                        <constraint firstItem="HgY-Fg-zrM" firstAttribute="leading" secondItem="5Qv-lk-wI7" secondAttribute="leading" constant="15" id="Nu4-xv-Rmg"/>
-                                                        <constraint firstItem="HgY-Fg-zrM" firstAttribute="top" secondItem="5Qv-lk-wI7" secondAttribute="top" constant="22" id="UDn-XK-z4L"/>
-                                                        <constraint firstAttribute="trailing" secondItem="6np-8y-kUQ" secondAttribute="trailing" constant="42" id="VcP-mx-wtm"/>
-                                                        <constraint firstItem="doP-kK-e2u" firstAttribute="baseline" secondItem="8h8-nk-aIC" secondAttribute="baseline" id="XBX-fq-uYV"/>
-                                                        <constraint firstItem="6np-8y-kUQ" firstAttribute="top" secondItem="5Qv-lk-wI7" secondAttribute="top" constant="54" id="utf-T5-HqC"/>
+                                                        <constraint firstItem="8h8-nk-aIC" firstAttribute="centerY" secondItem="doP-kK-e2u" secondAttribute="centerY" id="1jr-A7-Tdb" userLabel="B Time Label.centerY = Task Label.centerY"/>
+                                                        <constraint firstItem="doP-kK-e2u" firstAttribute="top" secondItem="5Qv-lk-wI7" secondAttribute="top" constant="27" id="9i5-Fc-s7I" userLabel="B Task Label.top = top + 27"/>
+                                                        <constraint firstItem="HgY-Fg-zrM" firstAttribute="centerY" secondItem="doP-kK-e2u" secondAttribute="centerY" id="9xY-GF-fR3" userLabel="B Play Pause Button.centerY = Task Label.centerY"/>
+                                                        <constraint firstItem="HgY-Fg-zrM" firstAttribute="leading" secondItem="5Qv-lk-wI7" secondAttribute="leading" constant="15" id="FTb-9N-9i0" userLabel="C Play Pause Button.leading = leading + 15"/>
+                                                        <constraint firstItem="fxf-ZC-12t" firstAttribute="top" secondItem="doP-kK-e2u" secondAttribute="bottom" constant="40" id="Lrh-KE-pJo" userLabel="B Text View.top = Task Label.bottom + 40"/>
+                                                        <constraint firstItem="HgY-Fg-zrM" firstAttribute="centerY" secondItem="5Qv-lk-wI7" secondAttribute="centerY" id="MRb-XM-34B" userLabel="A Play Pause Button.centerY = centerY"/>
+                                                        <constraint firstItem="doP-kK-e2u" firstAttribute="leading" secondItem="HgY-Fg-zrM" secondAttribute="trailing" constant="14" id="Mhu-tG-IS8" userLabel="C Task Label.leading = Play Pause Button.trailing + 14"/>
+                                                        <constraint firstAttribute="height" constant="75" id="Wsd-S5-xu5" userLabel="A CellHeight"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8h8-nk-aIC" secondAttribute="trailing" constant="17" id="cZS-1l-1KC" userLabel="C trailing = Time Label.trailing + 17"/>
+                                                        <constraint firstItem="8h8-nk-aIC" firstAttribute="leading" secondItem="doP-kK-e2u" secondAttribute="trailing" constant="45" id="dkp-4Q-IaR" userLabel="C Time Label.leading = Task Label.trailing + 45"/>
+                                                        <constraint firstItem="doP-kK-e2u" firstAttribute="centerY" secondItem="5Qv-lk-wI7" secondAttribute="centerY" id="dmm-Tj-0bP" userLabel="A Task Label.centerY = centerY"/>
+                                                        <constraint firstItem="8h8-nk-aIC" firstAttribute="centerY" secondItem="5Qv-lk-wI7" secondAttribute="centerY" id="nOU-Oq-9QG" userLabel="A Time Label.centerY = centerY"/>
+                                                        <constraint firstAttribute="bottom" secondItem="fxf-ZC-12t" secondAttribute="bottom" constant="10" id="ote-P9-Gf4" userLabel="B bottom = Text View.bottom + 10"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="9xY-GF-fR3"/>
+                                                            <exclude reference="9i5-Fc-s7I"/>
+                                                            <exclude reference="Lrh-KE-pJo"/>
+                                                            <exclude reference="ote-P9-Gf4"/>
+                                                            <exclude reference="1jr-A7-Tdb"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="5Qv-lk-wI7" firstAttribute="centerY" secondItem="wAq-Tu-bWg" secondAttribute="centerY" id="2Ix-bj-VX1"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="5Qv-lk-wI7" secondAttribute="bottom" constant="1" id="Dfz-1z-JOt"/>
                                                 <constraint firstItem="5Qv-lk-wI7" firstAttribute="leading" secondItem="wAq-Tu-bWg" secondAttribute="leadingMargin" id="Z0f-WB-iJg"/>
                                                 <constraint firstItem="5Qv-lk-wI7" firstAttribute="trailing" secondItem="wAq-Tu-bWg" secondAttribute="trailingMargin" id="eiF-fY-lLT"/>
                                                 <constraint firstItem="5Qv-lk-wI7" firstAttribute="top" secondItem="wAq-Tu-bWg" secondAttribute="topMargin" id="kgd-QU-JAL"/>
