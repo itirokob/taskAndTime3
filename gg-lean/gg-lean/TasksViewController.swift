@@ -155,13 +155,14 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ggCell", for: indexPath) as! ggCell
         
+        // Add value to cell tags
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        
         cell.timeLabel.text = tasksArray[indexPath.row].getTimeString()
-        
         cell.taskLabel.text = tasksArray[indexPath.row].name
-        
         cell.tag = indexPath.row
+        
+        //Remove cell selection highlighting
+        cell.selectionStyle = .none
         
         cell.playPauseButton.tag = indexPath.row
         cell.playPauseButton.addTarget(self, action: #selector(TasksViewController.playPauseButton), for: .touchUpInside);
