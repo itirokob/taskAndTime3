@@ -12,30 +12,30 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ggCell" id="bmz-9D-PXC" userLabel="ggCell" customClass="ggCell" customModule="gg_lean" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ggCell" rowHeight="125" id="bmz-9D-PXC" userLabel="ggCell" customClass="ggCell" customModule="gg_lean" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bmz-9D-PXC" id="Iko-vX-yXP">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-5a-tcq" customClass="taskView" customModule="gg_lean" customModuleProvider="target">
-                        <rect key="frame" x="13" y="13" width="349" height="223.5"/>
+                        <rect key="frame" x="13" y="13" width="349" height="98.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzk-Qn-Yp6" userLabel="Task Content">
-                                <rect key="frame" x="5" y="5" width="339" height="213.5"/>
+                                <rect key="frame" x="5" y="5" width="339" height="88.5"/>
                                 <subviews>
                                     <button opaque="NO" tag="999" contentMode="scaleToFill" horizontalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39r-uP-SxH">
-                                        <rect key="frame" x="10" y="95" width="30" height="22"/>
+                                        <rect key="frame" x="10" y="21.5" width="30" height="22"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEM-ZE-Zeg">
-                                        <rect key="frame" x="50" y="23" width="239" height="167.5"/>
+                                        <rect key="frame" x="50" y="23" width="239" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sm7-gq-Jl1">
-                                        <rect key="frame" x="279" y="96" width="50" height="20.5"/>
+                                        <rect key="frame" x="279" y="22.5" width="50" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="aXx-9Y-Yzf"/>
                                         </constraints>
@@ -43,18 +43,23 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7oA-9o-7M7" userLabel="Add Custom VIew">
+                                        <rect key="frame" x="0.0" y="76" width="339" height="128"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="7oA-9o-7M7" firstAttribute="leading" secondItem="Rzk-Qn-Yp6" secondAttribute="leading" id="7op-w4-CxA"/>
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="trailing" secondItem="sm7-gq-Jl1" secondAttribute="leading" constant="10" id="BxP-xd-Wjh"/>
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="leading" secondItem="39r-uP-SxH" secondAttribute="trailing" constant="10" id="Ce1-6i-wUn"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="lEM-ZE-Zeg" secondAttribute="bottom" constant="15" id="ENO-rG-O1S"/>
+                                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="lEM-ZE-Zeg" secondAttribute="bottom" constant="15" id="ENO-rG-O1S"/>
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="centerX" secondItem="Rzk-Qn-Yp6" secondAttribute="centerX" id="I1S-ng-9fb"/>
                                     <constraint firstItem="39r-uP-SxH" firstAttribute="leading" secondItem="Rzk-Qn-Yp6" secondAttribute="leading" constant="10" id="cnf-Wc-PUe"/>
                                     <constraint firstItem="sm7-gq-Jl1" firstAttribute="centerY" secondItem="lEM-ZE-Zeg" secondAttribute="centerY" id="gXw-DV-jsp"/>
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="top" secondItem="Rzk-Qn-Yp6" secondAttribute="topMargin" constant="15" id="j28-Gq-9Yl"/>
+                                    <constraint firstAttribute="trailing" secondItem="7oA-9o-7M7" secondAttribute="trailing" id="l0P-6O-7H0"/>
                                     <constraint firstAttribute="trailing" secondItem="sm7-gq-Jl1" secondAttribute="trailing" constant="10" id="oEb-H1-3CL"/>
-                                    <constraint firstItem="lEM-ZE-Zeg" firstAttribute="centerY" secondItem="Rzk-Qn-Yp6" secondAttribute="centerY" id="rtH-EF-8r7"/>
                                     <constraint firstItem="39r-uP-SxH" firstAttribute="centerY" secondItem="lEM-ZE-Zeg" secondAttribute="centerY" id="vJU-pv-pi5"/>
                                 </constraints>
                             </view>
@@ -85,6 +90,7 @@
                 <outlet property="taskLabel" destination="lEM-ZE-Zeg" id="t75-YU-jcg"/>
                 <outlet property="timeLabel" destination="sm7-gq-Jl1" id="ghI-ws-wik"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="-8.5"/>
         </tableViewCell>
     </objects>
 </document>
