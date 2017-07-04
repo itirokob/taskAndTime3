@@ -16,7 +16,6 @@
 		B73766F91F03D0650063B268 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B73766F71F03D0650063B268 /* LaunchScreen.storyboard */; };
 		B73767011F03D2D90063B268 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767001F03D2D90063B268 /* TasksViewController.swift */; };
 		B73767031F03D4B40063B268 /* taskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767021F03D4B40063B268 /* taskView.swift */; };
-		B73767071F03DC500063B268 /* taskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73767061F03DC500063B268 /* taskView.xib */; };
 		B737670D1F03DF200063B268 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B737670C1F03DF200063B268 /* CloudKit.framework */; };
 		B73767111F04220D0063B268 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767101F04220D0063B268 /* DataBaseManager.swift */; };
 		B73767131F043C730063B268 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
@@ -37,7 +36,6 @@
 		B73766FA1F03D0650063B268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B73767001F03D2D90063B268 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		B73767021F03D4B40063B268 /* taskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = taskView.swift; sourceTree = "<group>"; };
-		B73767061F03DC500063B268 /* taskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = taskView.xib; sourceTree = "<group>"; };
 		B737670A1F03DF1F0063B268 /* gg-lean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "gg-lean.entitlements"; sourceTree = "<group>"; };
 		B737670C1F03DF200063B268 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B73767101F04220D0063B268 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBaseManager.swift; path = ../DataBaseManager.swift; sourceTree = "<group>"; };
@@ -106,8 +104,6 @@
 				B7E843B81F093C890041E634 /* Cell.swift */,
 				B737671E1F053C6E0063B268 /* Business */,
 				B73767191F04592E0063B268 /* Persistence */,
-				9BA4EECA1F0ACE7A00355E21 /* ggCell.xib */,
-				9BA4EECC1F0ACEF800355E21 /* ggCell.swift */,
 				9BA4EEC81F0AC71200355E21 /* MyTableViewCell.swift */,
 			);
 			name = Model;
@@ -127,7 +123,8 @@
 				B73766F71F03D0650063B268 /* LaunchScreen.storyboard */,
 				B73766F21F03D0650063B268 /* Main.storyboard */,
 				B73767021F03D4B40063B268 /* taskView.swift */,
-				B73767061F03DC500063B268 /* taskView.xib */,
+				9BA4EECA1F0ACE7A00355E21 /* ggCell.xib */,
+				9BA4EECC1F0ACEF800355E21 /* ggCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -220,7 +217,6 @@
 				B73766F61F03D0650063B268 /* Assets.xcassets in Resources */,
 				B73766F41F03D0650063B268 /* Main.storyboard in Resources */,
 				9BA4EECB1F0ACE7A00355E21 /* ggCell.xib in Resources */,
-				B73767071F03DC500063B268 /* taskView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
