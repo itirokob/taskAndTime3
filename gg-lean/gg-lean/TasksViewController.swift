@@ -188,15 +188,25 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         let cell = tableView.cellForRow(at: selectedIndex!) as? ggCell
-        cell?.collapse()
-        self.didExpandCell()
+        self.isExpanded = !self.isExpanded
         
-        self.view.layoutIfNeeded()
+        if self.isExpanded == true{
+            cell?.collapse()
+        }
+        else {
+            cell?.expand()
+        }
+        
+        print(self.isExpanded)
+        self.didExpandCell()
+        //self.tableView.reloadRows(at: [selectedIndex!], with: .automatic)
+        
+        //self.view.layoutIfNeeded()
     }
     
     func didExpandCell(){
         
-        self.isExpanded = !self.isExpanded
-        //self.tableView.reloadRows(at: [selectedIndex!], with: .automatic)
+        //self.isExpanded = !self.isExpanded
+        self.tableView.reloadRows(at: [selectedIndex!], with: .automatic)
     }
 }

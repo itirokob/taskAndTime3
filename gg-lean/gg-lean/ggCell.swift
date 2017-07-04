@@ -18,10 +18,6 @@ class ggCell: UITableViewCell {
     @IBOutlet weak var customViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var customViewBottomConstraint: NSLayoutConstraint!
     
-    //State Var
-    var collapsed : Bool = true
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -35,16 +31,14 @@ class ggCell: UITableViewCell {
     
     func collapse(){
         
-        collapsed = !collapsed
+        customViewTopConstraint.constant    = 100
+        customViewBottomConstraint.constant = -200
         
-        if collapsed == true{
-            customViewTopConstraint.constant    = 100
-            customViewBottomConstraint.constant = -200
-        }
-        else{
-            customViewTopConstraint.constant    = 10
-            customViewBottomConstraint.constant = 10
-        }
+    }
+    
+    func expand(){
+        customViewTopConstraint.constant    = 10
+        customViewBottomConstraint.constant = 10
     }
     
     
