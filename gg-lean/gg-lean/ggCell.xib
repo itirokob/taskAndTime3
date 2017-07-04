@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bmz-9D-PXC" id="Iko-vX-yXP">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="124.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQl-5a-tcq" customClass="taskView" customModule="gg_lean" customModuleProvider="target">
@@ -43,8 +43,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7oA-9o-7M7" userLabel="Add Custom VIew">
-                                        <rect key="frame" x="0.0" y="76" width="339" height="128"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oA-9o-7M7" userLabel="Add Custom VIew">
+                                        <rect key="frame" x="0.0" y="143.5" width="339" height="95"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
@@ -55,12 +55,14 @@
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="leading" secondItem="39r-uP-SxH" secondAttribute="trailing" constant="10" id="Ce1-6i-wUn"/>
                                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="lEM-ZE-Zeg" secondAttribute="bottom" constant="15" id="ENO-rG-O1S"/>
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="centerX" secondItem="Rzk-Qn-Yp6" secondAttribute="centerX" id="I1S-ng-9fb"/>
+                                    <constraint firstAttribute="bottom" secondItem="7oA-9o-7M7" secondAttribute="bottom" constant="-150" id="TEJ-pV-wON"/>
                                     <constraint firstItem="39r-uP-SxH" firstAttribute="leading" secondItem="Rzk-Qn-Yp6" secondAttribute="leading" constant="10" id="cnf-Wc-PUe"/>
                                     <constraint firstItem="sm7-gq-Jl1" firstAttribute="centerY" secondItem="lEM-ZE-Zeg" secondAttribute="centerY" id="gXw-DV-jsp"/>
                                     <constraint firstItem="lEM-ZE-Zeg" firstAttribute="top" secondItem="Rzk-Qn-Yp6" secondAttribute="topMargin" constant="15" id="j28-Gq-9Yl"/>
                                     <constraint firstAttribute="trailing" secondItem="7oA-9o-7M7" secondAttribute="trailing" id="l0P-6O-7H0"/>
                                     <constraint firstAttribute="trailing" secondItem="sm7-gq-Jl1" secondAttribute="trailing" constant="10" id="oEb-H1-3CL"/>
                                     <constraint firstItem="39r-uP-SxH" firstAttribute="centerY" secondItem="lEM-ZE-Zeg" secondAttribute="centerY" id="vJU-pv-pi5"/>
+                                    <constraint firstItem="7oA-9o-7M7" firstAttribute="top" secondItem="lEM-ZE-Zeg" secondAttribute="bottom" constant="100" id="x7H-hf-j0x"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -86,6 +88,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="customViewBottomConstraint" destination="TEJ-pV-wON" id="SP0-WG-xub"/>
+                <outlet property="customViewTopConstraint" destination="x7H-hf-j0x" id="wQq-Qn-TAP"/>
                 <outlet property="playPauseButton" destination="39r-uP-SxH" id="fEe-5m-XHs"/>
                 <outlet property="taskLabel" destination="lEM-ZE-Zeg" id="t75-YU-jcg"/>
                 <outlet property="timeLabel" destination="sm7-gq-Jl1" id="ghI-ws-wik"/>

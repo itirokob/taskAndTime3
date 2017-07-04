@@ -166,9 +166,6 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
         cell.playPauseButton.tag = indexPath.row
         cell.playPauseButton.addTarget(self, action: #selector(TasksViewController.playPauseButton), for: .touchUpInside);
 
-        
-        
-        
         return cell
     }
     //Swipe to delete a task
@@ -186,15 +183,20 @@ extension  TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.selectedIndex = indexPath
+        if !(self.isExpanded == true && indexPath != self.selectedIndex){
+            self.selectedIndex = indexPath
+        }
+        
+        let cell = tableView.cellForRow(at: selectedIndex!) as? ggCell
+        cell?.collapse()
         self.didExpandCell()
         
-        self.tableView.reloadRows(at: [indexPath], with: .automatic)
         self.view.layoutIfNeeded()
     }
     
     func didExpandCell(){
+        
         self.isExpanded = !self.isExpanded
-        self.tableView.reloadRows(at: [selectedIndex!], with: .automatic)
+        //self.tableView.reloadRows(at: [selectedIndex!], with: .automatic)
     }
 }
