@@ -52,6 +52,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.loadTasks()
     }
     
+    
+    /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func updateTimers(){
         if(tasksArray.count > 0){
             for i in 0...(tasksArray.count - 1){
@@ -63,14 +65,17 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    
+    /// The playPauseButton is the action attached to the play/pause button, we know which task called by the sender.tag (which we made equal to the indexPath.row in cellForRowAt)
+    ///
+    /// - Parameter sender: the button who called
     func playPauseButton(_ sender: UIButton) {
-        
         if tasksArray[sender.tag].isRunning == false {
             timeLogic.playPressed(task: tasksArray[sender.tag])
             print("Play \(tasksArray[sender.tag].name)")
             //mudar a imagem para o pause
         } else {
-            timeLogic.pausePressed(task: tasksArray[sender.tag])
+            tasksArray[sender.tag] = timeLogic.pausePressed(task: tasksArray[sender.tag])
             print("Pause \(tasksArray[sender.tag].name)")
             //mudar a imagem para o play
         }
@@ -126,7 +131,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        cell.timeLabel.text = String(tasksArray[indexPath.row].getTotalTime())
+        cell.timeLabel.text = tasksArray[indexPath.row].getTimeString()
         
         cell.taskLabel.text = tasksArray[indexPath.row].name
                 
@@ -144,9 +149,10 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            manager.delete(tasksArray[indexPath.row].id)
-            tasksArray.remove(at: indexPath.row)
-            self.tableView.isEditing=false;
+            manager.delete(tasksArray[indexPath.row].id, completion: {
+                self.tasksArray.remove(at: indexPath.row)
+                self.tableView.isEditing=false;
+            })
         }
     }
 }

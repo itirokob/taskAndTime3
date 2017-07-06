@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CloudKit
 
 struct TaskSession {
     var startDate:Date
     var durationInSeconds:Int
+    var recordID:CKRecordID?
 }
 
 class Task: NSObject {
@@ -38,6 +40,9 @@ class Task: NSObject {
         self.id = id
     }
     
+    func setSessions(sessionsArray:[TaskSession]){
+        self.sessions = sessionsArray
+    }
     
     /// The updateTotalTime function sums all the session's durations into totalTime
     ///
@@ -57,7 +62,7 @@ class Task: NSObject {
     ///
     /// - Parameter startDate: task's startDate
     func startSession(startDate:Date){
-        sessions.append(TaskSession(startDate: startDate, durationInSeconds: 0))
+        sessions.append(TaskSession(startDate: startDate, durationInSeconds: 0, recordID:nil))
     }
     
     func updateSessionDuration(){
@@ -70,11 +75,7 @@ class Task: NSObject {
         sessions[sessions.count - 1].durationInSeconds = components.second!
                 
         //Feels like migué
-        self.totalTime = updateTotalTime()
-    }
-    
-    func addNewSession(startDate:Date, duration:Int){
-        sessions.append(TaskSession(startDate:startDate, durationInSeconds: duration))
+        self.totalTime += 1
     }
     
     func getTotalTime()->Int{
@@ -83,5 +84,13 @@ class Task: NSObject {
     
     func getSessionsSize() -> Int{
         return sessions.count
+    }
+    
+    func getTimeString() -> String{
+        
+        let minutes :Int = totalTime / 60
+        let seconds :Int = totalTime - 60*minutes
+        
+        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
     }
 }

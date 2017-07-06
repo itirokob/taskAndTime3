@@ -23,15 +23,16 @@ class TimeLogic:NSObject{
     /// The pausePressed function sends the info from task's session to cloudkit
     ///
     /// - Parameter task: task to be paused
-    func pausePressed(task:Task){
+    func pausePressed(task:Task) -> Task {
         task.isRunning = false
         if(task.getSessionsSize() > 0){
             print(task.sessions[task.getSessionsSize() - 1].durationInSeconds)
             
-            //            manager.addTimeCount(task:task, completionHandler: { (task) in
-//                self.manager.saveTask(task: self.manager.mapToObject(task), completion: { (task, error) in})
-//            })
-            
+            manager.addTimeCount(task: task, completionHandler: { (recordID) in
+                task.sessions[task.getSessionsSize() - 1].recordID = recordID
+                self.manager.saveTask(task: task, completion: { (task, error) in })
+            })
         }
+        return task
     }
 }
