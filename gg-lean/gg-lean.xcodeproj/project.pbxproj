@@ -17,7 +17,7 @@
 		B737670D1F03DF200063B268 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B737670C1F03DF200063B268 /* CloudKit.framework */; };
 		B73767111F04220D0063B268 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767101F04220D0063B268 /* DataBaseManager.swift */; };
 		B73767131F043C730063B268 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
-		B737671D1F053C670063B268 /* timeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* timeLogic.swift */; };
+		B737671D1F053C670063B268 /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
 		B73767201F0673F90063B268 /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671F1F0673F90063B268 /* TimeCounter.swift */; };
 		B7E843B91F093C890041E634 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E843B81F093C890041E634 /* Cell.swift */; };
 /* End PBXBuildFile section */
@@ -36,7 +36,7 @@
 		B737670C1F03DF200063B268 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B73767101F04220D0063B268 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBaseManager.swift; path = ../DataBaseManager.swift; sourceTree = "<group>"; };
 		B73767121F043C730063B268 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Task.swift; sourceTree = "<group>"; };
-		B737671C1F053C670063B268 /* timeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timeLogic.swift; sourceTree = "<group>"; };
+		B737671C1F053C670063B268 /* TimeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogic.swift; sourceTree = "<group>"; };
 		B737671F1F0673F90063B268 /* TimeCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCounter.swift; sourceTree = "<group>"; };
 		B7E843B81F093C890041E634 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,8 +75,8 @@
 			children = (
 				B73766EE1F03D0650063B268 /* AppDelegate.swift */,
 				B73767171F043CA90063B268 /* View */,
-				B73767161F043C960063B268 /* Controllers */,
 				B73767141F043C840063B268 /* Model */,
+				B73767161F043C960063B268 /* Controllers */,
 				B73766F51F03D0650063B268 /* Assets.xcassets */,
 				B73766FA1F03D0650063B268 /* Info.plist */,
 				B737670A1F03DF1F0063B268 /* gg-lean.entitlements */,
@@ -134,7 +134,7 @@
 		B737671E1F053C6E0063B268 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				B737671C1F053C670063B268 /* timeLogic.swift */,
+				B737671C1F053C670063B268 /* TimeLogic.swift */,
 			);
 			name = Business;
 			sourceTree = "<group>";
@@ -224,7 +224,7 @@
 				B73766EF1F03D0650063B268 /* AppDelegate.swift in Sources */,
 				B73767011F03D2D90063B268 /* TasksViewController.swift in Sources */,
 				B73767201F0673F90063B268 /* TimeCounter.swift in Sources */,
-				B737671D1F053C670063B268 /* timeLogic.swift in Sources */,
+				B737671D1F053C670063B268 /* TimeLogic.swift in Sources */,
 				B73767031F03D4B40063B268 /* taskView.swift in Sources */,
 				B7E843B91F093C890041E634 /* Cell.swift in Sources */,
 				B73767131F043C730063B268 /* Task.swift in Sources */,

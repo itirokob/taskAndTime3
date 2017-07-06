@@ -13,12 +13,14 @@ class TimeCounter:NSObject {
     public var endDate:Date
     public var taskID:String
     public var isActive:Bool
+    public var id:String
     
     init(taskID:String) {
         self.taskID = taskID
         self.startDate = Date()
         self.endDate = Date()
         self.isActive = true
+        self.id = UUID().uuidString
     }
     
     func setStartDate(startDate:Date){

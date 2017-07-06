@@ -13,46 +13,33 @@ class DataBaseManager : NSObject {
     static let shared = DataBaseManager()
     let publicData = CKContainer.default().publicCloudDatabase
     
+    //TO DO: ADICIONAR O TIMECOUNTERLIST
     let tasksFields = ["name", "isSubtask", "tasksDates", "tasksTimes", "totalTime", "isActive", "id"]
     
-    func objectInfoInArray (_ objectTask:Task)->[Any]{
-        return [objectTask.name, objectTask.isSubtask, objectTask.tasksDates, objectTask.tasksTimes, objectTask.totalTime, objectTask.isActive, objectTask.id] as [Any]
+    /// The objectInfoInArray returns a array with the fields of a given Task object
+    ///
+    /// - Parameter objectTask: Task object with which the fields will form the array
+    /// - Returns: a array with the fields from the objectTask object
+    func objectInfoInArray (_ objectTask:Task)->[Any?]{
+        var fieldValues = [Any]()
+        
+        for field in tasksFields  {
+            fieldValues.append(objectTask.value(forKey: field)!)
+        }
+        
+        return fieldValues
     }
     
     /// The mapToCKRecord function receives a Task object and transforms it into a CKRecord
     ///
     /// - Parameter objectTask: object to be transformed to CKRecord
     /// - Returns: the task in CKRecord form
-    func mapToCKRecord(_ objectTask:Task) -> CKRecord{
-        let ckRecordTask = CKRecord(recordType: "task")
-        
+    func mapToCKRecord(objectTask:Task, ckRecordTask:CKRecord) -> Void{
         let objectInfo = objectInfoInArray(objectTask)
         
         for i in 0...(tasksFields.count - 1) {
             ckRecordTask.setObject(objectInfo[i] as? CKRecordValue, forKey: self.tasksFields[i])
         }
-        
-        return ckRecordTask
-    }
-    
-    /// The addNewTask func receives a Task object and with it sends all the informations to CloudKit
-    ///
-    /// - Parameters:
-    ///   - task: object received from the view
-    ///   - completionHandler: commands to be executed when the function ends
-    func addNewTask(_ task:Task, completionHandler: @escaping () -> Swift.Void){
-        let newTask = mapToCKRecord(task)
-        
-        //Uploading to CloudKit
-        publicData.save(newTask, completionHandler: {(record:CKRecord?, error:Error?) -> Void in
-            if error != nil{
-                print("Error --->" + (error!.localizedDescription))
-            }
-            
-            OperationQueue.main.addOperation ({ () -> Void in
-                completionHandler()
-            })
-        })
     }
     
     /// The mapToObject function receives a CKRecord array and transforms it into a Task object
@@ -62,19 +49,10 @@ class DataBaseManager : NSObject {
     func mapToObjectArray (_ results:[CKRecord]) -> [Task]{
         var tasksToDisplay = [Task]()
         
-        for record in results {
-            let name = record.value(forKey: "name") as! String
-            let isSubtask = record.value(forKey: "isSubtask") as! Int
-            let totalTime = record.value(forKey: "totalTime") as! Int
-            let tasksDates = record.value(forKey: "tasksDates") as! [Date]
-            let tasksTimes = record.value(forKey: "tasksTimes") as! [Int]
-            let isActive = record.value(forKey: "isActive") as! Int
-            let id = record.value(forKey:"id") as! String
-            
-            tasksToDisplay.append(
-                Task(name: name, isSubtask: isSubtask, tasksDates: tasksDates, tasksTimes: tasksTimes, totalTime: totalTime, isActive: isActive, id:id)
-            )
+        tasksToDisplay = results.map { (record) -> Task in
+            return mapToObject(record)
         }
+        
         return tasksToDisplay
 
     }
@@ -130,30 +108,6 @@ class DataBaseManager : NSObject {
         }
     }
     
-    /// The getTotalTime function returns que totalTime of a given task (identified by a id)
-    ///
-    /// - Parameter id: id of the task whom we want the total time from
-    /// - Returns: the desired totalTime 
-    func getTotalTime(_ id:String) -> Int{
-        var soughtTotalTime = -1
-        let predicate = NSPredicate(format: "id == %@", id as CVarArg)
-        let query = CKQuery(recordType: "task", predicate: predicate)
-        
-        publicData.perform(query, inZoneWith: nil) { (results, error) in
-            if error != nil{
-                print("Error" + error.debugDescription)
-            } else {
-                if(results?.count == 1) {
-                    let record = (results?[0])! as CKRecord
-                    soughtTotalTime = record.value(forKey:"totalTime") as! Int
-                }
-            }
-        }
-        
-        return soughtTotalTime
-    }
-    
-    
     /// The mapToObject function returns a Task object given a CKRecord
     ///
     /// - Parameter record: our desired task in CKRecord type
@@ -166,67 +120,238 @@ class DataBaseManager : NSObject {
         let tasksTimes = record.value(forKey: "tasksTimes") as! [Int]
         let isActive = record.value(forKey: "isActive") as! Int
         let id = record.value(forKey:"id") as! String
+    
+        let task = Task(name: name, isSubtask: isSubtask, tasksDates: tasksDates, tasksTimes: tasksTimes, totalTime: totalTime, isActive: isActive, id:id)
+        task.recordName = record.recordID.recordName
         
-        return Task(name: name, isSubtask: isSubtask, tasksDates: tasksDates, tasksTimes: tasksTimes, totalTime: totalTime, isActive: isActive, id:id)
+        return task
     }
     
     
     /// The getSpecificTask returns a Task object given it's id
     ///
     /// - Parameter id: id of the desired tasks
-    func getSpecificTask(_ id:String) -> Task{
-        var soughtTask:Task? = nil
+    @discardableResult func getSpecificTask(_ id:String, completion: @escaping (Task?,Error?) -> Void){
         let predicate = NSPredicate(format: "id == %@", id as CVarArg)
         let query = CKQuery(recordType: "task", predicate: predicate)
         
         publicData.perform(query, inZoneWith: nil) { (results, error) in
             if error != nil{
+                completion(nil, error)
                 print("Error" + error.debugDescription)
             } else {
                 if(results?.count == 1) {
                     let record = (results?[0])! as CKRecord
-                    soughtTask = self.mapToObject(record)
+                    completion(self.mapToObject(record), nil)
                 }
             }
         }
-        
-        return soughtTask!
     }
     
-    func updateTotalTime(_ id:String, totalTime:Int){
+    /// The getSpecificCKRecordTask returns a CKRecord task object given it's id
+    ///
+    /// - Parameter id: id of the desired tasks
+    @discardableResult func getSpecificCKRecordTask(_ id:String, completion: @escaping (CKRecord?,Error?) -> Void){
         let predicate = NSPredicate(format: "id == %@", id as CVarArg)
         let query = CKQuery(recordType: "task", predicate: predicate)
         
         publicData.perform(query, inZoneWith: nil) { (results, error) in
             if error != nil{
+                completion(nil, error)
                 print("Error" + error.debugDescription)
             } else {
                 if(results?.count == 1) {
                     let record = (results?[0])! as CKRecord
-                    record.setObject(totalTime as CKRecordValue?, forKey: "totalTime")
-                    
-                    self.publicData.save(record, completionHandler: { (result, error) in
-                        if error != nil{
-                            print("error-->" + error.debugDescription)
-                        } else {
-                            print("TotalTime atualizado")
-                        }
-                    })
+                    completion(record, nil)
+                }
+            }
+        }
+    }
+    
+    
+    /// The saveTask function updates if a task already exists or creates a new one into cloudkit
+    ///
+    /// - Parameters:
+    ///   - task: the task Object to be updated or created into cloudkit
+    ///   - completion: things to be done when the func ends
+    func saveTask(task:Task, completion:@escaping (Task?,Error?) -> Void) {
+        if task.recordName != nil {
+            //retrieve task
+            publicData.fetch(withRecordID: CKRecordID(recordName:task.recordName!)) { (record, error) in
+                if (error == nil) {
+                    if let databaseRecord = record {
+                        //Update record based on task information
+                        self.mapToCKRecord(objectTask: task, ckRecordTask: databaseRecord)
+                        
+                        //databaseRecord["totalTime"] = (task.getTotalTime()) as? CKRecordValue
+                        self.publicData.save(databaseRecord, completionHandler: { (finalRecord, error) in
+                            if let savedRecord = finalRecord, error == nil {
+                                completion(self.mapToObject(savedRecord),nil)
+                            } else {
+                                completion(nil, error)
+                            }
+                        })
+                    }
                 } else {
-                    print("Task não encontrada")
+                    completion(nil,error)
                 }
             }
+        } else {
+            //create record
+            let ckRecordTask:CKRecord = CKRecord(recordType: "task")
+            mapToCKRecord(objectTask: task, ckRecordTask: ckRecordTask)
+            
+            //Uploading to CloudKit
+            publicData.save(ckRecordTask, completionHandler: {(record:CKRecord?, error:Error?) -> Void in
+                if let savedRecord = record, error == nil {
+                    completion(self.mapToObject(savedRecord),nil)
+                } else {
+                    completion(nil, error)
+                }
+            })
         }
     }
     
     
+    /// The addTimeCount function adds a timeCount object into the timeCountList from cloudkit
+    ///
+    /// - Parameters:
+    ///   - taskID: id of the task we'll add the new time Count
+    ///   - startDate: start date of the task session to be uploaded
+    ///   - duration: duration of the task session to be uploaded
+    ///   - completionHandler: things to be done when the func ends
+    func addTimeCount(task:Task, completionHandler: @escaping (CKRecord) -> Swift.Void){
+        let newTimeCount = CKRecord(recordType: "timeCount")
+        newTimeCount.setObject(task.sessions[task.getSessionsSize() - 1].startDate as CKRecordValue, forKey: "startDate")
+        newTimeCount.setObject(task.sessions[task.getSessionsSize() - 1].durationInSeconds as CKRecordValue, forKey: "duration")
+        
+        publicData.fetch(withRecordID: CKRecordID(recordName:task.recordName!)) { (record, error) in
+            if(error == nil){
+                if let dbRecord = record {
+                    var timeCountList = [CKReference]()
+                    
+                    if (dbRecord["timeCountList"] == nil) {
+                        dbRecord["timeCountList"] = timeCountList as CKRecordValue
+                    } else {
+                        timeCountList = dbRecord["timeCountList"] as! [CKReference]
+                    }
+                    
+                    timeCountList.append(CKReference(recordID: newTimeCount.recordID, action: CKReferenceAction.none))
+                    
+                    dbRecord["timeCountList"] = timeCountList as CKRecordValue
+                }
+            }else{
+                ///completionHandler(nil)
+            }
+        }
+        
+        
+        //Uploading to CloudKit
+        publicData.save(newTimeCount, completionHandler: {(record:CKRecord?, error:Error?) -> Void in
+            if error != nil{
+                print("Error --->" + (error!.localizedDescription))
+            }
+            
+//            self.getSpecificTask(taskID, completion: { (taskInTaskForm, error) in
+//                if error != nil{
+//                    print("Error" + error.debugDescription)
+//                } else {
+//                    let task = CKRecord(recordType: "task")
+//                    
+//                    self.mapToCKRecord(objectTask: taskInTaskForm!, ckRecordTask: task)
+//                    
+//                    var timeCountList = [CKReference]()
+//                    
+//                    if (task["timeCountList"] == nil) {
+//                        task["timeCountList"] = timeCountList as CKRecordValue
+//                    } else {
+//                        timeCountList = task["timeCountList"] as! [CKReference]
+//                    }
+//                    
+//                    timeCountList.append(CKReference(recordID: record!.recordID, action: CKReferenceAction.none))
+//                    
+//                    task["timeCountList"] = timeCountList as CKRecordValue
+//                    
+//                    OperationQueue.main.addOperation ({ (Task) -> Void in
+//                        self.updateTasksSessions(task:
+//                            self.mapToObject(task))
+//                        completionHandler(task)
+//                    })
+//                }
+//            })
+            
+//            self.getSpecificCKRecordTask(task) { (task, error) in
+//                if error != nil{
+//                    print("Error" + error.debugDescription)
+//                } else {
+//                    var timeCountList = [CKReference]()
+//                    
+//                    if (task!["timeCountList"] == nil) {
+//                        task!["timeCountList"] = timeCountList as CKRecordValue
+//                    } else {
+//                        timeCountList = task!["timeCountList"] as! [CKReference]
+//                    }
+//                    
+//                    timeCountList.append(CKReference(recordID: record!.recordID, action: CKReferenceAction.none))
+//                    
+//                    task!["timeCountList"] = timeCountList as CKRecordValue
+//                
+////                    OperationQueue.main.addOperation ({ () -> Void in
+////                        completionHandler()
+////                    })
+//                }
+//            }
+//            OperationQueue.main.addOperation ({ () -> Void in
+//                //completionHandler()
+//            })
+        })
+    }
     
     
-    
-    
-    
-    
-    
-    
-    
+    /// The updateTimeCountList function gets the timeCount objects from CloudKit and transforms it into the TaskSession struct into Task object
+    ///
+    /// - Parameter task: the task from which we want to get the data
+    func updateTasksSessions(task:Task){
+        var duration:Int = 0
+        var startDate:Date = Date()
+        
+        getSpecificCKRecordTask(task.id) { (record, error) in
+            if error != nil{
+                print("Error" + error.debugDescription)
+            } else {
+                let times = record?.value(forKey: "timeCountList") as? [CKReference]
+                
+                if let list = times {
+                    
+                    let idList = list.map({ (reference) -> CKRecordID in
+                        return reference.recordID
+                    })
+                    
+                    let fetch = CKFetchRecordsOperation(recordIDs: idList)
+                    
+                    fetch.fetchRecordsCompletionBlock = {(records, error) in
+                        if(records != nil){
+                            var i = 0
+                            for recordId in records!.keys {
+                                duration = records![recordId]?.value(forKey: "duration") as! Int
+                                startDate = records![recordId]?.value(forKey: "startDate") as! Date
+                                task.sessions[i].durationInSeconds = duration
+                                task.sessions[i].startDate = startDate
+                                i+=1
+                            }
+//                            
+//                            for i in 0...((records?.count)! -  1){
+//                                task.sessions[i].durationInSeconds = duration
+//                                task.sessions[i].startDate = startDate
+//                            }
+                        }
+                    }
+                    
+                    fetch.database = self.publicData
+                    fetch.start()
+                }
+            }
+        }
+
+    }
 }

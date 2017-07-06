@@ -8,24 +8,19 @@
 
 import UIKit
 
-enum buttonsState {
-    case play
-    case pause
-}
-
 class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let manager = DataBaseManager.shared
 
+    let timeLogic = TimeLogic.shared
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var addTaskField: UITextField!
     
-    var playPauseState = buttonsState.play
-    
     var tasksArray = [Task]()
 
     var refresh: UIRefreshControl!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorColor = UIColor(white: 0.95, alpha: 1)
@@ -60,8 +55,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func updateTimers(){
         if(tasksArray.count > 0){
             for i in 0...(tasksArray.count - 1){
-                if tasksArray[i].playPauseState == buttonsState.pause{
-                    tasksArray[i].totalTime += 1
+                if tasksArray[i].isRunning == true {
+                    tasksArray[i].updateSessionDuration()
                 }
             }
             tableView.reloadData()
@@ -69,14 +64,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func playPauseButton(_ sender: UIButton) {
-        if tasksArray[sender.tag].playPauseState == buttonsState.play{
-            tasksArray[sender.tag].playPauseState = buttonsState.pause
+        
+        if tasksArray[sender.tag].isRunning == false {
+            timeLogic.playPressed(task: tasksArray[sender.tag])
             print("Play \(tasksArray[sender.tag].name)")
-            //mudar a imagem para o pause, aqui usamos o button
+            //mudar a imagem para o pause
         } else {
-            tasksArray[sender.tag].playPauseState = buttonsState.play
+            timeLogic.pausePressed(task: tasksArray[sender.tag])
             print("Pause \(tasksArray[sender.tag].name)")
-            //mudar a imagem para o play, aqui usamos o button
+            //mudar a imagem para o play
         }
     }
     
@@ -98,14 +94,14 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let dates = [Date]()
             let times = [Int]()
             let uuid = UUID().uuidString
-            print(uuid)
             
             let task = Task(name: addTaskField.text!, isSubtask: -1, tasksDates: dates, tasksTimes: times, totalTime: 0, isActive: 1, id: uuid)
             
-            manager.addNewTask(task, completionHandler: { 
+            manager.saveTask(task: task, completion: { (task2, error) in
                 self.dismissKeyboard()
                 self.addTaskField.text = ""
             })
+            
         }
     }
     
@@ -130,7 +126,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        cell.timeLabel.text = String(tasksArray[indexPath.row].totalTime)
+        cell.timeLabel.text = String(tasksArray[indexPath.row].getTotalTime())
         
         cell.taskLabel.text = tasksArray[indexPath.row].name
                 

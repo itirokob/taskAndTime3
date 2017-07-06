@@ -8,27 +8,30 @@
 
 import Foundation
 
-class timeLogic:NSObject{
-    static let shared = timeLogic()
+class TimeLogic:NSObject{
+    static let shared = TimeLogic()
     let manager = DataBaseManager.shared
     var activeTimers = [TimeCounter]()
-    //E se o timer fosse na TaskViewController meramente ilustrativo e aqui só fosse o que vamos guardar no CloudKit?
     
-    
+
     //Em timelogic, recebo a informação que o botão play foi pressionado e guardo a data que foi iniciado. A cada um segundo, eu faço dataAtual - dataInicio
-    func playPressed(_ tasksID:String, cellsTotalTime:Int){
-        let timer = TimeCounter(taskID: tasksID)
-        timer.setStartDate(startDate: Date())
-        timer.isActive = true
-        
-        activeTimers.append(timer)
+    func playPressed(task:Task){
+        task.isRunning = true
+        task.startSession(startDate: Date())
     }
     
-    func pausePressed(_ tasksID:String){
-        for i in 0...activeTimers.count{
-            if(activeTimers[i].taskID == tasksID){
-                activeTimers[i].setEndDate(endDate: Date())
-            }
+    /// The pausePressed function sends the info from task's session to cloudkit
+    ///
+    /// - Parameter task: task to be paused
+    func pausePressed(task:Task){
+        task.isRunning = false
+        if(task.getSessionsSize() > 0){
+            print(task.sessions[task.getSessionsSize() - 1].durationInSeconds)
+            
+            //            manager.addTimeCount(task:task, completionHandler: { (task) in
+//                self.manager.saveTask(task: self.manager.mapToObject(task), completion: { (task, error) in})
+//            })
+            
         }
     }
 }
