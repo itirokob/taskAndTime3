@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Intents
 
 class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let manager = DataBaseManager.shared
@@ -43,6 +44,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.addSubview(refresh)
         
         var _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(updateTimers), userInfo: nil, repeats: true)
+        
+        
+        //Siri
+        INPreferences.requestSiriAuthorization { (status) in
+            
+        }
+        
+        INVocabulary.shared().setVocabularyStrings(["push up", "sit up", "pull up", "Lavar Louça"], of: .workoutActivityName)
+        
         
     }
     
