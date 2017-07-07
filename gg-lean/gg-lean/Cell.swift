@@ -39,6 +39,13 @@ class Cell:UITableViewCell{
         }
     }
     
+    func initiateActivity( ){
+        if playPauseSwitch.isOn == false{
+            playPauseSwitch.isOn = true
+        }
+        startTimer()
+    }
+    
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         self.timeLabelValue += 1

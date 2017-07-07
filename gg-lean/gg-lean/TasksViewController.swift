@@ -78,6 +78,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("Play \(tasksArray[cell.tag].name)")
     }
     
+    func willStartTimerBySiri(cell: Cell){
+        cell.initiateActivity()
+        print("Play \(tasksArray[cell.tag].name)")
+    }
+    
     func willStopTimer(cell: Cell){
         tasksArray[cell.tag] = timeLogic.pausePressed(task: tasksArray[cell.tag])
         print("Pause \(tasksArray[cell.tag].name)")
@@ -139,6 +144,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -153,16 +159,16 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
         cell.tag = indexPath.row
         
+        cell.selectionStyle = .none
         
-        //PINTA DE AZUL TESTE
+        //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
-            print("Not Null \(acName)")
-            self.view.backgroundColor = .blue
+            if cell.taskLabel.text == acName{
+                TasksViewController.startedActivityOnInit = nil
+                willStartTimerBySiri(cell: cell)
+            }
         }
-        else{
-            print("Not started by Siri")
-        }
-
+        
         return cell
     }
     
