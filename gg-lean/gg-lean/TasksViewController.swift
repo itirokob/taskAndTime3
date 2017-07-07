@@ -30,6 +30,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 tasksNameArray.append(tasksArray[i].name)
             }
         }
+        updateSiriVocabulary( )
+    }
+    
+    func updateSiriVocabulary(){
+        //Iniciando vocabulário da Siri através de um vetor de Strings - tasksNameArray
+        INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: tasksNameArray), of: .workoutActivityName)
     }
     
     override func viewDidLoad() {
@@ -57,9 +63,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         INPreferences.requestSiriAuthorization { (status) in
             
         }
-        
-        //Iniciando vocabulário da Siri através de um vetor de Strings - tasksNameArray
-        INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: tasksNameArray), of: .workoutActivityName)
+        updateSiriVocabulary( )
         
     }
     
@@ -91,7 +95,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             OperationQueue.main.addOperation({ 
                 self.tableView.reloadData()
                 self.refresh.endRefreshing()
-
+                self.updateTasksNameArray()
             })
         }
     }
