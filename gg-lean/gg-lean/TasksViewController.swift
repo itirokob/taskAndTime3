@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CellProtocol {
     let manager = DataBaseManager.shared
 
     let timeLogic = TimeLogic.shared
@@ -41,9 +41,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresh.addTarget(self, action: #selector(TasksViewController.loadTasks), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresh)
-        
-        var _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(updateTimers), userInfo: nil, repeats: true)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,41 +49,30 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.loadTasks()
     }
     
-    
-    /// The updateTimers function is called everytime the Timer calls (every 1 second)
-    func updateTimers(){
-        if(tasksArray.count > 0){
-            for i in 0...(tasksArray.count - 1){
-                if tasksArray[i].isRunning == true {
-                    tasksArray[i].updateSessionDuration()
-                }
-            }
-            tableView.reloadData()
-        }
+    func willStartTimer(cell: Cell){
+        timeLogic.playPressed(task: tasksArray[cell.tag])
+        print("Play \(tasksArray[cell.tag].name)")
     }
     
+    func willStopTimer(cell: Cell){
+        tasksArray[cell.tag] = timeLogic.pausePressed(task: tasksArray[cell.tag])
+        print("Pause \(tasksArray[cell.tag].name)")
+    }
     
-    /// The playPauseButton is the action attached to the play/pause button, we know which task called by the sender.tag (which we made equal to the indexPath.row in cellForRowAt)
-    ///
-    /// - Parameter sender: the button who called
-    func playPauseButton(_ sender: UIButton) {
-        if tasksArray[sender.tag].isRunning == false {
-            timeLogic.playPressed(task: tasksArray[sender.tag])
-            print("Play \(tasksArray[sender.tag].name)")
-            //mudar a imagem para o pause
-        } else {
-            tasksArray[sender.tag] = timeLogic.pausePressed(task: tasksArray[sender.tag])
-            print("Pause \(tasksArray[sender.tag].name)")
-            //mudar a imagem para o play
-        }
+    func timerDidTick(cell: Cell){
+        tasksArray[cell.tag].updateSessionDuration()
     }
     
     //Loads all the active tasks from the dataBase
     func loadTasks(){
         manager.getTasks { (tasks) in
             self.tasksArray = tasks
-            self.tableView.reloadData()
-            self.refresh.endRefreshing()
+            
+            OperationQueue.main.addOperation({ 
+                self.tableView.reloadData()
+                self.refresh.endRefreshing()
+
+            })
         }
     }
     
@@ -103,10 +89,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let task = Task(name: addTaskField.text!, isSubtask: -1, tasksDates: dates, tasksTimes: times, totalTime: 0, isActive: 1, id: uuid)
             
             manager.saveTask(task: task, completion: { (task2, error) in
-                self.dismissKeyboard()
-                self.addTaskField.text = ""
+                OperationQueue.main.addOperation({
+                    self.tableView.reloadData()
+                })
             })
-            
+            self.dismissKeyboard()
+            self.addTaskField.text = ""
         }
     }
     
@@ -131,28 +119,59 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        cell.timeLabel.text = tasksArray[indexPath.row].getTimeString()
         
-        cell.taskLabel.text = tasksArray[indexPath.row].name
+        let task = tasksArray[indexPath.row]
+        
+        cell.delegate = self
+        
+        cell.timeLabelValue = task.getTotalTime()
+        
+        cell.taskLabel.text = task.name
                 
         cell.tag = indexPath.row
         
-        cell.playPauseButton.tag = indexPath.row
-        cell.playPauseButton.addTarget(self, action: #selector(TasksViewController.playPauseButton), for: .touchUpInside);
-
         return cell
     }
+    
     //Swipe to delete a task
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            manager.delete(tasksArray[indexPath.row].id, completion: {
-                self.tasksArray.remove(at: indexPath.row)
-                self.tableView.isEditing=false;
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.manager.delete(self.tasksArray[indexPath.row].id, completion: {
+                OperationQueue.main.addOperation({
+                    self.tasksArray.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.tableView.isEditing=false
+                })
             })
         }
+        
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+            // Preciso de uma tela de edit e
+        }
+        
+        edit.backgroundColor = UIColor.blue
+        
+        return [delete, edit]
     }
+
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            manager.delete(tasksArray[indexPath.row].id, completion: {
+//                OperationQueue.main.addOperation({ 
+//                    self.tasksArray.remove(at: indexPath.row)
+//                    tableView.deleteRows(at: [indexPath], with: .fade)
+//                    self.tableView.isEditing=false
+//                })
+//            })
+//        } else if (editingStyle == UITableViewCellEditingStyle.insert){
+//            
+//        }
+//    }
+    
+    
 }

@@ -72,7 +72,7 @@ class Task: NSObject {
         }
         let components = Calendar.current.dateComponents([.hour, .minute, .second], from: sessions[currSession].startDate, to: Date())
 
-        sessions[sessions.count - 1].durationInSeconds = components.second!
+        sessions[currSession].durationInSeconds = components.second!
                 
         //Feels like migué
         self.totalTime += 1

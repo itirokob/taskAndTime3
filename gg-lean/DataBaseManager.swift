@@ -215,7 +215,7 @@ class DataBaseManager : NSObject {
         
         publicData.save(newTimeCount, completionHandler: {(record:CKRecord?, error:Error?) -> Void in
             if error != nil{
-                print("Error --->" + (error!.localizedDescription))
+                print("Error addTimeCount --->" + (error!.localizedDescription))
             } else {
                 completionHandler((record?.recordID)!)
             }
