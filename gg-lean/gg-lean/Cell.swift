@@ -15,6 +15,7 @@ protocol CellProtocol: NSObjectProtocol
     func willStartTimer(cell: Cell)
     func willStopTimer(cell: Cell)
     func timerDidTick(cell: Cell)
+    func willStartTimerBySiri(cell: Cell)
 }
 
 class Cell:UITableViewCell{

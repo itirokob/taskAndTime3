@@ -9,7 +9,7 @@
 import UIKit
 import Intents
 
-class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CellProtocol {
+class TasksViewController: UIViewController{
     let manager = DataBaseManager.shared
 
     let timeLogic = TimeLogic.shared
@@ -73,25 +73,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.loadTasks()
     }
     
-    func willStartTimer(cell: Cell){
-        timeLogic.playPressed(task: tasksArray[cell.tag])
-        print("Play \(tasksArray[cell.tag].name)")
-    }
-    
-    func willStartTimerBySiri(cell: Cell){
-        cell.initiateActivity()
-        print("Play \(tasksArray[cell.tag].name)")
-    }
-    
-    func willStopTimer(cell: Cell){
-        tasksArray[cell.tag] = timeLogic.pausePressed(task: tasksArray[cell.tag])
-        print("Pause \(tasksArray[cell.tag].name)")
-    }
-    
-    func timerDidTick(cell: Cell){
-        tasksArray[cell.tag].updateSessionDuration()
-    }
-    
     //Loads all the active tasks from the dataBase
     func loadTasks(){
         manager.getTasks { (tasks) in
@@ -134,6 +115,39 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
+}
+
+
+
+// MARK: Cell Protocol
+extension TasksViewController: CellProtocol{
+    
+    func willStartTimer(cell: Cell){
+        timeLogic.playPressed(task: tasksArray[cell.tag])
+        print("Play \(tasksArray[cell.tag].name)")
+    }
+    
+    func willStartTimerBySiri(cell: Cell){
+        cell.initiateActivity()
+        print("Play \(tasksArray[cell.tag].name)")
+    }
+    
+    func willStopTimer(cell: Cell){
+        tasksArray[cell.tag] = timeLogic.pausePressed(task: tasksArray[cell.tag])
+        print("Pause \(tasksArray[cell.tag].name)")
+    }
+    
+    func timerDidTick(cell: Cell){
+        tasksArray[cell.tag].updateSessionDuration()
+    }
+
+}
+
+
+
+// MARK: Table View Extensions
+extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasksArray.count
@@ -156,7 +170,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.timeLabelValue = task.getTotalTime()
         
         cell.taskLabel.text = task.name
-                
+        
         cell.tag = indexPath.row
         
         cell.selectionStyle = .none
@@ -195,15 +209,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         edit.backgroundColor = UIColor.blue
         
         return [delete, edit]
-    }
-    
-    public func startActivityBySiri(activityName: String?){
-        
-        for task in tasksArray{
-            if task.id == activityName!{
-                task.isRunning = true
-            }
-        }
     }
 
 }
