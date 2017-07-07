@@ -49,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         print("AppDelegate: Start Workout Intent - TRUE")
         print(intent)
+        
+        let acName = intent.workoutName?.identifier
+        TasksViewController.startedActivityOnInit = acName
+        
         return true
     }
     

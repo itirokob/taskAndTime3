@@ -19,8 +19,18 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var addTaskField: UITextField!
     
     var tasksArray = [Task]()
+    var tasksNameArray: [String] = []
+    public static var startedActivityOnInit:String?
 
     var refresh: UIRefreshControl!
+    
+    func updateTasksNameArray(){
+        if tasksArray.count > 0{
+            for i in 0...(tasksArray.count - 1){
+                tasksNameArray.append(tasksArray[i].name)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +61,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
         
-        INVocabulary.shared().setVocabularyStrings(["push up", "sit up", "pull up", "Lavar Louça"], of: .workoutActivityName)
-        
+        //Iniciando vocabulário da Siri através de um vetor de Strings - tasksNameArray
+        INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: tasksNameArray), of: .workoutActivityName)
         
     }
     
@@ -92,6 +102,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tasksArray = tasks
             self.tableView.reloadData()
             self.refresh.endRefreshing()
+            self.updateTasksNameArray()
+
         }
     }
     
@@ -136,7 +148,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        cell.timeLabel.text = String(tasksArray[indexPath.row].getTotalTime())
+        cell.timeLabel.text = tasksArray[indexPath.row].getTimeString()
         
         cell.taskLabel.text = tasksArray[indexPath.row].name
                 
@@ -144,6 +156,16 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.playPauseButton.tag = indexPath.row
         cell.playPauseButton.addTarget(self, action: #selector(TasksViewController.playPauseButton), for: .touchUpInside);
+        
+        
+        if let acName = TasksViewController.startedActivityOnInit{
+            print("Not Null \(acName)")
+            self.view.backgroundColor = .blue
+        }
+        else{
+            print("Not started by Siri")
+        }
+
 
         return cell
     }
@@ -157,6 +179,15 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             manager.delete(tasksArray[indexPath.row].id)
             tasksArray.remove(at: indexPath.row)
             self.tableView.isEditing=false;
+        }
+    }
+    
+    public func startActivityBySiri(activityName: String?){
+        
+        for task in tasksArray{
+            if task.id == activityName!{
+                task.isRunning = true
+            }
         }
     }
 }
