@@ -104,6 +104,8 @@ class TasksViewController: UIViewController{
             })
             self.dismissKeyboard()
             self.addTaskField.text = ""
+            
+            updateTasksNameArray()
         }
     }
     
