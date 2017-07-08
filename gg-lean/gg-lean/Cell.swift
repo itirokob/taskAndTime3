@@ -23,6 +23,8 @@ class Cell:UITableViewCell{
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var playPauseSwitch: UISwitch!
+    @IBOutlet weak var taskViewContainer: taskView!
+    
     fileprivate var timer: Timer?
     weak var delegate: CellProtocol?
     
@@ -34,8 +36,10 @@ class Cell:UITableViewCell{
     
     @IBAction func togglePlayPause(_ sender: UISwitch) {
         if sender.isOn {
+            taskViewContainer.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.3, alpha: 1)
             startTimer()
         } else {
+            taskViewContainer.backgroundColor = UIColor(white: 0.95, alpha: 1)
             stopTimer()
         }
     }

@@ -15,7 +15,6 @@ class TasksViewController: UIViewController{
     let timeLogic = TimeLogic.shared
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var addTaskField: UITextField!
     
     var tasksArray = [Task]()
@@ -160,20 +159,14 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
-        
-        cell.contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        
         let task = tasksArray[indexPath.row]
         
         cell.delegate = self
-        
         cell.timeLabelValue = task.getTotalTime()
-        
         cell.taskLabel.text = task.name
-        
         cell.tag = indexPath.row
-        
         cell.selectionStyle = .none
+        cell.contentView.backgroundColor = .clear
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
