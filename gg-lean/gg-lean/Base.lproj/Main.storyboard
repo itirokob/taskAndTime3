@@ -416,6 +416,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="O1h-2z-89o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TnO-eq-vCI">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -434,7 +435,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OrG-Kd-qif" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" selectedImage="gearActive" id="785-72-0CV"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="t2I-Ar-fbZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="t2I-Ar-fbZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
