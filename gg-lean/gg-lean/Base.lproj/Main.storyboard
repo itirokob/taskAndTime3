@@ -310,13 +310,13 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Clic was created by a group of friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaO-In-fBe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clic was created by a group of friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaO-In-fBe">
                                 <rect key="frame" x="43" y="36" width="289" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KBp-gd-d4c">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KBp-gd-d4c" userLabel="Photo Stack View">
                                 <rect key="frame" x="16" y="106.5" width="343" height="78.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bia" translatesAutoresizingMaskIntoConstraints="NO" id="TDX-xp-7cN">
@@ -341,7 +341,7 @@
                                     <constraint firstItem="79y-Ir-MkS" firstAttribute="width" secondItem="79y-Ir-MkS" secondAttribute="height" multiplier="1:1" id="q3c-iy-FiW"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="T8x-sK-yTD">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="T8x-sK-yTD" userLabel="Name Stack View">
                                 <rect key="frame" x="16" y="205" width="343" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bianca Itiroko" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIS-kJ-R8L">
@@ -381,15 +381,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="amburgui" translatesAutoresizingMaskIntoConstraints="NO" id="kur-1r-ycr">
+                                <rect key="frame" x="0.0" y="20" width="375" height="458"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kur-1r-ycr" secondAttribute="trailing" id="1S8-Vq-Qmp"/>
+                            <constraint firstItem="Vwg-w4-7QA" firstAttribute="top" secondItem="kur-1r-ycr" secondAttribute="bottom" constant="76" id="3gM-9Y-j9m"/>
+                            <constraint firstItem="kur-1r-ycr" firstAttribute="top" secondItem="aL1-dT-dDq" secondAttribute="bottom" constant="20" id="4lK-tw-wgB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ktH-QJ-gjd" secondAttribute="trailing" constant="27" id="6LS-TJ-QlS"/>
                             <constraint firstItem="KBp-gd-d4c" firstAttribute="leading" secondItem="PaJ-Ph-wjz" secondAttribute="leadingMargin" id="COO-cq-kwe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yaO-In-fBe" secondAttribute="trailing" constant="27" id="GCx-se-Rec"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T8x-sK-yTD" secondAttribute="trailing" id="Hgb-lQ-moo"/>
                             <constraint firstItem="T8x-sK-yTD" firstAttribute="top" secondItem="KBp-gd-d4c" secondAttribute="bottom" constant="20" id="IDO-cx-uBQ"/>
                             <constraint firstItem="KBp-gd-d4c" firstAttribute="trailing" secondItem="PaJ-Ph-wjz" secondAttribute="trailingMargin" id="LM0-UQ-eZn"/>
                             <constraint firstItem="yaO-In-fBe" firstAttribute="top" secondItem="aL1-dT-dDq" secondAttribute="bottom" constant="36" id="Lux-7K-3sp"/>
+                            <constraint firstItem="yaO-In-fBe" firstAttribute="leading" secondItem="PaJ-Ph-wjz" secondAttribute="leadingMargin" constant="27" id="O9N-mw-5sE"/>
+                            <constraint firstItem="kur-1r-ycr" firstAttribute="leading" secondItem="PaJ-Ph-wjz" secondAttribute="leading" id="QOT-0d-245"/>
                             <constraint firstItem="ktH-QJ-gjd" firstAttribute="leading" secondItem="PaJ-Ph-wjz" secondAttribute="leadingMargin" constant="27" id="c9E-Wo-UR9"/>
                             <constraint firstItem="KBp-gd-d4c" firstAttribute="top" secondItem="yaO-In-fBe" secondAttribute="bottom" constant="50" id="juS-fk-M7T"/>
                             <constraint firstAttribute="leadingMargin" secondItem="T8x-sK-yTD" secondAttribute="leading" id="lTk-7U-d4j"/>
@@ -450,6 +459,7 @@
         <image name="Guga" width="500" height="500"/>
         <image name="Jessica" width="500" height="500"/>
         <image name="activeWatch" width="25" height="25"/>
+        <image name="amburgui" width="2048" height="2732"/>
         <image name="gear" width="25" height="25"/>
         <image name="gearActive" width="25" height="25"/>
         <image name="notActiveWatch" width="25" height="25"/>
