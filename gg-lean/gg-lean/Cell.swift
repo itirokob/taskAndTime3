@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let activeCellColor     = UIColor(red: 247/255, green: 153/255, blue: 41/255, alpha: 1)
+let unactiveCellColor = UIColor(white: 0.95, alpha: 1)
 
 protocol CellProtocol: NSObjectProtocol
 {
@@ -36,11 +38,11 @@ class Cell:UITableViewCell{
     
     @IBAction func togglePlayPause(_ sender: UISwitch) {
         if sender.isOn {
-            taskViewContainer.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.3, alpha: 1)
+            taskViewContainer.backgroundColor = activeCellColor
             startTimer()
         } else {
-            taskViewContainer.backgroundColor = UIColor(white: 0.95, alpha: 1)
-            stopTimer()
+            taskViewContainer.backgroundColor = unactiveCellColor
+                stopTimer()
         }
     }
     
@@ -48,6 +50,7 @@ class Cell:UITableViewCell{
         if playPauseSwitch.isOn == false{
             playPauseSwitch.isOn = true
         }
+        taskViewContainer.backgroundColor = activeCellColor
         startTimer()
     }
     
