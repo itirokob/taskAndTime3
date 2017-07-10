@@ -45,7 +45,7 @@ let circleSizeConstant : CGFloat = 8000
         
         // o tamanho do gráfico vai ocupar somente uma parte da view pois vamos deixar espaço
         // para escrever um texto. vamos ocupar 4/5
-        let desiredGraphSize:CGSize = CGSize(width: self.bounds.size.width * 4/5, height: self.bounds.size.height * 4/5);
+        let desiredGraphSize:CGSize = CGSize(width: self.bounds.size.width * 13/15, height: self.bounds.size.height * 4/5);
         
         // e deixar 1/5 para as duas margens, ou seja cada margens será 1/10
         let margin = desiredGraphSize.width * 1/10 as CGFloat
