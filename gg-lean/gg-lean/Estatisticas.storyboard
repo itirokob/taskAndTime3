@@ -40,9 +40,6 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="endColor">
                                         <color key="value" red="1" green="1" blue="1" alpha="0.44766695205479451" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -70,7 +67,7 @@
                 <navigationController storyboardIdentifier="Estatistcs" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FbO-Vz-7PP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" selectedImage="gearActive" id="l7v-gT-LAC"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YTi-aw-Vcg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YTi-aw-Vcg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
