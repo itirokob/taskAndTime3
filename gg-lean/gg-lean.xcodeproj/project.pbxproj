@@ -12,6 +12,8 @@
 		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
 		9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */; };
 		9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */; };
+		9B31832E1F1402F100E49B38 /* PizzaGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B31832D1F1402F100E49B38 /* PizzaGraph.xib */; };
+		9B3183301F14030700E49B38 /* PizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B31832F1F14030700E49B38 /* PizzaGraphView.swift */; };
 		B73766EF1F03D0650063B268 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73766EE1F03D0650063B268 /* AppDelegate.swift */; };
 		B73766F41F03D0650063B268 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B73766F21F03D0650063B268 /* Main.storyboard */; };
 		B73766F61F03D0650063B268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B73766F51F03D0650063B268 /* Assets.xcassets */; };
@@ -71,6 +73,8 @@
 		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDescriptionViewController.swift; sourceTree = "<group>"; };
 		9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		9B31832D1F1402F100E49B38 /* PizzaGraph.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PizzaGraph.xib; sourceTree = "<group>"; };
+		9B31832F1F14030700E49B38 /* PizzaGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PizzaGraphView.swift; sourceTree = "<group>"; };
 		B73766EB1F03D0650063B268 /* gg-lean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gg-lean.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73766EE1F03D0650063B268 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B73766F31F03D0650063B268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 				9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */,
 				9B3183211F139EB100E49B38 /* Settings.storyboard */,
 				9B3183251F13A6B200E49B38 /* LineGraphView.swift */,
+				9B31832D1F1402F100E49B38 /* PizzaGraph.xib */,
+				9B31832F1F14030700E49B38 /* PizzaGraphView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73766F91F03D0650063B268 /* LaunchScreen.storyboard in Resources */,
+				9B31832E1F1402F100E49B38 /* PizzaGraph.xib in Resources */,
 				B73766F61F03D0650063B268 /* Assets.xcassets in Resources */,
 				9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */,
 				9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */,
@@ -392,6 +399,7 @@
 			files = (
 				B73766EF1F03D0650063B268 /* AppDelegate.swift in Sources */,
 				B73767011F03D2D90063B268 /* TasksViewController.swift in Sources */,
+				9B3183301F14030700E49B38 /* PizzaGraphView.swift in Sources */,
 				9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */,
 				B73767201F0673F90063B268 /* TimeCounter.swift in Sources */,
 				B737671D1F053C670063B268 /* TimeLogic.swift in Sources */,

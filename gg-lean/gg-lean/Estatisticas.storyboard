@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,18 +61,21 @@
                                     <outlet property="delegate" destination="syx-6L-xM3" id="gWp-2V-oPA"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71S-3T-Qoc" customClass="LineGraphView" customModule="gg_lean" customModuleProvider="target">
-                                <rect key="frame" x="16" y="20" width="343" height="220"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71S-3T-Qoc" customClass="PizzaGraphView" customModule="gg_lean" customModuleProvider="target">
+                                <rect key="frame" x="77" y="20" width="220" height="220"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="71S-3T-Qoc" secondAttribute="height" multiplier="1:1" id="gba-nB-VWl"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.50196078431372548" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Dou-Te-5J9" firstAttribute="leading" secondItem="o4Q-ol-wZv" secondAttribute="leading" id="5aQ-sD-ffr"/>
-                            <constraint firstItem="71S-3T-Qoc" firstAttribute="trailing" secondItem="o4Q-ol-wZv" secondAttribute="trailingMargin" id="DhR-PD-rk3"/>
+                            <constraint firstItem="71S-3T-Qoc" firstAttribute="trailing" secondItem="o4Q-ol-wZv" secondAttribute="trailingMargin" constant="-62" id="DhR-PD-rk3"/>
                             <constraint firstAttribute="trailing" secondItem="Dou-Te-5J9" secondAttribute="trailing" id="Flj-Ox-VGW"/>
-                            <constraint firstItem="71S-3T-Qoc" firstAttribute="leading" secondItem="o4Q-ol-wZv" secondAttribute="leadingMargin" id="I5U-3C-q6X"/>
+                            <constraint firstItem="71S-3T-Qoc" firstAttribute="leading" secondItem="o4Q-ol-wZv" secondAttribute="leadingMargin" constant="61" id="I5U-3C-q6X"/>
                             <constraint firstItem="71S-3T-Qoc" firstAttribute="top" secondItem="Nci-sv-zKs" secondAttribute="bottom" constant="20" id="Sqg-o8-L1V"/>
                             <constraint firstItem="Dou-Te-5J9" firstAttribute="top" secondItem="71S-3T-Qoc" secondAttribute="bottom" constant="30" id="XoR-Ly-HIy"/>
                             <constraint firstItem="MzM-ce-WQ3" firstAttribute="top" secondItem="Dou-Te-5J9" secondAttribute="bottom" constant="29" id="pie-5z-qmI"/>
@@ -94,7 +98,7 @@
                 <navigationController storyboardIdentifier="Estatistcs" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FbO-Vz-7PP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" selectedImage="gearActive" id="l7v-gT-LAC"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YTi-aw-Vcg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YTi-aw-Vcg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
