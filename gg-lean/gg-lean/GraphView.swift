@@ -18,14 +18,6 @@ import UIKit
     fileprivate var taskNameArray: [String]  = ["Red", "Study", "Play", "Orange", "Mario", "Flower", "WubaLub", "Dragon", "Zagreb", "Nunavut", "Heikjavik"]
     fileprivate var taskValueArray: [Float] = [    10,       20,         45,       72,          133,         8,              14,               27,             32,            90,             58]
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //Tell that you need to reload the view
     func reloadData(){
         self.setNeedsDisplay()
@@ -45,18 +37,19 @@ import UIKit
         let path = UIBezierPath(roundedRect: rect, cornerRadius: 10.0)
         path.addClip()
         
-        let usableSize:CGSize = CGSize(width: self.bounds.size.width, height: self.bounds.size.height);
+        let usableSize:CGSize = CGSize(width: self.bounds.size.width * 4/5, height: self.bounds.size.height * 4/5);
         let deviceColorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
         let margin = usableSize.width * 1/10 as CGFloat
-        
-        // Scale the context to the desired size
-        ctx.scaleBy(x: usableSize.width, y: usableSize.height)
         
         // Setting antialasing
         ctx.setShouldAntialias(true)
         
         //Saving initial context
         ctx.saveGState()
+        
+        // Scale the context to the desired size
+        ctx.scaleBy(x: usableSize.width, y: usableSize.height)
+        
         
         // Create background gradient
         let colors = [startColor.cgColor, endColor.cgColor]
@@ -72,15 +65,18 @@ import UIKit
                                 options: .drawsAfterEndLocation)
         
         ctx.restoreGState()
+        ctx.saveGState()
+        
         ctx.translateBy(x: margin, y: margin)
+        ctx.scaleBy(x: usableSize.width, y: usableSize.height)
         
         let pencilColor:UIColor = .red
         pencilColor.set()
         
         let graphPath = UIBezierPath()
         
-        let maximumSample:Float = taskValueArray.max() ?? 1.0
-        let minimumSample:Float = taskValueArray.min() ?? 0.0
+        let max:Float = taskValueArray.max() ?? 1.0
+        let min:Float =  taskValueArray.min()  ?? 0.0
         
         var counter: CGFloat = 0
         
@@ -89,9 +85,9 @@ import UIKit
         for value in taskValueArray{
         
             let x: CGFloat = counter/numberOfPoints
-            let y: CGFloat = 1 - CGFloat( (value - minimumSample) / (maximumSample - minimumSample))
+            let y: CGFloat = 1 - CGFloat( (value - min) / (max - min))
             
-            let point = CGPoint(x: x, y: y)
+            let point = CGPoint(x: x + 0.15, y: y)
             
             if (x == 0) {
                 //Move to first point location
@@ -103,21 +99,15 @@ import UIKit
             }
             
             //create a circle on the point
-            circles.append(UIBezierPath(arcCenter: point, radius: 0.01, startAngle: 0, endAngle: 2*( .pi), clockwise: true))
+            circles.append(UIBezierPath(arcCenter: point, radius: 0.011, startAngle: 0, endAngle: 2*( .pi), clockwise: true))
             
             counter  = counter + 1
         }
-        
-        graphPath.lineWidth = 0.1
+
+        UIColor.white.setStroke()
+        graphPath.lineWidth = 0.008
         graphPath.stroke()
         
-        //Drawing circles
-//        ctx.restoreGState()
-//        
-//        for circle in circles{
-//            circle.fill()
-//        }
-//        ctx.restoreGState()
    }
     
 
