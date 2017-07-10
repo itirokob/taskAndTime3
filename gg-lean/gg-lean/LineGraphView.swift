@@ -14,10 +14,9 @@ let circleSizeConstant : CGFloat = 8000
 @IBDesignable class LineGraphView: UIView {
     
     //Designable Variables
-    @IBInspectable var startColor : UIColor = .clear
-    @IBInspectable var endColor   : UIColor = .white
+    @IBInspectable var startColor : UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
+    @IBInspectable var endColor   : UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.45)
     
-    fileprivate var taskNameArray: [String]  = ["Red", "Study", "Play", "Orange", "Mario", "Flower", "WubaLub", "Dragon", "Zagreb", "Nunavut", "Heikjavik"]
     fileprivate var taskValueArray: [Float] = [    10,       20,         45,       72,          133,         8,              14,               27,             32,            90,             58]
     
     //Tell that you need to reload the view
@@ -183,30 +182,6 @@ let circleSizeConstant : CGFloat = 8000
         
         // restaura o contexto inicial
         ctx.restoreGState()
-        
-//        if self.title != nil
-//        {
-//            // Alinhamento do texto
-//            let textStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-//            textStyle.alignment = .right
-//            textStyle.lineBreakMode = .byClipping
-//            
-//            // Atritutos da fonte
-//            let textFontAttributes = [
-//                NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16),
-//                NSForegroundColorAttributeName: pencilColor,
-//                NSBackgroundColorAttributeName: UIColor.clear,
-//                NSBaselineOffsetAttributeName: 0,
-//                NSParagraphStyleAttributeName: textStyle
-//                ] as [String : Any]
-//            
-//            // Calcula o tamanho mínimo para o texto ser exibido
-//            let textSize:CGSize = title.size(attributes: textFontAttributes)
-//            
-//            // Desenha o texto
-//            title.draw(in: self.bounds.insetBy(dx: 10, dy: (self.bounds.height - textSize.height) / 2),withAttributes: textFontAttributes)
-//        }
-        
         
         // Desenha linhas horizontais
         let linePath = UIBezierPath()
