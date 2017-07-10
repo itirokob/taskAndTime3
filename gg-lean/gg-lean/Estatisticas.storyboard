@@ -24,10 +24,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dou-Te-5J9">
-                                <rect key="frame" x="0.0" y="270" width="375" height="304"/>
+                                <rect key="frame" x="0.0" y="270" width="375" height="333"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="304" id="4GL-RL-ecq"/>
+                                    <constraint firstAttribute="height" constant="333" id="4GL-RL-ecq"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="descriptionCell" textLabel="ubg-m1-1Ey" detailTextLabel="mwP-3U-FST" style="IBUITableViewCellStyleValue1" id="kS1-k0-TDE">
@@ -78,7 +78,7 @@
                             <constraint firstItem="71S-3T-Qoc" firstAttribute="leading" secondItem="o4Q-ol-wZv" secondAttribute="leadingMargin" constant="61" id="I5U-3C-q6X"/>
                             <constraint firstItem="71S-3T-Qoc" firstAttribute="top" secondItem="Nci-sv-zKs" secondAttribute="bottom" constant="20" id="Sqg-o8-L1V"/>
                             <constraint firstItem="Dou-Te-5J9" firstAttribute="top" secondItem="71S-3T-Qoc" secondAttribute="bottom" constant="30" id="XoR-Ly-HIy"/>
-                            <constraint firstItem="MzM-ce-WQ3" firstAttribute="top" secondItem="Dou-Te-5J9" secondAttribute="bottom" constant="29" id="pie-5z-qmI"/>
+                            <constraint firstItem="MzM-ce-WQ3" firstAttribute="top" secondItem="Dou-Te-5J9" secondAttribute="bottom" id="pie-5z-qmI"/>
                             <constraint firstItem="Dou-Te-5J9" firstAttribute="top" secondItem="71S-3T-Qoc" secondAttribute="bottom" constant="30" id="plG-U1-JF9"/>
                         </constraints>
                     </view>
@@ -98,7 +98,7 @@
                 <navigationController storyboardIdentifier="Estatistcs" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FbO-Vz-7PP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" selectedImage="gearActive" id="l7v-gT-LAC"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YTi-aw-Vcg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YTi-aw-Vcg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -134,10 +134,10 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Ez-lO-xzB">
-                                <rect key="frame" x="0.0" y="269" width="375" height="305"/>
+                                <rect key="frame" x="0.0" y="269" width="375" height="334"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="305" id="Q79-TA-c5k"/>
+                                    <constraint firstAttribute="height" constant="334" id="Q79-TA-c5k"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="wfg-Ui-4ww" id="6PY-4k-Uup"/>
@@ -152,7 +152,7 @@
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leading" id="ZGz-T9-gZN"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="centerX" secondItem="4Ez-lO-xzB" secondAttribute="centerX" id="bzs-W6-eNC"/>
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="29" id="jgy-k5-Bqk"/>
-                            <constraint firstItem="0CZ-IH-keL" firstAttribute="top" secondItem="4Ez-lO-xzB" secondAttribute="bottom" constant="29" id="ksX-uu-j9g"/>
+                            <constraint firstItem="0CZ-IH-keL" firstAttribute="top" secondItem="4Ez-lO-xzB" secondAttribute="bottom" id="ksX-uu-j9g"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="top" secondItem="Yna-pY-awM" secondAttribute="top" constant="20" symbolic="YES" id="m6l-mu-WmQ"/>
                         </constraints>
                     </view>
