@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwipeCellKit
 
 let activeCellColor     = UIColor(red: 247/255, green: 153/255, blue: 41/255, alpha: 1)
 let unactiveCellColor = UIColor(white: 0.95, alpha: 1)
@@ -20,7 +21,7 @@ protocol CellProtocol: NSObjectProtocol
     func willStartTimerBySiri(cell: Cell)
 }
 
-class Cell:UITableViewCell{
+class Cell:SwipeTableViewCell{
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
@@ -28,7 +29,7 @@ class Cell:UITableViewCell{
     @IBOutlet weak var taskViewContainer: taskView!
     
     fileprivate var timer: Timer?
-    weak var delegate: CellProtocol?
+    weak var cellDelegate: CellProtocol?
     
     var timeLabelValue:Int = 0 {
         didSet{
@@ -57,7 +58,7 @@ class Cell:UITableViewCell{
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         self.timeLabelValue += 1
-        delegate?.timerDidTick(cell: self)
+        cellDelegate?.timerDidTick(cell: self)
     }
     
     
@@ -72,8 +73,8 @@ class Cell:UITableViewCell{
     
     //Starting timer
     fileprivate func startTimer(){
-        if let delegate = self.delegate{
-            delegate.willStartTimer(cell: self)
+        if let cellDelegate = self.cellDelegate{
+            cellDelegate.willStartTimer(cell: self)
         }
         timerInvalidate()
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(timerTick), userInfo: nil, repeats: true)
@@ -81,8 +82,8 @@ class Cell:UITableViewCell{
     
     //Stoping timer
     fileprivate func stopTimer(){
-        if let delegate = self.delegate{
-            delegate.willStopTimer(cell: self)
+        if let cellDelegate = self.cellDelegate{
+            cellDelegate.willStopTimer(cell: self)
         }
         timerInvalidate()
     }
