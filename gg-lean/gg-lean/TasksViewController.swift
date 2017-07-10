@@ -62,7 +62,7 @@ class TasksViewController: UIViewController{
         INPreferences.requestSiriAuthorization { (status) in
             
         }
-        updateSiriVocabulary( )
+        //updateSiriVocabulary( )
         
     }
     
@@ -80,7 +80,7 @@ class TasksViewController: UIViewController{
             OperationQueue.main.addOperation({ 
                 self.tableView.reloadData()
                 self.refresh.endRefreshing()
-                self.updateTasksNameArray()
+                //self.updateTasksNameArray()
             })
         }
     }
@@ -99,13 +99,16 @@ class TasksViewController: UIViewController{
             
             manager.saveTask(task: task, completion: { (task2, error) in
                 OperationQueue.main.addOperation({
-                    self.tableView.reloadData()
+                    self.tasksArray.insert(task2!, at: 0)
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .fade)
+                    self.tableView.endUpdates()
                 })
             })
             self.dismissKeyboard()
             self.addTaskField.text = ""
             
-            updateTasksNameArray()
+            //updateTasksNameArray()
         }
     }
     
@@ -185,7 +188,8 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.manager.delete(self.tasksArray[indexPath.row].id, completion: {
@@ -198,7 +202,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // Preciso de uma tela de edit e
+            // Preciso de uma tela de edit
         }
         
         edit.backgroundColor = UIColor.blue

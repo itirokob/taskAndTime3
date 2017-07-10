@@ -101,6 +101,8 @@ class DataBaseManager : NSObject {
         
         let query = CKQuery(recordType: "task", predicate:predicate)
         
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
         publicData.perform(query, inZoneWith: nil) { (results, error) in
             if error != nil{
                 print("Error" + error.debugDescription)
@@ -161,6 +163,33 @@ class DataBaseManager : NSObject {
         }
     }
     
+    
+    /// The updateTask function updates a task in CloudKit
+    ///
+    /// - Parameters:
+    ///   - task: task to be updated
+    ///   - completion: do things when the function ends
+    func updateTask(task:Task, completion:@escaping (CKRecord?,Error?) -> Void){
+        publicData.fetch(withRecordID: CKRecordID(recordName: task.recordName!)) { (record, error) in
+            if (error == nil) {
+                if let databaseRecord = record {
+                    //Update record based on task information
+                    self.mapToCKRecord(objectTask: task, ckRecordTask: databaseRecord)
+                    
+                    self.publicData.save(databaseRecord, completionHandler: { (finalRecord, error) in
+                        if let savedRecord = finalRecord, error == nil {
+                            completion(savedRecord,nil)
+                        } else {
+                            completion(nil, error)
+                        }
+                    })
+                }
+            } else {
+                completion(nil,error)
+            }
+        }
+    }
+    
     /// The saveTask function updates if a task already exists or creates a new one into cloudkit
     ///
     /// - Parameters:
@@ -169,24 +198,13 @@ class DataBaseManager : NSObject {
     func saveTask(task:Task, completion:@escaping (Task?,Error?) -> Void) {
         if task.recordName != nil {
             //Means the task already exists and we want to update her
-            publicData.fetch(withRecordID: CKRecordID(recordName:task.recordName!)) { (record, error) in
-                if (error == nil) {
-                    if let databaseRecord = record {
-                        //Update record based on task information
-                        self.mapToCKRecord(objectTask: task, ckRecordTask: databaseRecord)
-                        
-                        self.publicData.save(databaseRecord, completionHandler: { (finalRecord, error) in
-                            if let savedRecord = finalRecord, error == nil {
-                                completion(self.mapToObject(savedRecord),nil)
-                            } else {
-                                completion(nil, error)
-                            }
-                        })
-                    }
+            updateTask(task: task, completion: { (finalRecord, error) in
+                if error == nil {
+                    completion(self.mapToObject(finalRecord!),nil)
                 } else {
-                    completion(nil,error)
+                    completion(nil, error)
                 }
-            }
+            })
         } else {
             //Creating a record
             let ckRecordTask:CKRecord = CKRecord(recordType: "task")
