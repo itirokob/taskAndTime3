@@ -176,10 +176,10 @@
             </objects>
             <point key="canvasLocation" x="-98.400000000000006" y="122.78860569715144"/>
         </scene>
-        <!--Estat-->
+        <!--Estatistcs-->
         <scene sceneID="Ujo-wa-kGZ">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Estat" storyboardName="Estatisticas" referencedIdentifier="Estat" id="ay7-mK-jvK" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="Estat" storyboardName="Estatisticas" referencedIdentifier="Estatistcs" id="ay7-mK-jvK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="92o-l6-34X"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uH-xX-Klo" userLabel="First Responder" sceneMemberID="firstResponder"/>
