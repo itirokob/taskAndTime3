@@ -11,7 +11,7 @@ import UIKit
 let circleSizeConstant : CGFloat = 8000
 
 /// Create a line Graph based on a series of points
-@IBDesignable class GraphView: UIView {
+@IBDesignable class LineGraphView: UIView {
     
     //Designable Variables
     @IBInspectable var startColor : UIColor = .clear
