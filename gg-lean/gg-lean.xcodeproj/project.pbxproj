@@ -10,7 +10,6 @@
 		9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */; };
 		9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183211F139EB100E49B38 /* Settings.storyboard */; };
 		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
-		9B3183281F13D40400E49B38 /* LineGraphic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183271F13D40400E49B38 /* LineGraphic.xib */; };
 		9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */; };
 		9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */; };
 		B73766EF1F03D0650063B268 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73766EE1F03D0650063B268 /* AppDelegate.swift */; };
@@ -70,7 +69,6 @@
 		9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Estatisticas.storyboard; sourceTree = "<group>"; };
 		9B3183211F139EB100E49B38 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
-		9B3183271F13D40400E49B38 /* LineGraphic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineGraphic.xib; sourceTree = "<group>"; };
 		9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDescriptionViewController.swift; sourceTree = "<group>"; };
 		9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		B73766EB1F03D0650063B268 /* gg-lean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gg-lean.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,7 +200,6 @@
 				9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */,
 				9B3183211F139EB100E49B38 /* Settings.storyboard */,
 				9B3183251F13A6B200E49B38 /* LineGraphView.swift */,
-				9B3183271F13D40400E49B38 /* LineGraphic.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -367,7 +364,6 @@
 				9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */,
 				9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */,
 				B73766F41F03D0650063B268 /* Main.storyboard in Resources */,
-				9B3183281F13D40400E49B38 /* LineGraphic.xib in Resources */,
 				B73767071F03DC500063B268 /* taskView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
