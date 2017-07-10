@@ -14,7 +14,7 @@ class DataBaseManager : NSObject {
     let publicData = CKContainer.default().publicCloudDatabase
     
     //TO DO: ADICIONAR O TIMECOUNTERLIST
-    let tasksFields = ["name", "isSubtask", "tasksDates", "tasksTimes", "totalTime", "isActive", "id"]
+    let tasksFields = ["name", "isSubtask", "totalTime", "isActive", "id"]
     
     /// The objectInfoInArray returns a array with the fields of a given Task object
     ///
@@ -50,7 +50,9 @@ class DataBaseManager : NSObject {
             }
         } else {
             timeCountList = ckRecordTask["timeCountList"] as! [CKReference]
-            timeCountList.append(CKReference(recordID: objectTask.sessions[objectTask.getSessionsSize() - 1].recordID!, action: CKReferenceAction.none))
+            if objectTask.getSessionsSize() > 0{
+                timeCountList.append(CKReference(recordID: objectTask.sessions[objectTask.getSessionsSize() - 1].recordID!, action: CKReferenceAction.none))
+            }
         }
 
         ckRecordTask["timeCountList"] = timeCountList as CKRecordValue
@@ -66,12 +68,10 @@ class DataBaseManager : NSObject {
         let name = record.value(forKey: "name") as! String
         let isSubtask = record.value(forKey: "isSubtask") as! Int
         let totalTime = record.value(forKey: "totalTime") as! Int
-        let tasksDates = record.value(forKey: "tasksDates") as! [Date]
-        let tasksTimes = record.value(forKey: "tasksTimes") as! [Int]
         let isActive = record.value(forKey: "isActive") as! Int
         let id = record.value(forKey:"id") as! String
         
-        let task = Task(name: name, isSubtask: isSubtask, tasksDates: tasksDates, tasksTimes: tasksTimes, totalTime: totalTime, isActive: isActive, id:id)
+        let task = Task(name: name, isSubtask: isSubtask, totalTime: totalTime, isActive: isActive, id:id)
         task.recordName = record.recordID.recordName
         return task
     }
@@ -120,7 +120,7 @@ class DataBaseManager : NSObject {
     /// The getSpecificTask returns a Task object given it's id
     ///
     /// - Parameter id: id of the desired tasks
-    @discardableResult func getSpecificTask(_ id:String, completion: @escaping (Task?,Error?) -> Void){
+    func getSpecificTask(_ id:String, completion: @escaping (Task?,Error?) -> Void){
         let predicate = NSPredicate(format: "id == %@", id as CVarArg)
         let query = CKQuery(recordType: "task", predicate: predicate)
         
