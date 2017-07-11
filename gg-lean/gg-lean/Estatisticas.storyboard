@@ -140,6 +140,9 @@
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="top" secondItem="Yna-pY-awM" secondAttribute="top" constant="20" symbolic="YES" id="m6l-mu-WmQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="h2x-sR-5oa" id="voY-PI-9AK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K9e-5M-U6G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

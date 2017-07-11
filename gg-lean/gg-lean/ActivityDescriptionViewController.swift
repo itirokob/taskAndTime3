@@ -11,23 +11,19 @@ import UIKit
 class ActivityDescriptionViewController: UIViewController {
     
     var describedTask : Task?
+    @IBOutlet weak var graphView: LineGraphView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = describedTask?.name
-        
+        graphView.lineGraphDataSource = self as LineGraphProtocol
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
 }
 
-
+// Implementing the table View Delegates and Data source
+// it shows the description of a task (describedTask), passed by the previous View
 extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,5 +53,14 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         
     }
 
+}
 
+// Implementing the Graph View data soure protocol
+extension ActivityDescriptionViewController : LineGraphProtocol{
+
+    // his method needs to return a [Float] with the time of the sessions of the describedTask
+    func getGraphValueArray() -> [Float] {
+        return [10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38]
+    }
+    
 }
