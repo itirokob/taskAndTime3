@@ -8,9 +8,13 @@
 
 import Foundation
 import UIKit
+import SwipeCellKit
 
+//Cell properties
 let activeCellColor     = UIColor(red: 247/255, green: 153/255, blue: 41/255, alpha: 1)
 let unactiveCellColor = UIColor(white: 0.95, alpha: 1)
+let buttonPlayImage : UIImage = UIImage(named: "play")!
+let buttonPauseImage : UIImage = UIImage(named: "pause")!
 
 protocol CellProtocol: NSObjectProtocol
 {
@@ -18,17 +22,19 @@ protocol CellProtocol: NSObjectProtocol
     func willStopTimer(cell: Cell)
     func timerDidTick(cell: Cell)
     func willStartTimerBySiri(cell: Cell)
+    func willStopTimerBySiri(cell: Cell)
 }
 
-class Cell:UITableViewCell{
+class Cell:SwipeTableViewCell{
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
-    @IBOutlet weak var playPauseSwitch: UISwitch!
     @IBOutlet weak var taskViewContainer: taskView!
+    @IBOutlet weak var playPauseButton: UIButton!
     
     fileprivate var timer: Timer?
-    weak var delegate: CellProtocol?
+    var isOn : Bool = false
+    weak var cellDelegate: CellProtocol?
     
     var timeLabelValue:Int = 0 {
         didSet{
@@ -36,28 +42,41 @@ class Cell:UITableViewCell{
         }
     }
     
-    @IBAction func togglePlayPause(_ sender: UISwitch) {
-        if sender.isOn {
+    @IBAction func togglePlayPauseButton(_ sender: Any) {
+        isOn = !isOn
+        if isOn {
             taskViewContainer.backgroundColor = activeCellColor
+            self.playPauseButton.setImage(buttonPauseImage, for: .normal)
             startTimer()
         } else {
             taskViewContainer.backgroundColor = unactiveCellColor
-                stopTimer()
+            self.playPauseButton.setImage(buttonPlayImage, for: .normal)
+            stopTimer()
         }
     }
     
     func initiateActivity( ){
-        if playPauseSwitch.isOn == false{
-            playPauseSwitch.isOn = true
+        if isOn == false{
+            isOn = true
         }
+        self.playPauseButton.setImage(buttonPauseImage, for: .normal)
         taskViewContainer.backgroundColor = activeCellColor
         startTimer()
+    }
+    
+    func stopActivity( ){
+        if isOn == true{
+            isOn = false
+        }
+        self.playPauseButton.setImage(buttonPlayImage, for: .normal)
+        taskViewContainer.backgroundColor = unactiveCellColor
+        stopTimer()
     }
     
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         self.timeLabelValue += 1
-        delegate?.timerDidTick(cell: self)
+        cellDelegate?.timerDidTick(cell: self)
     }
     
     
@@ -72,8 +91,8 @@ class Cell:UITableViewCell{
     
     //Starting timer
     fileprivate func startTimer(){
-        if let delegate = self.delegate{
-            delegate.willStartTimer(cell: self)
+        if let cellDelegate = self.cellDelegate{
+            cellDelegate.willStartTimer(cell: self)
         }
         timerInvalidate()
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(timerTick), userInfo: nil, repeats: true)
@@ -81,8 +100,8 @@ class Cell:UITableViewCell{
     
     //Stoping timer
     fileprivate func stopTimer(){
-        if let delegate = self.delegate{
-            delegate.willStopTimer(cell: self)
+        if let cellDelegate = self.cellDelegate{
+            cellDelegate.willStopTimer(cell: self)
         }
         timerInvalidate()
     }

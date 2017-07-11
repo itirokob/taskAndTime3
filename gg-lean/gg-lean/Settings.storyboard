@@ -139,9 +139,11 @@
                             <outlet property="delegate" destination="A4A-rP-fnO" id="Yty-gY-9ec"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" selectedImage="gearActive" id="kc2-Q1-gja"/>
                     <navigationItem key="navigationItem" title="Settings" id="Khq-7p-ahQ">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jBn-mF-H9S"/>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oSy-vL-dCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

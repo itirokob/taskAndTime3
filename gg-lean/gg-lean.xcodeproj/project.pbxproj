@@ -13,6 +13,11 @@
 		4D8B7E9F1F13FEA400FAB3F3 /* clicWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */; };
 		9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183211F139EB100E49B38 /* Settings.storyboard */; };
+		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
+		9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */; };
+		9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */; };
+		9B31832E1F1402F100E49B38 /* PizzaGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B31832D1F1402F100E49B38 /* PizzaGraph.xib */; };
+		9B3183301F14030700E49B38 /* PizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B31832F1F14030700E49B38 /* PizzaGraphView.swift */; };
 		B73766EF1F03D0650063B268 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73766EE1F03D0650063B268 /* AppDelegate.swift */; };
 		B73766F41F03D0650063B268 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B73766F21F03D0650063B268 /* Main.storyboard */; };
 		B73766F61F03D0650063B268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B73766F51F03D0650063B268 /* Assets.xcassets */; };
@@ -25,6 +30,9 @@
 		B73767131F043C730063B268 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
 		B737671D1F053C670063B268 /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
 		B73767201F0673F90063B268 /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671F1F0673F90063B268 /* TimeCounter.swift */; };
+		B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B7E3888A1F13FF8600C42A26 /* Cartfile */; };
+		B7E3888D1F14002700C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
+		B7E3888E1F14009400C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
 		B7E843B91F093C890041E634 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E843B81F093C890041E634 /* Cell.swift */; };
 		DE2B99CC1F0E6968002CE4F3 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2B99CB1F0E6968002CE4F3 /* IntentHandler.swift */; };
 		DE2B99D41F0E6969002CE4F3 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2B99D31F0E6969002CE4F3 /* IntentsUI.framework */; };
@@ -82,6 +90,11 @@
 		4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Estatisticas.storyboard; sourceTree = "<group>"; };
 		9B3183211F139EB100E49B38 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
+		9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDescriptionViewController.swift; sourceTree = "<group>"; };
+		9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		9B31832D1F1402F100E49B38 /* PizzaGraph.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PizzaGraph.xib; sourceTree = "<group>"; };
+		9B31832F1F14030700E49B38 /* PizzaGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PizzaGraphView.swift; sourceTree = "<group>"; };
 		B73766EB1F03D0650063B268 /* gg-lean.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gg-lean.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73766EE1F03D0650063B268 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B73766F31F03D0650063B268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,6 +110,8 @@
 		B73767121F043C730063B268 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Task.swift; sourceTree = "<group>"; };
 		B737671C1F053C670063B268 /* TimeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogic.swift; sourceTree = "<group>"; };
 		B737671F1F0673F90063B268 /* TimeCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCounter.swift; sourceTree = "<group>"; };
+		B7E3888A1F13FF8600C42A26 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
 		B7E843B81F093C890041E634 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		DE2B99C91F0E6968002CE4F3 /* Intent Handler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Intent Handler.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE2B99CB1F0E6968002CE4F3 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
@@ -122,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737670D1F03DF200063B268 /* CloudKit.framework in Frameworks */,
+				B7E3888D1F14002700C42A26 /* SwipeCellKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E3888E1F14009400C42A26 /* SwipeCellKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +173,7 @@
 		B73766E21F03D0640063B268 = {
 			isa = PBXGroup;
 			children = (
+				B7E3888A1F13FF8600C42A26 /* Cartfile */,
 				B73766ED1F03D0650063B268 /* gg-lean */,
 				DE2B99CA1F0E6968002CE4F3 /* Intent Handler */,
 				DE2B99D51F0E6969002CE4F3 /* Intent HandlerUI */,
@@ -193,6 +211,7 @@
 		B737670B1F03DF200063B268 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */,
 				B737670C1F03DF200063B268 /* CloudKit.framework */,
 				DE2B99D31F0E6969002CE4F3 /* IntentsUI.framework */,
 				4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */,
@@ -216,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				B73767001F03D2D90063B268 /* TasksViewController.swift */,
+				9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */,
+				9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -229,6 +250,9 @@
 				B73767061F03DC500063B268 /* taskView.xib */,
 				9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */,
 				9B3183211F139EB100E49B38 /* Settings.storyboard */,
+				9B3183251F13A6B200E49B38 /* LineGraphView.swift */,
+				9B31832D1F1402F100E49B38 /* PizzaGraph.xib */,
+				9B31832F1F14030700E49B38 /* PizzaGraphView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -296,6 +320,7 @@
 				B73766E81F03D0650063B268 /* Frameworks */,
 				B73766E91F03D0650063B268 /* Resources */,
 				DE2B99E81F0E6969002CE4F3 /* Embed App Extensions */,
+				B7E3888F1F1400F500C42A26 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -420,7 +445,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */,
 				B73766F91F03D0650063B268 /* LaunchScreen.storyboard in Resources */,
+				9B31832E1F1402F100E49B38 /* PizzaGraph.xib in Resources */,
 				B73766F61F03D0650063B268 /* Assets.xcassets in Resources */,
 				9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */,
 				9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */,
@@ -446,6 +473,24 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B7E3888F1F1400F500C42A26 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwipeCellKit.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwipeCellKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4D8B7E8F1F13FEA400FAB3F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -461,9 +506,13 @@
 			files = (
 				B73766EF1F03D0650063B268 /* AppDelegate.swift in Sources */,
 				B73767011F03D2D90063B268 /* TasksViewController.swift in Sources */,
+				9B3183301F14030700E49B38 /* PizzaGraphView.swift in Sources */,
+				9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */,
 				B73767201F0673F90063B268 /* TimeCounter.swift in Sources */,
 				B737671D1F053C670063B268 /* TimeLogic.swift in Sources */,
+				9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */,
 				B73767031F03D4B40063B268 /* taskView.swift in Sources */,
+				9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */,
 				B7E843B91F093C890041E634 /* Cell.swift in Sources */,
 				B73767131F043C730063B268 /* Task.swift in Sources */,
 				B73767111F04220D0063B268 /* DataBaseManager.swift in Sources */,
@@ -670,7 +719,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "gg-lean/gg-lean.entitlements";
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = "gg-lean/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.gg-lean";
@@ -687,7 +736,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "gg-lean/gg-lean.entitlements";
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = "gg-lean/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.gg-lean";
@@ -732,6 +781,10 @@
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Intent Handler/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -747,6 +800,10 @@
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Intent Handler/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

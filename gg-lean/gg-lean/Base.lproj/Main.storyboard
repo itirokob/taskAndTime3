@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,12 +65,17 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-lk-wI7" customClass="taskView" customModule="gg_lean" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="359" height="75"/>
                                                     <subviews>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" onImage="pause" offImage="play" translatesAutoresizingMaskIntoConstraints="NO" id="5tH-qC-2zl">
-                                                            <rect key="frame" x="8" y="22" width="51" height="31"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBY-TG-qIr" userLabel="Play Pause Button">
+                                                            <rect key="frame" x="22" y="27" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="bBY-TG-qIr" secondAttribute="height" multiplier="1:1" id="UVl-58-f6O"/>
+                                                                <constraint firstAttribute="height" constant="20" id="lsV-GV-K4k"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button" image="play"/>
                                                             <connections>
-                                                                <action selector="togglePlayPause:" destination="4aP-Vl-Rul" eventType="valueChanged" id="dE6-dz-vcG"/>
+                                                                <action selector="togglePlayPauseButton:" destination="4aP-Vl-Rul" eventType="touchUpInside" id="Mrb-ht-kMe"/>
                                                             </connections>
-                                                        </switch>
+                                                        </button>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6np-8y-kUQ" userLabel="id">
                                                             <rect key="frame" x="317" y="54" width="0.0" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -94,14 +100,14 @@
                                                     </subviews>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="5tH-qC-2zl" firstAttribute="leading" secondItem="5Qv-lk-wI7" secondAttribute="leadingMargin" id="2dd-gd-7rV"/>
                                                         <constraint firstItem="8h8-nk-aIC" firstAttribute="leading" secondItem="doP-kK-e2u" secondAttribute="trailing" constant="33" id="5xz-0o-pou"/>
-                                                        <constraint firstItem="5tH-qC-2zl" firstAttribute="centerY" secondItem="doP-kK-e2u" secondAttribute="centerY" id="AQn-dn-esW"/>
+                                                        <constraint firstItem="bBY-TG-qIr" firstAttribute="centerY" secondItem="doP-kK-e2u" secondAttribute="centerY" id="AWR-ts-D5a"/>
                                                         <constraint firstItem="doP-kK-e2u" firstAttribute="centerY" secondItem="5Qv-lk-wI7" secondAttribute="centerY" id="N1y-qM-o5A"/>
                                                         <constraint firstAttribute="trailing" secondItem="6np-8y-kUQ" secondAttribute="trailing" constant="42" id="VcP-mx-wtm"/>
                                                         <constraint firstItem="doP-kK-e2u" firstAttribute="baseline" secondItem="8h8-nk-aIC" secondAttribute="baseline" id="XBX-fq-uYV"/>
                                                         <constraint firstItem="doP-kK-e2u" firstAttribute="leading" secondItem="5Qv-lk-wI7" secondAttribute="leading" constant="65" id="tjW-NF-PgO"/>
                                                         <constraint firstItem="6np-8y-kUQ" firstAttribute="top" secondItem="5Qv-lk-wI7" secondAttribute="top" constant="54" id="utf-T5-HqC"/>
+                                                        <constraint firstItem="bBY-TG-qIr" firstAttribute="leading" secondItem="5Qv-lk-wI7" secondAttribute="leading" constant="22" id="v4J-RR-zn9"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -120,7 +126,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="playPauseSwitch" destination="5tH-qC-2zl" id="H7p-dC-Qnw"/>
+                                            <outlet property="playPauseButton" destination="bBY-TG-qIr" id="8TK-1h-cwM"/>
                                             <outlet property="taskLabel" destination="doP-kK-e2u" id="vAL-wZ-MZ7"/>
                                             <outlet property="taskViewContainer" destination="5Qv-lk-wI7" id="Exd-vZ-GkL"/>
                                             <outlet property="timeLabel" destination="8h8-nk-aIC" id="SoL-B1-wuv"/>
@@ -176,10 +182,10 @@
             </objects>
             <point key="canvasLocation" x="-98.400000000000006" y="122.78860569715144"/>
         </scene>
-        <!--Estat-->
+        <!--Estatistcs-->
         <scene sceneID="Ujo-wa-kGZ">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Estat" storyboardName="Estatisticas" referencedIdentifier="Estat" id="ay7-mK-jvK" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="Estat" storyboardName="Estatisticas" referencedIdentifier="Estatistcs" id="ay7-mK-jvK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="92o-l6-34X"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uH-xX-Klo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -200,7 +206,6 @@
     <resources>
         <image name="activeWatch" width="25" height="25"/>
         <image name="notActiveWatch" width="25" height="25"/>
-        <image name="pause" width="700" height="700"/>
-        <image name="play" width="700" height="700"/>
+        <image name="play" width="25" height="25"/>
     </resources>
 </document>

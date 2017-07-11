@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataBaseManager.swift"
-            timestampString = "521065497.308269"
+            filePath = "Carthage/Checkouts/SwipeCellKit/Source/SwipeTableViewCell.swift"
+            timestampString = "521412015.051543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "saveTask(task:completion:)"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "performFillAction(action:fillOption:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataBaseManager.swift"
-            timestampString = "521065516.046848"
+            filePath = "gg-lean/TasksViewController.swift"
+            timestampString = "521468164.798773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "saveTask(task:completion:)"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "tableView(_:editActionsOptionsForRowAt:for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataBaseManager.swift"
-            timestampString = "521065518.15914"
+            filePath = "gg-lean/TimeLogic.swift"
+            timestampString = "521468022.747794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "saveTask(task:completion:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "pausePressed(task:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DataBaseManager.swift"
-            timestampString = "521124440.536811"
+            filePath = "gg-lean/Cell.swift"
+            timestampString = "521468058.748914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
-            landmarkName = "addTimeCount(task:completionHandler:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "togglePlayPause(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
