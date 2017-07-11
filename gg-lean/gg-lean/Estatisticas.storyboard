@@ -151,7 +151,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="graph" width="25" height="24"/>
-        <image name="graphActive" width="25" height="24"/>
+        <image name="graph" width="25" height="27"/>
+        <image name="graphActive" width="25" height="27"/>
     </resources>
 </document>

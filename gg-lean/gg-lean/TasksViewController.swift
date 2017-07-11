@@ -140,6 +140,11 @@ extension TasksViewController: CellProtocol{
         print("Pause \(tasksArray[cell.tag].name)")
     }
     
+    func willStopTimerBySiri(cell: Cell){
+        cell.stopActivity()
+        print("Play \(tasksArray[cell.tag].name)")
+    }
+    
     func timerDidTick(cell: Cell){
         tasksArray[cell.tag].updateSessionDuration()
     }
@@ -170,8 +175,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-        
-
+    
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
@@ -182,6 +186,17 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         }
         
         return cell
+        }
+    
+    //Essa função está aqui por enquanto.... ela ativa um timer, mas deveria collapsar uma célula no futuro
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! Cell
+        if cell.isOn == false{
+            willStartTimerBySiri(cell: cell)
+        }
+        else{
+            willStopTimerBySiri(cell: cell)
+        }
     }
     
     //Swipe to delete a task
