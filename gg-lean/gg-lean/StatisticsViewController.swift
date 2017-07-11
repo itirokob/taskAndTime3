@@ -41,6 +41,8 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.backgroundColor = .clear
         
         self.loadTasks()
     }
@@ -63,7 +65,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        var searchText = searchController.searchBar.text!
+        let searchText = searchController.searchBar.text!
         if searchText == "" {
             filteredTasks = tasksArray
         }else{
