@@ -63,16 +63,20 @@ class DataBaseManager : NSObject {
     /// - Parameter record: our desired task in CKRecord type
     /// - Returns: our desired task in Task type
     func mapToObject (_ record:CKRecord) -> Task{
-        //var sessionsArray = [TaskSession]()
         
         let name = record.value(forKey: "name") as! String
         let isSubtask = record.value(forKey: "isSubtask") as! Int
         let totalTime = record.value(forKey: "totalTime") as! Int
         let isActive = record.value(forKey: "isActive") as! Int
         let id = record.value(forKey:"id") as! String
+        let timeCountList = record.value(forKey: "timeCountList") as! [CKReference]
         
         let task = Task(name: name, isSubtask: isSubtask, totalTime: totalTime, isActive: isActive, id:id)
         task.recordName = record.recordID.recordName
+        self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
+            task.sessions = taskSessionList
+        }
+        
         return task
     }
     
@@ -240,4 +244,44 @@ class DataBaseManager : NSObject {
     }
     
     
+    /// The mapToTaskSession maps a TimeCount record into a TaskSession object
+    ///
+    /// - Parameter record: the TimeCount record to be mapped
+    /// - Returns: a taskSession
+    func mapToTaskSession (_ record:CKRecord) -> TaskSession{
+        let startDate = record.value(forKey: "startDate") as! Date
+        let duration = record.value(forKey: "duration") as! Int
+        let recordID = record.recordID
+        
+        return TaskSession(startDate: startDate, durationInSeconds: duration, recordID: recordID)
+    }
+
+    /// The mapToTaskSessionList transforms a reference list into a TaskSession list
+    ///
+    /// - Parameters:
+    ///   - referenceList: the reference list to be transformed
+    ///   - completionHandler: things to do only when the function ends
+    func mapToTaskSessionList(referenceList: [CKReference], completionHandler: @escaping ([TaskSession]) -> Swift.Void){
+        var recordIDList = [CKRecordID]()
+        var taskSessionList = [TaskSession]()
+        
+        for reference in referenceList {
+            recordIDList.append(reference.recordID)
+        }
+        
+        let op = CKFetchRecordsOperation(recordIDs: recordIDList)
+        op.database = publicData
+        publicData.add(op)
+        
+        op.perRecordCompletionBlock = { (record, recordID, error) in
+            if error == nil{
+                if let result = record{
+                    taskSessionList.append(self.mapToTaskSession(result))
+                }
+            }else{
+                print("Error in mapping to recordIDList: \(String(describing: error))")
+            }
+            completionHandler(taskSessionList)
+        }
+    }
 }
