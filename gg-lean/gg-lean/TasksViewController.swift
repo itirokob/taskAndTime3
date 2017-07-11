@@ -96,12 +96,16 @@ class TasksViewController: UIViewController{
             let task = Task(name: addTaskField.text!, isSubtask: -1, totalTime: 0, isActive: 1, id: UUID().uuidString)
             
             manager.saveTask(task: task, completion: { (task2, error) in
-                OperationQueue.main.addOperation({
-                    self.tasksArray.insert(task2!, at: 0)
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .fade)
-                    self.tableView.endUpdates()
-                })
+                if(error == nil){
+                    OperationQueue.main.addOperation({
+                        self.tasksArray.insert(task2!, at: 0)
+                        self.tableView.beginUpdates()
+                        self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .fade)
+                        self.tableView.endUpdates()
+                    })
+                } else {
+                    print("Error in adding task: \(String(describing: error))")
+                }
             })
             self.dismissKeyboard()
             self.addTaskField.text = ""
@@ -165,6 +169,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         let task = tasksArray[indexPath.row]
         
         cell.delegate = self
+        cell.cellDelegate = self
         cell.timeLabelValue = task.getTotalTime()
         cell.taskLabel.text = task.name
         cell.tag = indexPath.row
