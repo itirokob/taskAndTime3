@@ -118,8 +118,7 @@ class DataBaseManager : NSObject {
     }
     
     /// The getSpecificTask returns a Task object given it's id
-    ///
-    /// - Parameter id: id of the desired tasks
+        /// - Parameter id: id of the desired tasks
     func getSpecificTask(_ id:String, completion: @escaping (Task?,Error?) -> Void){
         let predicate = NSPredicate(format: "id == %@", id as CVarArg)
         let query = CKQuery(recordType: "task", predicate: predicate)

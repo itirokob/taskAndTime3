@@ -8,11 +8,15 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController {
+class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
     let manager = DataBaseManager.shared
     var tasksArray = [Task]()
     var sendingTask: Task?
+    var filteredTasks = [Task]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -30,6 +34,13 @@ class StatisticsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        filteredTasks = tasksArray
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
         
         self.loadTasks()
     }
@@ -50,13 +61,22 @@ class StatisticsViewController: UIViewController {
         let destinationController = segue.destination as? ActivityDescriptionViewController
         destinationController?.describedTask = sendingTask!
     }
-
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        var searchText = searchController.searchBar.text!
+        if searchText == "" {
+            filteredTasks = tasksArray
+        }else{
+            filteredTasks = tasksArray.filter( { $0.name.lowercased().contains(searchText.lowercased()) } )
+        }
+        self.tableView.reloadData()
+    }
 }
 
 extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasksArray.count
+        return filteredTasks.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -66,7 +86,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
-        let task = tasksArray[indexPath.row]
+        let task = filteredTasks[indexPath.row]
         
         cell.textLabel?.text = task.name
         cell.detailTextLabel?.text = task.getTimeString()
@@ -76,9 +96,10 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        sendingTask = tasksArray[indexPath.row]
+        sendingTask = filteredTasks[indexPath.row]
         performSegue(withIdentifier: "showDescription", sender: self)
         
     }
 
 }
+
