@@ -41,10 +41,11 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         let sessionDate = (describedTask?.sessions[indexPath.row].startDate)!
         let dateFormate = DateFormatter()
         dateFormate.dateStyle = .medium
-        dateFormate.timeStyle = .medium
+        dateFormate.timeStyle = .short
         
         cell.textLabel?.text = dateFormate.string(from: sessionDate)
-        cell.detailTextLabel?.text = String(describing: describedTask?.sessions[indexPath.row].durationInSeconds)
+        let durationInSeconds = describedTask?.sessions[indexPath.row].durationInSeconds
+        cell.detailTextLabel?.text = durationInSeconds?.description
         
         return cell
     }
@@ -60,7 +61,13 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
 
     // his method needs to return a [Float] with the time of the sessions of the describedTask
     func getGraphValueArray() -> [Float] {
-        return [10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 50, 55, 51, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38]
+        
+        var dataPoints = [Float]()
+        for session in (describedTask?.sessions)!{
+            dataPoints.append(Float(session.durationInSeconds))
+        }
+        
+        return dataPoints
     }
     
 }
