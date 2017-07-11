@@ -60,7 +60,7 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
 
     // his method needs to return a [Float] with the time of the sessions of the describedTask
     func getGraphValueArray() -> [Float] {
-        return [10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38]
+        return [10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 50, 55, 51, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38,10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38]
     }
     
 }
