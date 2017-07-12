@@ -17,6 +17,18 @@ class TimeLogic:NSObject{
     //Em timelogic, recebo a informação que o botão play foi pressionado e guardo a data que foi iniciado. A cada um segundo, eu faço dataAtual - dataInicio
     func playPressed(task:Task){
         task.isRunning = task.startSession(startDate: Date())
+        
+        if task.currentSession != nil{
+            manager.addTimeCount(session: task.currentSession!) { (recordID) in
+                task.currentSession?.recordID = recordID
+                
+                self.manager.saveTask(task: task, completion: { (task, error) in
+                    if error != nil{
+                        print("Error in playPressed: \(String(describing: error))")
+                    }
+                })
+            }
+        }
     }
     
     /// The pausePressed function sends the info from task's session to cloudkit
@@ -32,8 +44,7 @@ class TimeLogic:NSObject{
         
         print("Finished session \(finishedSession) in task \(task.name)")
         
-        manager.addTimeCount(task: task, completionHandler: { (recordID) in
-            
+        manager.addTimeCount(session: finishedSession, completionHandler: { (recordID) in
             if(task.sessions.count > 0) {
                 task.sessions[task.getSessionsSize() - 1].recordID = recordID
                 self.manager.saveTask(task: task, completion: { (task, error) in })
