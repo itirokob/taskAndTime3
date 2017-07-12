@@ -45,8 +45,9 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         
         cell.textLabel?.text = dateFormate.string(from: sessionDate)
         let durationInSeconds = describedTask?.sessions[indexPath.row].durationInSeconds
-        
         cell.detailTextLabel?.text = getTimeString(time: durationInSeconds!)
+        
+        cell.selectionStyle = .none
         
         return cell
     }

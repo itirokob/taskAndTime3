@@ -10,6 +10,8 @@ import UIKit
 import Intents
 import SwipeCellKit
 
+let backgroundBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+
 class TasksViewController: UIViewController{
     let manager = DataBaseManager.shared
 
@@ -43,6 +45,8 @@ class TasksViewController: UIViewController{
         tableView.separatorColor = UIColor(white: 0.95, alpha: 1)
         tableView.delegate = self
         tableView.dataSource = self
+        self.tabBarController?.tabBar.barTintColor = UIColor.white
+        self.tabBarController?.tabBar.tintColor = backgroundBlue
         
         //Adding the done button instead of "return" button on the keyboard
         addTaskField.returnKeyType = .done
