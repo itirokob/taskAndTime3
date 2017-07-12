@@ -26,8 +26,11 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
             self.tasksArray = tasks
             
             OperationQueue.main.addOperation({
-                self.tableView.reloadData()
+                self.filteredTasks = self.tasksArray
+                
+                self.updateSearchResults(for: self.searchController)
                 //self.refresh.endRefreshing()
+                
             })
         }
     }
@@ -35,14 +38,6 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        filteredTasks = tasksArray
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-        
-        searchController.searchBar.barTintColor = .white
-        searchController.searchBar.backgroundColor = .clear
         
         self.loadTasks()
     }
@@ -50,7 +45,13 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.backgroundColor = .clear
     }
 
     override func didReceiveMemoryWarning() {
