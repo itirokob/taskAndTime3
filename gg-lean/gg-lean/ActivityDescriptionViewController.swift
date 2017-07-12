@@ -12,12 +12,19 @@ class ActivityDescriptionViewController: UIViewController {
     
     var describedTask : Task?
     @IBOutlet weak var graphView: LineGraphView!
+    @IBOutlet weak var nodataWarning: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title = describedTask?.name
         graphView.lineGraphDataSource = self as LineGraphProtocol
+        
+        if describedTask?.sessions == nil || describedTask?.sessions.count == 0{
+            nodataWarning.text = "No data to display"
+        } else{
+            nodataWarning.text = ""
+        }
     }
 
 }

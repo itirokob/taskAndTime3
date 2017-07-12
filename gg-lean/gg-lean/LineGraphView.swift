@@ -90,8 +90,12 @@ protocol LineGraphProtocol : NSObjectProtocol{
         var circles = [UIBezierPath]()
         
         //Get maximun and minimum values to scale the graph
-        let maximumSample:Float = taskValueArray.max() ?? 1.0
-        let minimumSample:Float = taskValueArray.min() ?? 0.0
+        var maximumSample:Float = taskValueArray.max() ?? 1.0
+        var minimumSample:Float = taskValueArray.min() ?? 0.0
+        if maximumSample == minimumSample {
+            maximumSample = maximumSample * 1.5
+            minimumSample = minimumSample / 1.5
+        }
         
         var x: CGFloat = 0
         let count: CGFloat = CGFloat(taskValueArray.count)
