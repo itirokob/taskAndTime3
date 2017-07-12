@@ -45,7 +45,8 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         
         cell.textLabel?.text = dateFormate.string(from: sessionDate)
         let durationInSeconds = describedTask?.sessions[indexPath.row].durationInSeconds
-        cell.detailTextLabel?.text = durationInSeconds?.description
+        
+        cell.detailTextLabel?.text = getTimeString(time: durationInSeconds!)
         
         return cell
     }
@@ -53,6 +54,15 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+    
+    func getTimeString(time: Int) -> String{
+        
+        let minutes :Int = time / 60
+        let seconds :Int = time - 60*minutes
+        
+        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
+    }
+
 
 }
 
