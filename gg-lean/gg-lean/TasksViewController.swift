@@ -63,7 +63,7 @@ class TasksViewController: UIViewController{
         INPreferences.requestSiriAuthorization { (status) in
             
         }
-        //updateSiriVocabulary( )
+        updateTasksNameArray( )
         
     }
     
@@ -81,7 +81,7 @@ class TasksViewController: UIViewController{
             OperationQueue.main.addOperation({ 
                 self.tableView.reloadData()
                 self.refresh.endRefreshing()
-                //self.updateTasksNameArray()
+                self.updateTasksNameArray()
             })
         }
     }
@@ -110,7 +110,7 @@ class TasksViewController: UIViewController{
             self.dismissKeyboard()
             self.addTaskField.text = ""
             
-            //updateTasksNameArray()
+            updateTasksNameArray()
         }
     }
     
