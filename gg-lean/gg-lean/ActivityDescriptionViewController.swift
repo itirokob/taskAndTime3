@@ -14,6 +14,7 @@ class ActivityDescriptionViewController: UIViewController {
     var selectedRow : Int = -1
     @IBOutlet weak var graphView: LineGraphView!
     @IBOutlet weak var nodataWarning: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class ActivityDescriptionViewController: UIViewController {
             nodataWarning.text = ""
         }
         selectedRow = -1
+        descriptionLabel.text = ""
     }
 
 }
@@ -64,6 +66,7 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row
+        descriptionLabel.text = "Selected Session Time: \(getTimeString(time: (describedTask?.sessions[indexPath.row].durationInSeconds)!))"
         graphView.reloadData()
     }
     

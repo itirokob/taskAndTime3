@@ -17,7 +17,6 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
     let searchController = UISearchController(searchResultsController: nil)
 
-    
     @IBOutlet weak var tableView: UITableView!
     
     func loadTasks(){

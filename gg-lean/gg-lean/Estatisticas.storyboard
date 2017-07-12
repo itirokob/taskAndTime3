@@ -118,8 +118,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlC-4T-cBS">
-                                <rect key="frame" x="165" y="95" width="44.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nodataWarningLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlC-4T-cBS">
+                                <rect key="frame" x="109" y="95" width="157" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -162,6 +162,15 @@
                                     <outlet property="delegate" destination="wfg-Ui-4ww" id="Hs3-2g-cfv"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJS-PR-P2P">
+                                <rect key="frame" x="115" y="191" width="232" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="232" id="qgb-HP-Ot4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.50196078431372548" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -171,12 +180,15 @@
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leading" id="ZGz-T9-gZN"/>
                             <constraint firstItem="XlC-4T-cBS" firstAttribute="centerX" secondItem="h2x-sR-5oa" secondAttribute="centerX" id="ap4-sm-ZSZ"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="centerX" secondItem="4Ez-lO-xzB" secondAttribute="centerX" id="bzs-W6-eNC"/>
+                            <constraint firstItem="GJS-PR-P2P" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" id="f1O-c0-plF"/>
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="29" id="jgy-k5-Bqk"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="top" secondItem="Yna-pY-awM" secondAttribute="top" constant="20" symbolic="YES" id="m6l-mu-WmQ"/>
+                            <constraint firstItem="GJS-PR-P2P" firstAttribute="trailing" secondItem="h2x-sR-5oa" secondAttribute="trailing" id="n7z-xT-QNg"/>
                             <constraint firstItem="0CZ-IH-keL" firstAttribute="top" secondItem="4Ez-lO-xzB" secondAttribute="bottom" id="vW8-zJ-Ysm"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="descriptionLabel" destination="GJS-PR-P2P" id="LDb-JA-pwz"/>
                         <outlet property="graphView" destination="h2x-sR-5oa" id="voY-PI-9AK"/>
                         <outlet property="nodataWarning" destination="XlC-4T-cBS" id="CHy-0i-m2E"/>
                     </connections>
