@@ -18,6 +18,8 @@ class Cache: NSObject {
     }()
     
     class func shared() -> Cache {
+        print("sharedCache tasks: \(sharedCache.tasks)")
+        
         return sharedCache
     }
     

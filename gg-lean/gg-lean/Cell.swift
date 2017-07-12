@@ -100,6 +100,8 @@ class Cell:SwipeTableViewCell{
     func setViewProperties() {
         taskLabel.text = task.name
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
+        timeLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
+        taskLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
         taskViewContainer.backgroundColor = task.isRunning ? activeCellColor : unactiveCellColor
         playPauseButton.setImage(task.isRunning ? buttonPauseImage : buttonPlayImage, for: .normal)
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityDescriptionViewController: UIViewController {
     
-    var describedTask : Task?
+    var describedTask : Task!
     var selectedRow : Int = -1
     @IBOutlet weak var graphView: LineGraphView!
     @IBOutlet weak var nodataWarning: UILabel!
@@ -19,10 +19,10 @@ class ActivityDescriptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = describedTask?.name
+        self.navigationItem.title = describedTask.name
         graphView.lineGraphDataSource = self as LineGraphProtocol
         
-        if describedTask?.sessions == nil || describedTask?.sessions.count == 0{
+        if describedTask.sessions.count == 0{
             nodataWarning.text = "No data to display"
         } else{
             nodataWarning.text = ""
@@ -38,7 +38,7 @@ class ActivityDescriptionViewController: UIViewController {
 extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (describedTask?.sessions.count)!
+        return describedTask.sessions.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,14 +50,14 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
         
         //Get and formatt the sessin time
-        let sessionDate = (describedTask?.sessions[indexPath.row].startDate)!
+        let sessionDate = describedTask.sessions[indexPath.row].startDate
         let dateFormate = DateFormatter()
         dateFormate.dateStyle = .medium
         dateFormate.timeStyle = .short
         
         cell.textLabel?.text = dateFormate.string(from: sessionDate)
-        let durationInSeconds = describedTask?.sessions[indexPath.row].durationInSeconds
-        cell.detailTextLabel?.text = getTimeString(time: durationInSeconds!)
+        let durationInSeconds = describedTask.sessions[indexPath.row].durationInSeconds
+        cell.detailTextLabel?.text = getTimeString(time: durationInSeconds)
         
         //cell.selectionStyle = .none
         
@@ -66,7 +66,7 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row
-        descriptionLabel.text = "Selected Session Time: \(getTimeString(time: (describedTask?.sessions[indexPath.row].durationInSeconds)!))"
+        descriptionLabel.text = "Selected Session Time: \(getTimeString(time: describedTask.sessions[indexPath.row].durationInSeconds))"
         graphView.reloadData()
     }
     
@@ -88,7 +88,8 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
     func getGraphValueArray() -> [Float] {
         
         var dataPoints = [Float]()
-        for session in (describedTask?.sessions)!{
+        print("task \(describedTask)'s sessions: \(describedTask.sessions)")
+        for session in describedTask.sessions{
             dataPoints.append(Float(session.durationInSeconds))
         }
         

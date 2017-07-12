@@ -258,7 +258,7 @@ class DataBaseManager : NSObject {
         guard let startDate = record.value(forKey: "startDate") as? Date,
             let stopDate = record.value(forKey: "stopDate") as? Date,
             let duration = record.value(forKey: "duration") as? Int else {
-                print("Attributes missing when mapping task session CKRecord to object.")
+//                print("Attributes missing when mapping task session CKRecord to object.")
                 return nil
         }
         
