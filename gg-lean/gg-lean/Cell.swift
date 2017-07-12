@@ -46,10 +46,14 @@ class Cell:SwipeTableViewCell{
         isOn = !isOn
         if isOn {
             taskViewContainer.backgroundColor = activeCellColor
+            self.taskLabel.textColor = UIColor.white
+            self.timeLabel.textColor = UIColor.white
             self.playPauseButton.setImage(buttonPauseImage, for: .normal)
             startTimer()
         } else {
             taskViewContainer.backgroundColor = unactiveCellColor
+            self.taskLabel.textColor = UIColor.black
+            self.timeLabel.textColor = UIColor.black
             self.playPauseButton.setImage(buttonPlayImage, for: .normal)
             stopTimer()
         }
@@ -60,6 +64,8 @@ class Cell:SwipeTableViewCell{
             isOn = true
         }
         self.playPauseButton.setImage(buttonPauseImage, for: .normal)
+        self.taskLabel.textColor = UIColor.white
+        self.timeLabel.textColor = UIColor.white
         taskViewContainer.backgroundColor = activeCellColor
         startTimer()
     }
@@ -69,6 +75,8 @@ class Cell:SwipeTableViewCell{
             isOn = false
         }
         self.playPauseButton.setImage(buttonPlayImage, for: .normal)
+        self.taskLabel.textColor = UIColor.black
+        self.timeLabel.textColor = UIColor.black
         taskViewContainer.backgroundColor = unactiveCellColor
         stopTimer()
     }

@@ -71,7 +71,7 @@
                                                                 <constraint firstAttribute="width" secondItem="bBY-TG-qIr" secondAttribute="height" multiplier="1:1" id="UVl-58-f6O"/>
                                                                 <constraint firstAttribute="height" constant="20" id="lsV-GV-K4k"/>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="play"/>
+                                                            <state key="normal" image="play"/>
                                                             <connections>
                                                                 <action selector="togglePlayPauseButton:" destination="4aP-Vl-Rul" eventType="touchUpInside" id="Mrb-ht-kMe"/>
                                                             </connections>
@@ -206,6 +206,6 @@
     <resources>
         <image name="activeWatch" width="25" height="25"/>
         <image name="notActiveWatch" width="25" height="25"/>
-        <image name="play" width="25" height="25"/>
+        <image name="play" width="12" height="17"/>
     </resources>
 </document>

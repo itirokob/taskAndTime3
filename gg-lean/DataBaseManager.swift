@@ -50,7 +50,7 @@ class DataBaseManager : NSObject {
             }
         } else {
             timeCountList = ckRecordTask["timeCountList"] as! [CKReference]
-            if objectTask.getSessionsSize() > 0{
+            if objectTask.getSessionsSize() > 0 && objectTask.sessions[objectTask.getSessionsSize() - 1].recordID != nil{
                 timeCountList.append(CKReference(recordID: objectTask.sessions[objectTask.getSessionsSize() - 1].recordID!, action: CKReferenceAction.none))
             }
         }
