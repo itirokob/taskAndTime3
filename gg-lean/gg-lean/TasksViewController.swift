@@ -18,7 +18,10 @@ class TasksViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addTaskField: UITextField!
     
-    var tasksArray = [Task]()
+    var tasksArray  = {
+        return Cache.shared().tasks
+    }()
+    
     var tasksNameArray: [String] = []
     public static var startedActivityOnInit:String?
 

@@ -11,7 +11,9 @@ import UIKit
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
     let manager = DataBaseManager.shared
-    var tasksArray = [Task]()
+    var tasksArray  = {
+        return Cache.shared().tasks
+    }()
     var sendingTask: Task?
     var filteredTasks = [Task]()
     
