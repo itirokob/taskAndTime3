@@ -126,7 +126,8 @@ class Cell:SwipeTableViewCell{
 //        if let cellDelegate = self.cellDelegate{
 //            cellDelegate.willStartTimer(cell: self)
 //        }
-        self.task.isRunning = self.task.startSession(startDate: Date())
+//        self.task.isRunning = self.task.startSession(startDate: Date())
+        TimeLogic.shared.playPressed(task: self.task)
         setViewProperties()
         initializeTimer()
     }
