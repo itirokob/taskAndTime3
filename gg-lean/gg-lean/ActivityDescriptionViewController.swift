@@ -11,6 +11,7 @@ import UIKit
 class ActivityDescriptionViewController: UIViewController {
     
     var describedTask : Task?
+    var selectedRow : Int = -1
     @IBOutlet weak var graphView: LineGraphView!
     @IBOutlet weak var nodataWarning: UILabel!
 
@@ -25,6 +26,7 @@ class ActivityDescriptionViewController: UIViewController {
         } else{
             nodataWarning.text = ""
         }
+        selectedRow = -1
     }
 
 }
@@ -45,6 +47,7 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
         
+        //Get and formatt the sessin time
         let sessionDate = (describedTask?.sessions[indexPath.row].startDate)!
         let dateFormate = DateFormatter()
         dateFormate.dateStyle = .medium
@@ -54,15 +57,17 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         let durationInSeconds = describedTask?.sessions[indexPath.row].durationInSeconds
         cell.detailTextLabel?.text = getTimeString(time: durationInSeconds!)
         
-        cell.selectionStyle = .none
+        //cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        selectedRow = indexPath.row
+        graphView.reloadData()
     }
     
+    // Format a given time to mm:ss
     func getTimeString(time: Int) -> String{
         
         let minutes :Int = time / 60
@@ -71,13 +76,12 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
     }
 
-
 }
 
 // Implementing the Graph View data soure protocol
 extension ActivityDescriptionViewController : LineGraphProtocol{
 
-    // his method needs to return a [Float] with the time of the sessions of the describedTask
+    // This method needs to return a [Float] with the time of the sessions of the describedTask
     func getGraphValueArray() -> [Float] {
         
         var dataPoints = [Float]()
@@ -86,6 +90,11 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
         }
         
         return dataPoints
+    }
+    
+    // Returns the selected row of the table view, to be highlighted on the graph view
+    func getSelectedRow() -> Int {
+        return selectedRow
     }
     
 }

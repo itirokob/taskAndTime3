@@ -9,10 +9,12 @@
 import UIKit
 
 let circleSizeConstant : CGFloat = 8000
+let highlightedColor : CGColor = UIColor.orange.cgColor
 
 /// Implement this protocol to generate the graph Value points to a specifc data
 protocol LineGraphProtocol : NSObjectProtocol{
     func getGraphValueArray() -> [Float]
+    func getSelectedRow() -> Int
 }
 
 /// Create a line Graph based on a series of points
@@ -23,6 +25,7 @@ protocol LineGraphProtocol : NSObjectProtocol{
     @IBInspectable var endColor   : UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.45)
     
     fileprivate var taskValueArray: [Float] = [10, 20, 30, 12, 15, 33, 50, 3, 10, 22, 23, 38]
+    fileprivate var selectedPoint : Int = -1
     
     var lineGraphDataSource : LineGraphProtocol?
     
@@ -31,6 +34,7 @@ protocol LineGraphProtocol : NSObjectProtocol{
         
         if let source = lineGraphDataSource{
             taskValueArray = source.getGraphValueArray()
+            selectedPoint  = source.getSelectedRow()
         }
         
         self.setNeedsDisplay()
@@ -147,8 +151,21 @@ protocol LineGraphProtocol : NSObjectProtocol{
 
         //Draw the circles - that are actualy ellipses
         ctx.restoreGState()
+        var counter = 0
         for circle in circles{
-            circle.fill()
+            
+            if counter == selectedPoint{
+                ctx.setFillColor(highlightedColor)
+                let highlightedCircle = UIBezierPath(ovalIn: CGRect(x: circle.cgPath.boundingBox.minX - circle.cgPath.boundingBox.width/2,
+                                                                                                      y: circle.cgPath.boundingBox.minY - circle.cgPath.boundingBox.height/2,
+                                                                                                      width: circle.cgPath.boundingBox.width * 2,
+                                                                                                      height: circle.cgPath.boundingBox.height * 2))
+                highlightedCircle.fill()
+                ctx.setFillColor(tintColor.cgColor)
+            } else{
+                circle.fill()
+            }
+            counter += 1
         }
 
         ctx.restoreGState()
