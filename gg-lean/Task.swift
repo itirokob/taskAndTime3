@@ -11,6 +11,7 @@ import CloudKit
 
 struct TaskSession {
     var startDate:Date
+    var stopDate: Date?
     var durationInSeconds:Int
     var recordID:CKRecordID?
 }
@@ -18,9 +19,27 @@ struct TaskSession {
 class Task: NSObject {
     //No vetor sessions, a última posição será a sessão atual
     var sessions: [TaskSession] = [TaskSession]()
+    var currentSession: TaskSession?
     public var name:String
     public var isSubtask:Int
-    private var totalTime:Int //Tem que ser recalculado toda vez
+    private var finishedSessionTime: Int
+    public var totalTime:Int {
+        get {
+            
+            if let currentSession = self.currentSession {
+                updateCurrentSessionDuration()
+                return finishedSessionTime + currentSession.durationInSeconds
+            } else {
+                return finishedSessionTime
+            }
+
+//            for s in sessions {
+////                let components = Calendar.current.dateComponents([.hour, .minute, .second], from: currentSession?.startDate, to: Date())
+//                counter += s.durationInSeconds
+//            }
+            
+        }
+    }
     public var isActive:Int
     public var id:String
     public var isRunning:Bool = false
@@ -28,12 +47,13 @@ class Task: NSObject {
     
     public var recordName:String?
     
-    init(name:String, isSubtask:Int, totalTime: Int, isActive:Int, id:String){
+    init(name:String, isSubtask:Int, isActive:Int = 0, id:String, finishedSessionTime: Int){
         self.name = name
         self.isSubtask = isSubtask
-        self.totalTime = totalTime
+//        self.totalTime = totalTime
         self.isActive = isActive
         self.id = id
+        self.finishedSessionTime = finishedSessionTime
     }
     
     func setSessions(sessionsArray:[TaskSession]){
@@ -43,36 +63,82 @@ class Task: NSObject {
     /// The updateTotalTime function sums all the session's durations into totalTime
     ///
     /// - Returns: the totalTime
-    func updateTotalTime() -> Int{
-        var counter:Int = 0
-        if(sessions.count > 0){
-            for i in 0...(sessions.count - 1){
-                counter += sessions[i].durationInSeconds
-            }
-        }
-        return counter
-    }
+//    func updateTotalTime() -> Int{
+//        var counter:Int = 0
+//        
+//        updateCurrentSessionDuration()
+//        counter += currentSession?.durationInSeconds
+//        
+//        for s in sessions {
+//            counter += s.durationInSeconds
+//        }
+//
+//        return counter
+//    }
     
     
     /// The startSession function starts a session
     ///
     /// - Parameter startDate: task's startDate
-    func startSession(startDate:Date){
-        sessions.append(TaskSession(startDate: startDate, durationInSeconds: 0, recordID:nil))
+    func startSession(startDate:Date) -> Bool{
+        guard self.currentSession == nil else {
+            print("Can't start another session when one is already running1")
+            return false
+        }
+        self.currentSession = TaskSession(startDate: startDate, stopDate: nil, durationInSeconds: 0, recordID:nil)
+        
+        print("currentSession is now: \(String(describing: self.currentSession))")
+        return true
     }
     
-    func updateSessionDuration(){
-        var currSession = sessions.count - 1
-        if(currSession < 0){
-            currSession = 0
+    func stopSession() -> TaskSession? {
+        guard currentSession != nil else {
+            print("no current session to be stopped")
+            return nil
         }
-        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: sessions[currSession].startDate, to: Date())
-
-        sessions[currSession].durationInSeconds = components.second!
-                
-        //Feels like migué
-        self.totalTime += 1
+        currentSession!.stopDate = Date()
+        updateCurrentSessionDuration()
+        
+        
+        if currentSession != nil {
+            
+            // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
+            sessions.append(currentSession!)
+            self.finishedSessionTime += currentSession!.durationInSeconds
+            let cs = currentSession
+            currentSession = nil
+            return cs
+        } else {
+            print("currentSession couldnt be stopped because it's nil after it should have been updated!")
+            return nil
+        }
+    
     }
+    
+    func updateCurrentSessionDuration() {
+        guard var currentSession = self.currentSession else {
+            print("currentSession is nil!")
+            return
+        }
+        let components = Calendar.current.dateComponents([.second], from: currentSession.startDate, to: Date()) // Why arent we getting only the second component?
+        
+        
+        currentSession.durationInSeconds = components.second ?? 0
+        
+        self.currentSession = currentSession // update the instance variable
+    }
+    
+//    func updateSessionDuration(){
+//        let currSession = sessions.count > 0 ? sessions.count - 1 : 0
+//        
+//        
+//        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: sessions[currSession].startDate, to: Date())
+//
+//        sessions[currSession].durationInSeconds = components.second!
+//                
+//        //Feels like migué
+//        self.totalTime += 1
+//    }
     
     func getTotalTime()->Int{
         return totalTime

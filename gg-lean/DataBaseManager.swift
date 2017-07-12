@@ -66,12 +66,16 @@ class DataBaseManager : NSObject {
         
         let name = record.value(forKey: "name") as! String
         let isSubtask = record.value(forKey: "isSubtask") as! Int
-        let totalTime = record.value(forKey: "totalTime") as! Int
+//        let totalTime = record.value(forKey: "totalTime") as! Int
         let isActive = record.value(forKey: "isActive") as! Int
         let id = record.value(forKey:"id") as! String
         let timeCountList = record.value(forKey: "timeCountList") as! [CKReference]
+        let finishedSessionTime = record.value(forKey: "totalTime") as! Int
+    
+        // TODO: guards for errors and nils
         
-        let task = Task(name: name, isSubtask: isSubtask, totalTime: totalTime, isActive: isActive, id:id)
+        let task = Task(name: name, isSubtask: isSubtask, isActive: isActive, id:id, finishedSessionTime: finishedSessionTime)
+        
         task.recordName = record.recordID.recordName
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
             task.sessions = taskSessionList
@@ -250,10 +254,11 @@ class DataBaseManager : NSObject {
     /// - Returns: a taskSession
     func mapToTaskSession (_ record:CKRecord) -> TaskSession{
         let startDate = record.value(forKey: "startDate") as! Date
+        let stopDate = record.value(forKey: "stopDate") as? Date
         let duration = record.value(forKey: "duration") as! Int
         let recordID = record.recordID
         
-        return TaskSession(startDate: startDate, durationInSeconds: duration, recordID: recordID)
+        return TaskSession(startDate: startDate, stopDate: stopDate, durationInSeconds: duration, recordID: recordID)
     }
 
     /// The mapToTaskSessionList transforms a reference list into a TaskSession list

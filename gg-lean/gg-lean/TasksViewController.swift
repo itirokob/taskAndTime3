@@ -25,10 +25,9 @@ class TasksViewController: UIViewController{
     var refresh: UIRefreshControl!
     
     func updateTasksNameArray(){
-        if tasksArray.count > 0{
-            for i in 0...(tasksArray.count - 1){
-                tasksNameArray.append(tasksArray[i].name)
-            }
+        
+        for task in tasksArray {
+            tasksNameArray.append(task.name)
         }
         updateSiriVocabulary( )
     }
@@ -93,7 +92,7 @@ class TasksViewController: UIViewController{
         } else {
             //We want tasksDates and tasksTimes empty arrays because it will only receive values when the pause button is reached
             
-            let task = Task(name: addTaskField.text!, isSubtask: -1, totalTime: 0, isActive: 1, id: UUID().uuidString)
+            let task = Task(name: addTaskField.text!, isSubtask: -1, isActive: 1, id: UUID().uuidString, finishedSessionTime: 0)
             
             manager.saveTask(task: task, completion: { (task2, error) in
                 if(error == nil){
@@ -130,27 +129,27 @@ class TasksViewController: UIViewController{
 extension TasksViewController: CellProtocol{
     
     func willStartTimer(cell: Cell){
-        timeLogic.playPressed(task: tasksArray[cell.tag])
+        timeLogic.playPressed(task: cell.task)
         print("Play \(tasksArray[cell.tag].name)")
     }
     
     func willStartTimerBySiri(cell: Cell){
-        cell.initiateActivity()
+        cell.startTimer()
         print("Play \(tasksArray[cell.tag].name)")
     }
     
     func willStopTimer(cell: Cell){
-        tasksArray[cell.tag] = timeLogic.pausePressed(task: tasksArray[cell.tag])
+        timeLogic.pausePressed(task: cell.task)
         print("Pause \(tasksArray[cell.tag].name)")
     }
     
     func willStopTimerBySiri(cell: Cell){
-        cell.stopActivity()
+        cell.stopTimer()
         print("Play \(tasksArray[cell.tag].name)")
     }
     
     func timerDidTick(cell: Cell){
-        tasksArray[cell.tag].updateSessionDuration()
+        cell.task.updateCurrentSessionDuration()
     }
 
 }
@@ -168,19 +167,41 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let myCell = cell as! Cell
+        
+        myCell.timerInvalidate()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let myCell = cell as! Cell
+        
+        if(myCell.task.isRunning) {
+            myCell.initializeTimer()
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         let task = tasksArray[indexPath.row]
         
+        
+
+        
         cell.delegate = self
         cell.cellDelegate = self
-        cell.timeLabelValue = task.getTotalTime()
-        cell.taskLabel.text = task.name
+        cell.task = task
+//        cell.task.addObserver(cell, forKeyPath: "sessions", options: [.new], context: nil)
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-    
+        
+        
+        
+        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
