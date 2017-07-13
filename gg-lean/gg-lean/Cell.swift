@@ -38,6 +38,8 @@ class Cell:SwipeTableViewCell{
             return task.isRunning
         }
     }
+    
+    var timeLogic = TimeLogic.shared
     weak var cellDelegate: CellProtocol?
     var hasObserver: Bool = false
     let taskObserverPath: String = "sessions"
@@ -125,6 +127,7 @@ class Cell:SwipeTableViewCell{
     
     //Starting timer
     func startTimer(){
+
         //        if let cellDelegate = self.cellDelegate{
         //            cellDelegate.willStartTimer(cell: self)
         //        }
