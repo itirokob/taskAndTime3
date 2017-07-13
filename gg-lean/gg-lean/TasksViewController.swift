@@ -30,11 +30,14 @@ class TasksViewController: UIViewController{
     var refresh: UIRefreshControl!
     
     func updateTasksNameArray(){
+        var tasksNames = [String]()
         
         for task in Cache.shared().tasks {
-            tasksNameArray.append(task.name)
+            tasksNames.append(task.name)
         }
-        updateSiriVocabulary( )
+        tasksNameArray = tasksNames
+        
+        updateSiriVocabulary()
     }
     
     func updateSiriVocabulary(){

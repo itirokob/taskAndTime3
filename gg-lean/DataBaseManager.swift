@@ -152,10 +152,11 @@ class DataBaseManager : NSObject {
     /// The getTasks function gets and returns all the active tasks in the CloudKit database
     ///
     /// - Parameter completionHandler:
-    func getTasks(_ completionHandler: @escaping ([Task]) -> Swift.Void){
+    func getTasks(active: Bool = true, _ completionHandler: @escaping ([Task]) -> Swift.Void){
         var tasksToDisplay = [Task]()
         
-        let predicate = NSPredicate(format: "isActive >= 1")
+        let predicateString = "isActive >= " + String(describing:(active ? 1 : 0))
+        let predicate = NSPredicate(format: predicateString)
         
         let query = CKQuery(recordType: "Task", predicate:predicate)
         

@@ -22,16 +22,32 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var refresh: UIRefreshControl!
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        loadTasks()
     }
 
+    //Loads all the active tasks from the dataBase
+    func loadTasks(){
+        Cache.shared().updateTasks(active: false){ (tasks) in
+            
+            self.filteredTasks = tasks
+            
+            OperationQueue.main.addOperation({
+                self.tableView.reloadData()
+                self.refresh.endRefreshing()
+            })
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filteredTasks = Cache.shared().tasks
+        filteredTasks = Cache.shared().tasks.filter{ $0.isRunning }
+        
 
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -43,7 +59,17 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         searchController.searchBar.tintColor = .white
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.placeholder =  "Search Activity"
+        
+        //Pull to refresh
+        refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresh.addTarget(self, action: #selector(TasksViewController.loadTasks), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresh)
+        
+        loadTasks()
     }
+    
+ 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
