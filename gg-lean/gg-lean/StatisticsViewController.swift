@@ -20,38 +20,27 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     
-    
-    func loadTasks(){
-        manager.getTasks { (tasks) in
-            self.tasksArray = tasks
-            
-            OperationQueue.main.addOperation({
-                self.filteredTasks = self.tasksArray
-                
-                self.updateSearchResults(for: self.searchController)
-                //self.refresh.endRefreshing()
-                
-            })
-        }
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-//        print("Cache.shared().tasks in StatisticsViewController: \(Cache.shared().tasks)")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        filteredTasks = Cache.shared().tasks
 
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
-        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.barTintColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
         searchController.searchBar.backgroundColor = .clear
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.placeholder =  "Search Activity"
     }
 
     override func didReceiveMemoryWarning() {
