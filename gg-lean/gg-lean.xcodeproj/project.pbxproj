@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0B19FD1F169A850022E408 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B19FC1F169A850022E408 /* Cache.swift */; };
 		4D8B7E951F13FEA400FAB3F3 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */; };
 		4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */; };
 		4D8B7E9B1F13FEA400FAB3F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D8B7E991F13FEA400FAB3F3 /* MainInterface.storyboard */; };
@@ -83,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D0B19FC1F169A850022E408 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = clicWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				B737671F1F0673F90063B268 /* TimeCounter.swift */,
 				B73767121F043C730063B268 /* Task.swift */,
+				4D0B19FC1F169A850022E408 /* Cache.swift */,
 				B7E843B81F093C890041E634 /* Cell.swift */,
 				B737671E1F053C6E0063B268 /* Business */,
 				B73767191F04592E0063B268 /* Persistence */,
@@ -510,6 +513,7 @@
 				9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */,
 				B73767201F0673F90063B268 /* TimeCounter.swift in Sources */,
 				B737671D1F053C670063B268 /* TimeLogic.swift in Sources */,
+				4D0B19FD1F169A850022E408 /* Cache.swift in Sources */,
 				9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */,
 				B73767031F03D4B40063B268 /* taskView.swift in Sources */,
 				9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */,
@@ -824,6 +828,7 @@
 				4D8B7EA21F13FEA400FAB3F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B73766E61F03D0640063B268 /* Build configuration list for PBXProject "gg-lean" */ = {
 			isa = XCConfigurationList;

@@ -58,22 +58,7 @@ class Task: NSObject {
         self.sessions = sessionsArray
     }
     
-    /// The updateTotalTime function sums all the session's durations into totalTime
-    ///
-    /// - Returns: the totalTime
-//    func updateTotalTime() -> Int{
-//        var counter:Int = 0
-//        
-//        updateCurrentSessionDuration()
-//        counter += currentSession?.durationInSeconds
-//        
-//        for s in sessions {
-//            counter += s.durationInSeconds
-//        }
-//
-//        return counter
-//    }
-    
+
     
     /// The startSession function starts a session
     ///

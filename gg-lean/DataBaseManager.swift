@@ -62,7 +62,7 @@ class DataBaseManager : NSObject {
             }
         } else {
             timeCountList = ckRecordTask["timeCountList"] as! [CKReference]
-            if objectTask.getSessionsSize() > 0{
+            if objectTask.getSessionsSize() > 0 && objectTask.sessions[objectTask.getSessionsSize() - 1].recordID != nil{
                 timeCountList.append(CKReference(recordID: objectTask.sessions[objectTask.getSessionsSize() - 1].recordID!, action: CKReferenceAction.none))
             }
         }
@@ -70,11 +70,13 @@ class DataBaseManager : NSObject {
         ckRecordTask["timeCountList"] = timeCountList as CKRecordValue
     }
     
-    func getCurrentSession(currSessionID:CKRecordID, completionHandler: @escaping (TaskSession) -> Swift.Void ){
+    func getCurrentSession(currSessionID:CKRecordID, completionHandler: @escaping (TaskSession?) -> Swift.Void ){
         publicData.fetch(withRecordID: currSessionID) { (record, error) in
-            if error == nil && record != nil{
-                if let taskSession =  self.mapToTaskSession(record!){
+            if error == nil, let record = record{
+                if let taskSession =  self.mapToTaskSession(record){
                     completionHandler(taskSession)
+                } else {
+                    completionHandler(nil)
                 }
             } else {
                 print("Error in getCurrentSession: \(String(describing: error))")
@@ -95,7 +97,7 @@ class DataBaseManager : NSObject {
         let id = record.value(forKey:"id") as! String
         let timeCountList = record.value(forKey: "timeCountList") as! [CKReference]
         let finishedSessionTime = record.value(forKey: "totalTime") as! Int
-        let isRunning = record.value(forKey: "isRunning") as! Int
+        let isRunning = record.value(forKey: "isRunning") as? Int ?? 0 // FIXME: check for nil the right way.
         let currentSession = record.value(forKey: "currentSession") as? CKReference
     
         // TODO: guards for errors and nils
@@ -106,8 +108,14 @@ class DataBaseManager : NSObject {
         task.isRunning = (isRunning == 1)
         
         if currentSession != nil {
+            print("currentSession on CloudKit!")
             self.getCurrentSession(currSessionID: currentSession!.recordID, completionHandler: { (currSession) in
-                task.currentSession = currSession
+                if let currSession = currSession {
+                    task.currentSession = currSession
+                } else {
+                    print("Error mapping currentSession from CloudKit to object")
+                    task.currentSession = nil
+                }
             })
         }
         
@@ -282,25 +290,23 @@ class DataBaseManager : NSObject {
         })
     }
     
+    // FIXME: discover why some attributes are missing during execution.
     
     /// The mapToTaskSession maps a TimeCount record into a TaskSession object
     ///
     /// - Parameter record: the TimeCount record to be mapped
     /// - Returns: a taskSession
     func mapToTaskSession (_ record:CKRecord) -> TaskSession? {
-        let startDate = record.value(forKey: "startDate") as? Date
+
         let stopDate = record.value(forKey: "stopDate") as? Date
-        let duration = record.value(forKey: "duration") as? Int
-        let recordID = record.recordID
         
-//        var taskSession = TaskSession(startDate: Date(), stopDate: Date(), durationInSeconds: 0, recordID: nil)
-        
-        if startDate != nil && stopDate != nil && duration != nil {
-            return TaskSession(startDate: startDate!, stopDate: stopDate, durationInSeconds: duration!, recordID: recordID)
-            
+        guard let startDate = record.value(forKey: "startDate") as? Date,
+            let duration = record.value(forKey: "duration") as? Int else {
+                print("Attributes missing when mapping task session CKRecord to object.")
+                return nil
         }
         
-        return nil
+        return TaskSession(startDate: startDate, stopDate: stopDate, durationInSeconds: duration, recordID: record.recordID)
     }
 
     /// The mapToTaskSessionList transforms a reference list into a TaskSession list
@@ -324,6 +330,10 @@ class DataBaseManager : NSObject {
             if error == nil{
                 if let result = record, let taskSession = self.mapToTaskSession(result){
                     taskSessionList.append(taskSession)
+
+//                    else {
+//                        print("Error when trying to map task session CKRecord to object.")
+//                    }
                 }
             }else{
                 print("Error in mapping to recordIDList: \(String(describing: error))")
