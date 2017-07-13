@@ -28,9 +28,9 @@ class Task: NSObject {
             
             if let currentSession = self.currentSession {
 //                updateCurrentSessionDuration()
-                print("startDate: \(currentSession.startDate)")
+//                print("startDate: \(currentSession.startDate)")
                 let interval = Int(DateInterval(start: currentSession.startDate, end: Date()).duration)
-                print(interval)
+//                print(interval)
                 return finishedSessionTime + interval
             } else {
                 return finishedSessionTime
@@ -134,8 +134,9 @@ class Task: NSObject {
     
     func getTimeString() -> String{
         
-        let minutes :Int = totalTime / 60
-        let seconds :Int = totalTime - 60*minutes
+        // Using finishedSessionTime because the statistics view should't consider currentSession when displaying the total time.
+        let minutes :Int = finishedSessionTime / 60
+        let seconds :Int = finishedSessionTime - 60*minutes
         
         return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
     }
