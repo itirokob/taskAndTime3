@@ -24,7 +24,7 @@ class TasksViewController: UIViewController{
 //    var Cache.shared().tasks  = {
 //        return Cache.shared().tasks
 //    }()
-    var editFlag = false
+    //var editFlag = false
     
     var tasksNameArray: [String] = []
     public static var startedActivityOnInit:String?
@@ -41,10 +41,10 @@ class TasksViewController: UIViewController{
     @IBAction func editMode(_ sender: Any) {
         self.tableView.setEditing((self.tableView.isEditing ? false : true), animated: true)
         self.navigationItem.rightBarButtonItem?.title = (self.tableView.isEditing ? "Done" : "Edit")
-        
-        if tableView.isEditing {
-            editFlag = true
-        }
+//
+//        if tableView.isEditing {
+//            editFlag = true
+//        }
     }
     
     func updateSiriVocabulary(){
@@ -215,8 +215,17 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         cell.cellDelegate = self
         cell.task = task
         cell.tag = indexPath.row
-        cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
+        //cell.selectionStyle = .none
+        
+        let selectedView = UIView()
+//        selectedView.backgroundColor = UIColor.cyan
+        //selectedView.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = .clear
+
+        cell.tintColor = UIColor.white
+        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
@@ -232,55 +241,74 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     //Essa função está aqui por enquanto.... ela ativa um timer, mas deveria collapsar uma célula no futuro
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! Cell
-        if cell.isOn == false{
-            willStartTimerBySiri(cell: cell)
-        }
-        else{
-            willStopTimerBySiri(cell: cell)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+//        if cell.isOn == false{
+//            willStartTimerBySiri(cell: cell)
+//        }
+//        else{
+//            willStopTimerBySiri(cell: cell)
+//        }
+        //cell.accessoryType = UITableViewCellAccessoryType.checkmark
     }
     
-    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
-        var tasks = Cache.shared().tasks
-        
-        let itemToMove = tasks[fromIndexPath.row]
-        tasks.remove(at: fromIndexPath.row)
-        tasks.insert(itemToMove, at: toIndexPath.row)
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! Cell
+        cell.accessoryType = UITableViewCellAccessoryType.none
     }
+
+//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
+//        var tasks = Cache.shared().tasks
+//        
+//        let itemToMove = tasks[fromIndexPath.row]
+//        tasks.remove(at: fromIndexPath.row)
+//        tasks.insert(itemToMove, at: toIndexPath.row)
+//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        return UITableViewCellEditingStyle(rawValue: 3)!
-//    }
-//    
-    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        if editFlag {
-            let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            }
-            
-            delete.backgroundColor = .red
-            
-            editFlag = false
-            
-            return [delete]
-
-        } else {
-            let archive = UITableViewRowAction(style: .normal, title: "Archive") { action, index in
-            }
-            archive.backgroundColor = .green
-            
-            return [archive]
-
-        }
-        
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle(rawValue: 3)!
     }
+//
+//    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+//        if editFlag {
+//            let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+//            }
+//            
+//            delete.backgroundColor = .red
+//            
+//            editFlag = false
+//            
+//            return [delete]
+//
+//        } else {
+//            let archive = UITableViewRowAction(style: .normal, title: "Archive") { action, index in
+//            }
+//            archive.backgroundColor = .green
+//            
+//            return [archive]
+//
+//        }
+//        
+//    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+        }
+        delete.backgroundColor = .red
+        return [delete]
+    }
+
+    
+    
+    
+    
+    
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 //        
 //        if (editingStyle == UITableViewCellEditingStyle.delete) {
