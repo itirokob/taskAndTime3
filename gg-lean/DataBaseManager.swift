@@ -43,7 +43,10 @@ class DataBaseManager : NSObject {
         
         if objectTask.currentSession != nil{
             //Creating the currentSession in reference
+            // FIXME: quickly press play/pause crashes because recordID isn't created in time.
             ckRecordTask["currentSession"] = CKReference(recordID: (objectTask.currentSession?.recordID)!, action: CKReferenceAction.none)
+        } else {
+            ckRecordTask["currentSession"] = nil
         }
         
         ckRecordTask["isRunning"] = (objectTask.isRunning ? 1 : 0) as CKRecordValue
@@ -69,9 +72,9 @@ class DataBaseManager : NSObject {
     
     func getCurrentSession(currSessionID:CKRecordID, completionHandler: @escaping (TaskSession) -> Swift.Void ){
         publicData.fetch(withRecordID: currSessionID) { (record, error) in
-            if error == nil{
-                if record != nil{
-                    completionHandler(self.mapToTaskSession(record!))
+            if error == nil && record != nil{
+                if let taskSession =  self.mapToTaskSession(record!){
+                    completionHandler(taskSession)
                 }
             } else {
                 print("Error in getCurrentSession: \(String(describing: error))")
@@ -93,7 +96,7 @@ class DataBaseManager : NSObject {
         let timeCountList = record.value(forKey: "timeCountList") as! [CKReference]
         let finishedSessionTime = record.value(forKey: "totalTime") as! Int
         let isRunning = record.value(forKey: "isRunning") as! Int
-        let currentSession = record.value(forKey: "currentSession") as! CKReference
+        let currentSession = record.value(forKey: "currentSession") as? CKReference
     
         // TODO: guards for errors and nils
         
@@ -102,9 +105,11 @@ class DataBaseManager : NSObject {
         task.recordName = record.recordID.recordName
         task.isRunning = (isRunning == 1)
         
-        self.getCurrentSession(currSessionID: currentSession.recordID, completionHandler: { (currSession) in
-            task.currentSession = currSession
-        })
+        if currentSession != nil {
+            self.getCurrentSession(currSessionID: currentSession!.recordID, completionHandler: { (currSession) in
+                task.currentSession = currSession
+            })
+        }
         
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
             task.sessions = taskSessionList
@@ -282,19 +287,20 @@ class DataBaseManager : NSObject {
     ///
     /// - Parameter record: the TimeCount record to be mapped
     /// - Returns: a taskSession
-    func mapToTaskSession (_ record:CKRecord) -> TaskSession{
+    func mapToTaskSession (_ record:CKRecord) -> TaskSession? {
         let startDate = record.value(forKey: "startDate") as? Date
         let stopDate = record.value(forKey: "stopDate") as? Date
         let duration = record.value(forKey: "duration") as? Int
         let recordID = record.recordID
         
-        var taskSession = TaskSession(startDate: Date(), stopDate: Date(), durationInSeconds: 0, recordID: nil)
+//        var taskSession = TaskSession(startDate: Date(), stopDate: Date(), durationInSeconds: 0, recordID: nil)
         
         if startDate != nil && stopDate != nil && duration != nil {
-            taskSession = TaskSession(startDate: startDate!, stopDate: stopDate, durationInSeconds: duration!, recordID: recordID)
+            return TaskSession(startDate: startDate!, stopDate: stopDate, durationInSeconds: duration!, recordID: recordID)
+            
         }
         
-        return taskSession
+        return nil
     }
 
     /// The mapToTaskSessionList transforms a reference list into a TaskSession list
@@ -316,8 +322,8 @@ class DataBaseManager : NSObject {
         
         op.perRecordCompletionBlock = { (record, recordID, error) in
             if error == nil{
-                if let result = record{
-                    taskSessionList.append(self.mapToTaskSession(result))
+                if let result = record, let taskSession = self.mapToTaskSession(result){
+                    taskSessionList.append(taskSession)
                 }
             }else{
                 print("Error in mapping to recordIDList: \(String(describing: error))")

@@ -18,9 +18,9 @@ class TimeLogic:NSObject{
     func playPressed(task:Task){
         task.isRunning = task.startSession(startDate: Date())
         
-        if task.currentSession != nil{
+        if task.currentSession != nil && task.isRunning {
             manager.addTimeCount(session: task.currentSession!) { (recordID) in
-                task.currentSession?.recordID = recordID
+                task.currentSession!.recordID = recordID
                 
                 self.manager.saveTask(task: task, completion: { (task, error) in
                     if error != nil{
