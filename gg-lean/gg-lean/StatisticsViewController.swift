@@ -8,6 +8,8 @@
 
 import UIKit
 
+let backCellBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
 //    var Cache.shared().tasks  = {
@@ -24,25 +26,23 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         filteredTasks = Cache.shared().tasks
+
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
         searchController.searchBar.barTintColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+        searchController.searchBar.backgroundColor = .clear
         searchController.searchBar.tintColor = .white
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.placeholder =  "Search Activity"
-        
-//        print("Cache.shared().tasks in StatisticsViewController: \(Cache.shared().tasks)")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,6 +84,10 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
         
         cell.textLabel?.text = task.name
         cell.detailTextLabel?.text = task.getTimeString()
+        
+        //Creating Selection Style
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = backCellBlue
         
         return cell
     }
