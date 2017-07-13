@@ -12,6 +12,10 @@
 		4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */; };
 		4D8B7E9B1F13FEA400FAB3F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D8B7E991F13FEA400FAB3F3 /* MainInterface.storyboard */; };
 		4D8B7E9F1F13FEA400FAB3F3 /* clicWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D9356C31F17BC44002CCE18 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B19FC1F169A850022E408 /* Cache.swift */; };
+		4D9356C41F17BC4E002CCE18 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
+		4D9356C51F17BE44002CCE18 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767101F04220D0063B268 /* DataBaseManager.swift */; };
+		4D9356C71F17BEB4002CCE18 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B737670C1F03DF200063B268 /* CloudKit.framework */; };
 		9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */; };
 		9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183211F139EB100E49B38 /* Settings.storyboard */; };
 		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
@@ -90,6 +94,7 @@
 		4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		4D8B7E9A1F13FEA400FAB3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D9356C61F17BEAA002CCE18 /* clicWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = clicWidget.entitlements; sourceTree = "<group>"; };
 		9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Estatisticas.storyboard; sourceTree = "<group>"; };
 		9B3183211F139EB100E49B38 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
@@ -131,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D8B7E951F13FEA400FAB3F3 /* NotificationCenter.framework in Frameworks */,
+				4D9356C71F17BEB4002CCE18 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +171,7 @@
 		4D8B7E961F13FEA400FAB3F3 /* clicWidget */ = {
 			isa = PBXGroup;
 			children = (
+				4D9356C61F17BEAA002CCE18 /* clicWidget.entitlements */,
 				4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */,
 				4D8B7E991F13FEA400FAB3F3 /* MainInterface.storyboard */,
 				4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */,
@@ -385,6 +392,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = GJ5VL7QF9C;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					B73766EA1F03D0650063B268 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -499,6 +514,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9356C51F17BE44002CCE18 /* DataBaseManager.swift in Sources */,
+				4D9356C31F17BC44002CCE18 /* Cache.swift in Sources */,
+				4D9356C41F17BC4E002CCE18 /* Task.swift in Sources */,
 				4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = clicWidget/clicWidget.entitlements;
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
 				INFOPLIST_FILE = clicWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
@@ -614,6 +633,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = clicWidget/clicWidget.entitlements;
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
 				INFOPLIST_FILE = clicWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
