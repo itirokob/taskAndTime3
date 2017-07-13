@@ -20,9 +20,11 @@ class TasksViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addTaskField: UITextField!
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
 //    var Cache.shared().tasks  = {
 //        return Cache.shared().tasks
 //    }()
+    var editFlag = false
     
     var tasksNameArray: [String] = []
     public static var startedActivityOnInit:String?
@@ -36,6 +38,14 @@ class TasksViewController: UIViewController{
         }
         updateSiriVocabulary( )
     }
+    @IBAction func editMode(_ sender: Any) {
+        self.tableView.setEditing((self.tableView.isEditing ? false : true), animated: true)
+        self.navigationItem.rightBarButtonItem?.title = (self.tableView.isEditing ? "Done" : "Edit")
+        
+        if tableView.isEditing {
+            editFlag = true
+        }
+    }
     
     func updateSiriVocabulary(){
         //Iniciando vocabulário da Siri através de um vetor de Strings - tasksNameArray
@@ -47,6 +57,7 @@ class TasksViewController: UIViewController{
         tableView.separatorColor = UIColor(white: 0.95, alpha: 1)
         tableView.delegate = self
         tableView.dataSource = self
+        //showEditing(sender: editButton)
         self.tabBarController?.tabBar.barTintColor = UIColor.white
         self.tabBarController?.tabBar.tintColor = backgroundBlue
         
@@ -69,8 +80,9 @@ class TasksViewController: UIViewController{
         INPreferences.requestSiriAuthorization { (status) in
             
         }
-        updateTasksNameArray( )
+        //updateTasksNameArray( )
         
+        navigationItem.rightBarButtonItem = editButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +101,7 @@ class TasksViewController: UIViewController{
             OperationQueue.main.addOperation({ 
                 self.tableView.reloadData()
                 self.refresh.endRefreshing()
-                self.updateTasksNameArray()
+               // self.updateTasksNameArray()
             })
         }
     }
@@ -122,7 +134,7 @@ class TasksViewController: UIViewController{
             self.dismissKeyboard()
             self.addTaskField.text = ""
             
-            updateTasksNameArray()
+            //updateTasksNameArray()
         }
     }
     
@@ -170,7 +182,7 @@ extension TasksViewController: CellProtocol{
 
 
 // MARK: Table View Extensions
-extension TasksViewController: UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate{
+extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Cache.shared().tasks.count
@@ -197,24 +209,14 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         let task = Cache.shared().tasks[indexPath.row]
         
-        
-
-        
-        cell.delegate = self
         cell.cellDelegate = self
         cell.task = task
-//        cell.task.addObserver(cell, forKeyPath: "sessions", options: [.new], context: nil)
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-        
-        
-        
-        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
@@ -237,97 +239,60 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
             willStopTimerBySiri(cell: cell)
         }
     }
+
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
-    //Swipe to delete a task
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to toIndexPath: IndexPath) {
+        var tasks = Cache.shared().tasks
+        
+        let itemToMove = tasks[fromIndexPath.row]
+        tasks.remove(at: fromIndexPath.row)
+        tasks.insert(itemToMove, at: toIndexPath.row)
+    }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        return UITableViewCellEditingStyle(rawValue: 3)!
+//    }
+//    
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        if editFlag {
+            let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            }
+            
+            delete.backgroundColor = .red
+            
+            editFlag = false
+            
+            return [delete]
 
+        } else {
+            let archive = UITableViewRowAction(style: .normal, title: "Archive") { action, index in
+            }
+            archive.backgroundColor = .green
+            
+            return [archive]
 
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-//            self.manager.delete(self.Cache.shared().tasks[indexPath.row].id, completion: {
+        }
+        
+    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            self.manager.delete(Cache.shared().tasks[indexPath.row].id, completion: {
 //                OperationQueue.main.addOperation({
-//                    self.Cache.shared().tasks.remove(at: indexPath.row)
+//                    Cache.shared().tasks.remove(at: indexPath.row)
 //                    tableView.deleteRows(at: [indexPath], with: .fade)
 //                    self.tableView.isEditing=false
 //                })
 //            })
-//        }
-//        
-//        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-//            // Preciso de uma tela de edit
-//        }
-//        
-//        edit.backgroundColor = UIColor.blue
-//        
-//        return [delete, edit]
-//    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .left else { return nil }
-        
-        let completeAction = SwipeAction(style: .default , title: "Done") { action, indexPath in
-            Cache.shared().tasks[indexPath.row].isActive = 0
-            self.manager.saveTask(task: Cache.shared().tasks[indexPath.row], completion: { (task, error) in
-                OperationQueue.main.addOperation({
-                    Cache.shared().tasks.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    self.tableView.isEditing = false
-                })
-            })
-        }
-        
-        // customize the action appearance
-        completeAction.image = UIImage(named: "Complete")
-        completeAction.backgroundColor = UIColor.green
-        
-        return [completeAction]
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-        var options = SwipeTableOptions()
-        options.expansionStyle = .fill
-        options.transitionStyle = .border
-        return options
-    }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-//        //guard orientation == .right else { return nil }
-//        
-//        if (orientation == .right) {
-//        
-//        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-//            // handle action by updating model with deletion
-//        }
-//        
-//        var options = SwipeTableOptions()
-//        options.expansionStyle = SwipeExpansionStyle.selection
-//        
-//        // customize the action appearance
-//        deleteAction.image = UIImage(named: "delete")
-//        
-//        return [deleteAction]
-//        } else {
-//            let otherAction = SwipeAction(style: .default, title: "Ahhhh") { action, indexPath in
-//                // handle action by updating model with deletion
-//            }
-//            
-//            let secondAction = SwipeAction(style: .default, title: "Blehhh") { action, indexPath in
-//                // handle action by updating model with deletion
-//            }
-//            
-//            secondAction.backgroundColor = UIColor.yellow
-//            
-//            return [otherAction, secondAction]
+//        } else if (editingStyle == UITableViewCellEditingStyle.none) {
+//            //Tela de edit
 //        }
 //    }
-//    
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-//        var options = SwipeTableOptions()
-//            options.expansionStyle = .selection
-//        options.transitionStyle = orientation == .left ? .reveal : .border
-//        return options
-//    }
-
 }

@@ -231,7 +231,7 @@ class DataBaseManager : NSObject {
     /// The addTimeCount sends the timeCount to CloudKit and returns the recordName of the object added
     ///
     /// - Parameters:
-    ///   - task: the owner of the session that will be added to cloudkit
+     ///   - task: the owner of the session that will be added to cloudkit
     ///   - completionHandler: atributtes the recordName to the session added
     func addTimeCount(task:Task, completionHandler: @escaping (CKRecordID) -> Swift.Void){
         let newTimeCount = CKRecord(recordType: "timeCount")

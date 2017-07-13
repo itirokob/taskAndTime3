@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwipeCellKit
 
 //Cell properties
 let activeCellColor     = UIColor(red: 247/255, green: 153/255, blue: 41/255, alpha: 1)
@@ -25,7 +24,7 @@ protocol CellProtocol: NSObjectProtocol
     func willStopTimerBySiri(cell: Cell)
 }
 
-class Cell:SwipeTableViewCell{
+class Cell:UITableViewCell{
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
