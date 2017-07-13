@@ -46,44 +46,13 @@ class Cell:SwipeTableViewCell{
     var task: Task! {
         didSet {
             setViewProperties()
-            print("task has been set to a cell")
-            
-            
-            //            if task != nil {
-            ////                print("added observer")
-            //                self.task.addObserver(self, forKeyPath: taskObserverPath, options: [.new], context: nil)
-            //                hasObserver = true
-            //            }
-        }
-        willSet {
-            if task != nil && hasObserver {
-                self.task.removeObserver(self, forKeyPath: taskObserverPath)
-                hasObserver = false
-            }
         }
     }
     
     
-    deinit {
-        if task != nil && hasObserver {
-            self.task.removeObserver(self, forKeyPath: taskObserverPath)
-            hasObserver = false
-        }
-    }
     
     
-    // MARK: - Key-Value Observing
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        print("observer notified!")
-        if keyPath == taskObserverPath {
-            // Update Time Label
-            print("observer notified in keyPath!!")
-            timeLabel.text = self.formattedTime(seconds: task.totalTime)
-        } else if keyPath == "isOn" {
-            print("isON!!")
-        }
-    }
+   
     
     @IBAction func togglePlayPauseButton(_ sender: Any) {
         //        isOn = !isOn

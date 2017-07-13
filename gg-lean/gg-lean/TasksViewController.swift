@@ -80,21 +80,20 @@ class TasksViewController: UIViewController{
         super.viewWillAppear(animated)
         
         self.loadTasks()
-        
-//        print("Cache.shared().tasks in TasksViewController: \(Cache.shared().tasks)")
     }
     
     //Loads all the active tasks from the dataBase
     func loadTasks(){
-        manager.getTasks { (tasks) in
-            Cache.shared().tasks = tasks
-
-            OperationQueue.main.addOperation({ 
+        
+        Cache.shared().updateTasks(active: true){ (tasks) in
+            OperationQueue.main.addOperation({
                 self.tableView.reloadData()
                 self.refresh.endRefreshing()
                 self.updateTasksNameArray()
             })
         }
+
+        
     }
     
     //Action from the done button (which replaces the "return" button from the keyboard)
@@ -210,11 +209,9 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         cell.delegate = self
         cell.cellDelegate = self
         cell.task = task
-//        cell.task.addObserver(cell, forKeyPath: "sessions", options: [.new], context: nil)
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-        
         
         
         

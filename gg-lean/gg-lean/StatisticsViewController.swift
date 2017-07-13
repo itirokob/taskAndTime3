@@ -63,7 +63,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         //Pull to refresh
         refresh = UIRefreshControl()
         refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refresh.addTarget(self, action: #selector(TasksViewController.loadTasks), for: UIControlEvents.valueChanged)
+        refresh.addTarget(self, action: #selector(StatisticsViewController.loadTasks), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresh)
         
         loadTasks()
