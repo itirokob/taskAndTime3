@@ -20,7 +20,10 @@ class TasksViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addTaskField: UITextField!
     
-    var tasksArray = [Task]()
+//    var Cache.shared().tasks  = {
+//        return Cache.shared().tasks
+//    }()
+    
     var tasksNameArray: [String] = []
     public static var startedActivityOnInit:String?
 
@@ -28,7 +31,7 @@ class TasksViewController: UIViewController{
     
     func updateTasksNameArray(){
         
-        for task in tasksArray {
+        for task in Cache.shared().tasks {
             tasksNameArray.append(task.name)
         }
         updateSiriVocabulary( )
@@ -74,12 +77,14 @@ class TasksViewController: UIViewController{
         super.viewWillAppear(animated)
         
         self.loadTasks()
+        
+//        print("Cache.shared().tasks in TasksViewController: \(Cache.shared().tasks)")
     }
     
     //Loads all the active tasks from the dataBase
     func loadTasks(){
         manager.getTasks { (tasks) in
-            self.tasksArray = tasks
+            Cache.shared().tasks = tasks
 
             OperationQueue.main.addOperation({ 
                 self.tableView.reloadData()
@@ -99,16 +104,20 @@ class TasksViewController: UIViewController{
             let task = Task(name: addTaskField.text!, isSubtask: -1, isActive: 1, id: UUID().uuidString, finishedSessionTime: 0)
             
             manager.saveTask(task: task, completion: { (task2, error) in
-                if(error == nil){
-                    OperationQueue.main.addOperation({
-                        self.tasksArray.insert(task2!, at: 0)
-                        self.tableView.beginUpdates()
-                        self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .fade)
-                        self.tableView.endUpdates()
-                    })
-                } else {
+                
+                guard error == nil, let task = task2 else {
                     print("Error in adding task: \(String(describing: error))")
+                    return
                 }
+                
+                OperationQueue.main.addOperation({
+                    Cache.shared().tasks.insert(task, at: 0)
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .fade)
+                    self.tableView.endUpdates()
+                })
+                
+               
             })
             self.dismissKeyboard()
             self.addTaskField.text = ""
@@ -134,22 +143,22 @@ extension TasksViewController: CellProtocol{
     
     func willStartTimer(cell: Cell){
         timeLogic.playPressed(task: cell.task)
-        print("Play \(tasksArray[cell.tag].name)")
+        print("Play \(Cache.shared().tasks[cell.tag].name)")
     }
     
     func willStartTimerBySiri(cell: Cell){
         cell.startTimer()
-        print("Play \(tasksArray[cell.tag].name)")
+        print("Play \(Cache.shared().tasks[cell.tag].name)")
     }
     
     func willStopTimer(cell: Cell){
         timeLogic.pausePressed(task: cell.task)
-        print("Pause \(tasksArray[cell.tag].name)")
+        print("Pause \(Cache.shared().tasks[cell.tag].name)")
     }
     
     func willStopTimerBySiri(cell: Cell){
         cell.stopTimer()
-        print("Play \(tasksArray[cell.tag].name)")
+        print("Play \(Cache.shared().tasks[cell.tag].name)")
     }
     
     func timerDidTick(cell: Cell){
@@ -164,7 +173,7 @@ extension TasksViewController: CellProtocol{
 extension TasksViewController: UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasksArray.count
+        return Cache.shared().tasks.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -190,7 +199,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
-        let task = tasksArray[indexPath.row]
+        let task = Cache.shared().tasks[indexPath.row]
         
         
 
@@ -237,9 +246,9 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
 
 //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-//            self.manager.delete(self.tasksArray[indexPath.row].id, completion: {
+//            self.manager.delete(self.Cache.shared().tasks[indexPath.row].id, completion: {
 //                OperationQueue.main.addOperation({
-//                    self.tasksArray.remove(at: indexPath.row)
+//                    self.Cache.shared().tasks.remove(at: indexPath.row)
 //                    tableView.deleteRows(at: [indexPath], with: .fade)
 //                    self.tableView.isEditing=false
 //                })
@@ -259,10 +268,10 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         guard orientation == .left else { return nil }
         
         let completeAction = SwipeAction(style: .default , title: "Done") { action, indexPath in
-            self.tasksArray[indexPath.row].isActive = 0
-            self.manager.saveTask(task: self.tasksArray[indexPath.row], completion: { (task, error) in
+            Cache.shared().tasks[indexPath.row].isActive = 0
+            self.manager.saveTask(task: Cache.shared().tasks[indexPath.row], completion: { (task, error) in
                 OperationQueue.main.addOperation({
-                    self.tasksArray.remove(at: indexPath.row)
+                    Cache.shared().tasks.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                     self.tableView.isEditing = false
                 })

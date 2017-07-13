@@ -10,8 +10,9 @@ import UIKit
 
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
-    let manager = DataBaseManager.shared
-    var tasksArray = [Task]()
+//    var Cache.shared().tasks  = {
+//        return Cache.shared().tasks
+//    }()
     var sendingTask: Task?
     var filteredTasks = [Task]()
     
@@ -19,21 +20,11 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     
-    func loadTasks(){
-        manager.getTasks { (tasks) in
-            self.tasksArray = tasks
-            
-            OperationQueue.main.addOperation({
-                self.tableView.reloadData()
-                //self.refresh.endRefreshing()
-            })
-        }
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        filteredTasks = tasksArray
+        filteredTasks = Cache.shared().tasks
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
@@ -44,12 +35,13 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.placeholder =  "Search Activity"
         
-        self.loadTasks()
+//        print("Cache.shared().tasks in StatisticsViewController: \(Cache.shared().tasks)")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Do any additional setup after loading the view.
     }
 
@@ -67,9 +59,9 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text!
         if searchText == "" {
-            filteredTasks = tasksArray
+            filteredTasks = Cache.shared().tasks
         }else{
-            filteredTasks = tasksArray.filter( { $0.name.lowercased().contains(searchText.lowercased()) } )
+            filteredTasks = Cache.shared().tasks.filter( { $0.name.lowercased().contains(searchText.lowercased()) } )
         }
         self.tableView.reloadData()
     }
