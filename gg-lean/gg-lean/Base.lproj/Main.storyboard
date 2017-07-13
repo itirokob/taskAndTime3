@@ -65,7 +65,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-lk-wI7" customClass="taskView" customModule="gg_lean" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="359" height="75"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBY-TG-qIr" userLabel="Play Pause Button">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBY-TG-qIr" userLabel="Play Pause Button" customClass="LoadingButton" customModule="gg_lean" customModuleProvider="target">
                                                             <rect key="frame" x="22" y="27" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="bBY-TG-qIr" secondAttribute="height" multiplier="1:1" id="UVl-58-f6O"/>

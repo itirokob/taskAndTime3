@@ -42,15 +42,17 @@ class DataBaseManager : NSObject {
             ckRecordTask.setObject(objectInfo[i] as? CKRecordValue, forKey: self.tasksFields[i])
         }
         
-        if let currentSession = objectTask.currentSession, let recordID = currentSession.recordID {
-            //Creating the currentSession in reference
-            // FIXME: quickly press play/pause crashes because recordID isn't created in time.
-            ckRecordTask["currentSession"] = CKReference(recordID: recordID, action: CKReferenceAction.none)
-        } else {
-            print("Error obtaining recordID from currentRecord in mapToCKRecord method.")
-            ckRecordTask["currentSession"] = nil
+        if let currentSession = objectTask.currentSession {
+            if let recordID = currentSession.recordID {
+                //Creating the currentSession in reference
+                // FIXME: quickly press play/pause crashes because recordID isn't created in time.
+                ckRecordTask["currentSession"] = CKReference(recordID: recordID, action: CKReferenceAction.none)
+            }
+            else {
+                print("Error obtaining recordID from currentRecord in mapToCKRecord method.")
+                ckRecordTask["currentSession"] = nil
+            }
         }
-        
         ckRecordTask["isRunning"] = (objectTask.isRunning ? 1 : 0) as CKRecordValue
         //ckRecordTask.setObject(objectTask.isRunning ? 1 : 0 as! CKRecordValue, forKey: "isRunning")
         
