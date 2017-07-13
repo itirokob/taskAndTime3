@@ -33,57 +33,83 @@ class Cell:SwipeTableViewCell{
     @IBOutlet weak var playPauseButton: UIButton!
     
     fileprivate var timer: Timer?
-    var isOn : Bool = false
+    var isOn : Bool  {
+        get {
+            return task.isRunning
+        }
+    }
     weak var cellDelegate: CellProtocol?
+    var hasObserver: Bool = false
+    let taskObserverPath: String = "sessions"
+    var task: Task! {
+        didSet {
+            setViewProperties()
+            print("task has been set to a cell")
+            
+            
+            //            if task != nil {
+            ////                print("added observer")
+            //                self.task.addObserver(self, forKeyPath: taskObserverPath, options: [.new], context: nil)
+            //                hasObserver = true
+            //            }
+        }
+        willSet {
+            if task != nil && hasObserver {
+                self.task.removeObserver(self, forKeyPath: taskObserverPath)
+                hasObserver = false
+            }
+        }
+    }
     
-    var timeLabelValue:Int = 0 {
-        didSet{
-            timeLabel.text = self.formattedTime(seconds: timeLabelValue)
+    
+    deinit {
+        if task != nil && hasObserver {
+            self.task.removeObserver(self, forKeyPath: taskObserverPath)
+            hasObserver = false
+        }
+    }
+    
+    
+    // MARK: - Key-Value Observing
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print("observer notified!")
+        if keyPath == taskObserverPath {
+            // Update Time Label
+            print("observer notified in keyPath!!")
+            timeLabel.text = self.formattedTime(seconds: task.totalTime)
+        } else if keyPath == "isOn" {
+            print("isON!!")
         }
     }
     
     @IBAction func togglePlayPauseButton(_ sender: Any) {
-        isOn = !isOn
+        //        isOn = !isOn
+        
         if isOn {
-            taskViewContainer.backgroundColor = activeCellColor
-            self.taskLabel.textColor = UIColor.white
-            self.timeLabel.textColor = UIColor.white
-            self.playPauseButton.setImage(buttonPauseImage, for: .normal)
-            startTimer()
-        } else {
-            taskViewContainer.backgroundColor = unactiveCellColor
-            self.taskLabel.textColor = UIColor.black
-            self.timeLabel.textColor = UIColor.black
-            self.playPauseButton.setImage(buttonPlayImage, for: .normal)
             stopTimer()
+        } else {
+            startTimer()
         }
+        setViewProperties()
     }
     
-    func initiateActivity( ){
-        if isOn == false{
-            isOn = true
-        }
-        self.playPauseButton.setImage(buttonPauseImage, for: .normal)
-        self.taskLabel.textColor = UIColor.white
-        self.timeLabel.textColor = UIColor.white
-        taskViewContainer.backgroundColor = activeCellColor
-        startTimer()
+    
+    
+    
+    func setViewProperties() {
+        taskLabel.text = task.name
+        timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
+        timeLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
+        taskLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
+        taskViewContainer.backgroundColor = task.isRunning ? activeCellColor : unactiveCellColor
+        playPauseButton.setImage(task.isRunning ? buttonPauseImage : buttonPlayImage, for: .normal)
     }
     
-    func stopActivity( ){
-        if isOn == true{
-            isOn = false
-        }
-        self.playPauseButton.setImage(buttonPlayImage, for: .normal)
-        self.taskLabel.textColor = UIColor.black
-        self.timeLabel.textColor = UIColor.black
-        taskViewContainer.backgroundColor = unactiveCellColor
-        stopTimer()
-    }
     
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
-        self.timeLabelValue += 1
+        timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
         cellDelegate?.timerDidTick(cell: self)
     }
     
@@ -98,26 +124,34 @@ class Cell:SwipeTableViewCell{
     }
     
     //Starting timer
-    fileprivate func startTimer(){
+    func startTimer(){
+        //        if let cellDelegate = self.cellDelegate{
+        //            cellDelegate.willStartTimer(cell: self)
+        //        }
+        //        self.task.isRunning = self.task.startSession(startDate: Date())
+        TimeLogic.shared.playPressed(task: self.task)
+        setViewProperties()
+        initializeTimer()
+    }
+    
+    //Stoping timer
+    func stopTimer(){
         if let cellDelegate = self.cellDelegate{
-            cellDelegate.willStartTimer(cell: self)
+            cellDelegate.willStopTimer(cell: self)
         }
+        setViewProperties()
+        timerInvalidate()
+    }
+    
+    func initializeTimer() {
         timerInvalidate()
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(timerTick), userInfo: nil, repeats: true)
     }
     
-    //Stoping timer
-    fileprivate func stopTimer(){
-        if let cellDelegate = self.cellDelegate{
-            cellDelegate.willStopTimer(cell: self)
-        }
-        timerInvalidate()
-    }
-    
     //Invalidating Timer
-    fileprivate func timerInvalidate(){
-        if self.timer != nil {
-            self.timer?.invalidate()
+    func timerInvalidate(){
+        if let timer = self.timer {
+            timer.invalidate()
         }
     }
 }
