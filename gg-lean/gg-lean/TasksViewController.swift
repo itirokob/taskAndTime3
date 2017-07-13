@@ -34,7 +34,7 @@ class TasksViewController: UIViewController{
         for task in Cache.shared().tasks {
             tasksNameArray.append(task.name)
         }
-        updateSiriVocabulary( )
+        //updateSiriVocabulary( )
     }
     
     func updateSiriVocabulary(){
@@ -170,7 +170,7 @@ extension TasksViewController: CellProtocol{
 
 
 // MARK: Table View Extensions
-extension TasksViewController: UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate{
+extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Cache.shared().tasks.count
@@ -200,21 +200,12 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         let task = Cache.shared().tasks[indexPath.row]
-        
-        
-
-        
-        cell.delegate = self
+    
         cell.cellDelegate = self
         cell.task = task
-//        cell.task.addObserver(cell, forKeyPath: "sessions", options: [.new], context: nil)
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-        
-        
-        
-        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
@@ -264,70 +255,45 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
 //        return [delete, edit]
 //    }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .left else { return nil }
-        
-        let completeAction = SwipeAction(style: .default , title: "Done") { action, indexPath in
-            Cache.shared().tasks[indexPath.row].isActive = 0
-            self.manager.saveTask(task: Cache.shared().tasks[indexPath.row], completion: { (task, error) in
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
+            self.manager.delete(Cache.shared().tasks[indexPath.row].id, completion: {
                 OperationQueue.main.addOperation({
                     Cache.shared().tasks.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
-                    self.tableView.isEditing = false
+                    self.tableView.isEditing=false
                 })
             })
         }
+        delete.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
         
-        // customize the action appearance
-        completeAction.image = UIImage(named: "Complete")
-        completeAction.backgroundColor = UIColor.green
+        let archive = UITableViewRowAction(style: .default, title: "Archive") { (action, indexPath) in
+            
+        }
         
-        return [completeAction]
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-        var options = SwipeTableOptions()
-        options.expansionStyle = .fill
-        options.transitionStyle = .border
-        return options
-    }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-//        //guard orientation == .right else { return nil }
-//        
-//        if (orientation == .right) {
-//        
-//        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-//            // handle action by updating model with deletion
-//        }
-//        
-//        var options = SwipeTableOptions()
-//        options.expansionStyle = SwipeExpansionStyle.selection
-//        
-//        // customize the action appearance
-//        deleteAction.image = UIImage(named: "delete")
-//        
-//        return [deleteAction]
-//        } else {
-//            let otherAction = SwipeAction(style: .default, title: "Ahhhh") { action, indexPath in
-//                // handle action by updating model with deletion
-//            }
-//            
-//            let secondAction = SwipeAction(style: .default, title: "Blehhh") { action, indexPath in
-//                // handle action by updating model with deletion
-//            }
-//            
-//            secondAction.backgroundColor = UIColor.yellow
-//            
-//            return [otherAction, secondAction]
-//        }
-//    }
-//    
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-//        var options = SwipeTableOptions()
-//            options.expansionStyle = .selection
-//        options.transitionStyle = orientation == .left ? .reveal : .border
-//        return options
-//    }
+        //archive.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
 
+        archive.backgroundColor = UIColor(patternImage: UIImage(named: "Slice")!)
+
+        return [delete, archive]
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
