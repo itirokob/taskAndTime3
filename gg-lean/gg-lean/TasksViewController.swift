@@ -256,7 +256,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
 //    }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
+        let delete = UITableViewRowAction(style: .normal, title: "             ") { action, indexPath in
             self.manager.delete(Cache.shared().tasks[indexPath.row].id, completion: {
                 OperationQueue.main.addOperation({
                     Cache.shared().tasks.remove(at: indexPath.row)
@@ -266,14 +266,15 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
             })
         }
         delete.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
+        delete.backgroundColor = UIColor(patternImage: UIImage(named: "trashCan")!)
         
-        let archive = UITableViewRowAction(style: .default, title: "Archive") { (action, indexPath) in
+        let archive = UITableViewRowAction(style: .default, title: "            ") { (action, indexPath) in
             
         }
         
         //archive.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
 
-        archive.backgroundColor = UIColor(patternImage: UIImage(named: "Slice")!)
+        archive.backgroundColor = UIColor(patternImage: UIImage(named: "archive")!)
 
         return [delete, archive]
     }
