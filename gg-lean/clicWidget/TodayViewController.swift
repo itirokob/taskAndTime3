@@ -10,8 +10,9 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-        
+
     @IBOutlet weak var tableView: UITableView!
+    let manager = DataBaseManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Dispose of any resources that can be recreated.
     }
     
+    func loadTasks(){
+        manager.getTasks { (tasks) in
+            Cache.shared().tasks = tasks
+            
+        }
+    }
+    
+    func updateTasks(completionHandler: (@escaping (Bool) -> Void)) {
+        manager.getTasks { (tasks) in
+            
+            Cache.shared().tasks = tasks
+            
+        }
+    }
+    
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         
@@ -31,7 +47,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
-        completionHandler(NCUpdateResult.newData)
+        manager.getTasks { (tasks) in
+            Cache.shared().tasks = tasks
+            print("tasks no widget:", Cache.shared().tasks)
+            completionHandler(NCUpdateResult.newData)
+        }
+        
+        
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {

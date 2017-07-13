@@ -11,7 +11,8 @@ import CloudKit
 
 class DataBaseManager : NSObject {
     static let shared = DataBaseManager()
-    let publicData = CKContainer.default().publicCloudDatabase
+    let publicData = CKContainer(identifier: "iCloud.icloud.br.org.eldorado.bepid.gg-lean.shared-container").publicCloudDatabase
+    
     
     //TO DO: ADICIONAR O TIMECOUNTERLIST
     let tasksFields = ["name", "isSubtask", "totalTime", "isActive", "id"]
@@ -56,19 +57,25 @@ class DataBaseManager : NSObject {
         //Creating the timeCountList
         var timeCountList = [CKReference]()
         
-        if (ckRecordTask["timeCountList"] == nil) {
-            ckRecordTask["timeCountList"] = timeCountList as CKRecordValue
-            for session in objectTask.sessions {
-                timeCountList.append(CKReference(recordID: session.recordID!, action: CKReferenceAction.none))
-            }
-        } else {
-            timeCountList = ckRecordTask["timeCountList"] as! [CKReference]
-            if objectTask.getSessionsSize() > 0 && objectTask.sessions[objectTask.getSessionsSize() - 1].recordID != nil{
-                timeCountList.append(CKReference(recordID: objectTask.sessions[objectTask.getSessionsSize() - 1].recordID!, action: CKReferenceAction.none))
+        for session in objectTask.sessions {
+            if let recordID = session.recordID {
+                timeCountList.append(CKReference(recordID: recordID, action: CKReferenceAction.none))
+            } else {
+                print("Couldn't find session recordID when mapping task to CKRecord.")
             }
         }
+        
+        
+//        ckRecordTask["sessions"] = timeCountList as CKRecordValue
+        
+        if var sessionRecords = (ckRecordTask["sessions"] as? [CKReference]) {
+            sessionRecords.append(contentsOf: timeCountList)
+            ckRecordTask["sessions"] = sessionRecords as CKRecordValue
+        } else {
+            ckRecordTask["sessions"] = timeCountList as CKRecordValue
+        }
 
-        ckRecordTask["timeCountList"] = timeCountList as CKRecordValue
+        
     }
     
     func getCurrentSession(currSessionID:CKRecordID, completionHandler: @escaping (TaskSession?) -> Swift.Void ){
@@ -96,7 +103,7 @@ class DataBaseManager : NSObject {
 //        let totalTime = record.value(forKey: "totalTime") as! Int
         let isActive = record.value(forKey: "isActive") as! Int
         let id = record.value(forKey:"id") as! String
-        let timeCountList = record.value(forKey: "timeCountList") as! [CKReference]
+        let timeCountList = record.value(forKey: "sessions") as? [CKReference] ?? [CKReference]()
         let finishedSessionTime = record.value(forKey: "totalTime") as! Int
         let isRunning = record.value(forKey: "isRunning") as? Int ?? 0 // FIXME: check for nil the right way.
         let currentSession = record.value(forKey: "currentSession") as? CKReference
@@ -150,13 +157,13 @@ class DataBaseManager : NSObject {
         
         let predicate = NSPredicate(format: "isActive >= 1")
         
-        let query = CKQuery(recordType: "task", predicate:predicate)
+        let query = CKQuery(recordType: "Task", predicate:predicate)
         
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         publicData.perform(query, inZoneWith: nil) { (results, error) in
             if error != nil{
-                print("Error" + error.debugDescription)
+                print("Error " + error.debugDescription)
             } else {
                 tasksToDisplay = self.mapToObjectArray(results!)
             }
@@ -172,7 +179,7 @@ class DataBaseManager : NSObject {
         /// - Parameter id: id of the desired tasks
     func getSpecificTask(_ id:String, completion: @escaping (Task?,Error?) -> Void){
         let predicate = NSPredicate(format: "id == %@", id as CVarArg)
-        let query = CKQuery(recordType: "task", predicate: predicate)
+        let query = CKQuery(recordType: "Task", predicate: predicate)
         
         publicData.perform(query, inZoneWith: nil) { (results, error) in
             if error != nil{
@@ -192,7 +199,7 @@ class DataBaseManager : NSObject {
     /// - Parameter id: id of the task to be deleted
     func delete(_ id: String, completion: @escaping () -> Void){
         let predicate = NSPredicate(format: "id == %@", id as CVarArg)
-        let query = CKQuery(recordType: "task", predicate: predicate)
+        let query = CKQuery(recordType: "Task", predicate: predicate)
         
         publicData.perform(query, inZoneWith: nil) { (results, error) in
             if error != nil{
@@ -256,7 +263,7 @@ class DataBaseManager : NSObject {
             })
         } else {
             //Creating a record
-            let ckRecordTask:CKRecord = CKRecord(recordType: "task")
+            let ckRecordTask:CKRecord = CKRecord(recordType: "Task")
             mapToCKRecord(objectTask: task, ckRecordTask: ckRecordTask)
             
             //Uploading to CloudKit
@@ -276,7 +283,7 @@ class DataBaseManager : NSObject {
     ///   - task: the owner of the session that will be added to cloudkit
     ///   - completionHandler: atributtes the recordName to the session added
     func addTimeCount(session:TaskSession, completionHandler: @escaping (CKRecordID) -> Swift.Void){
-        let newTimeCount = CKRecord(recordType: "timeCount")
+        let newTimeCount = CKRecord(recordType: "Session")
         
         newTimeCount.setObject(session.startDate as CKRecordValue, forKey: "startDate")
         newTimeCount.setObject(session.stopDate as CKRecordValue?, forKey: "stopDate")
