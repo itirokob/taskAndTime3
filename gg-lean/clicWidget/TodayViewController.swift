@@ -37,7 +37,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         let expanded = activeDisplayMode == .expanded
         preferredContentSize = expanded ? CGSize(width: maxSize.width,
-                                                 height: CGFloat(tableView.numberOfRows(inSection: 0))*tableView.rowHeight + 400.0): maxSize
+                                                 height: CGFloat(tableView.numberOfRows(inSection: 1))*tableView.rowHeight + 200.0): maxSize
     }
     
 }
@@ -46,7 +46,7 @@ extension TodayViewController : UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
