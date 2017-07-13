@@ -59,7 +59,9 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         let durationInSeconds = describedTask.sessions[indexPath.row].durationInSeconds
         cell.detailTextLabel?.text = getTimeString(time: durationInSeconds)
         
-        //cell.selectionStyle = .none
+        //Creating Selection Style to tableView cell
+        cell.selectedBackgroundView = UIView ()
+        cell.selectedBackgroundView?.backgroundColor = backCellBlue
         
         return cell
     }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+let backCellBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
 //    var Cache.shared().tasks  = {
@@ -84,6 +86,10 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
         
         cell.textLabel?.text = task.name
         cell.detailTextLabel?.text = task.getTimeString()
+        
+        //Creating Selection Style
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = backCellBlue
         
         return cell
     }
