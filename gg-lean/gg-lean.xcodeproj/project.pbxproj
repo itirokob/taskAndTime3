@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0B19FD1F169A850022E408 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B19FC1F169A850022E408 /* Cache.swift */; };
+		4D8B7E951F13FEA400FAB3F3 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */; };
+		4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */; };
+		4D8B7E9B1F13FEA400FAB3F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D8B7E991F13FEA400FAB3F3 /* MainInterface.storyboard */; };
+		4D8B7E9F1F13FEA400FAB3F3 /* clicWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */; };
 		9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183211F139EB100E49B38 /* Settings.storyboard */; };
 		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
@@ -39,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4D8B7E9D1F13FEA400FAB3F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B73766E31F03D0640063B268 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D8B7E921F13FEA400FAB3F3;
+			remoteInfo = clicWidget;
+		};
 		DE2B99DC1F0E6969002CE4F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B73766E31F03D0640063B268 /* Project object */;
@@ -62,6 +74,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				4D8B7E9F1F13FEA400FAB3F3 /* clicWidget.appex in Embed App Extensions */,
 				DE2B99E11F0E6969002CE4F3 /* Intent Handler.appex in Embed App Extensions */,
 				DE2B99DE1F0E6969002CE4F3 /* Intent HandlerUI.appex in Embed App Extensions */,
 			);
@@ -71,6 +84,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D0B19FC1F169A850022E408 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = clicWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		4D8B7E9A1F13FEA400FAB3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Estatisticas.storyboard; sourceTree = "<group>"; };
 		9B3183211F139EB100E49B38 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
@@ -107,6 +126,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D8B7E901F13FEA400FAB3F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D8B7E951F13FEA400FAB3F3 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B73766E81F03D0650063B268 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,6 +162,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D8B7E961F13FEA400FAB3F3 /* clicWidget */ = {
+			isa = PBXGroup;
+			children = (
+				4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */,
+				4D8B7E991F13FEA400FAB3F3 /* MainInterface.storyboard */,
+				4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */,
+			);
+			path = clicWidget;
+			sourceTree = "<group>";
+		};
 		B73766E21F03D0640063B268 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +179,7 @@
 				B73766ED1F03D0650063B268 /* gg-lean */,
 				DE2B99CA1F0E6968002CE4F3 /* Intent Handler */,
 				DE2B99D51F0E6969002CE4F3 /* Intent HandlerUI */,
+				4D8B7E961F13FEA400FAB3F3 /* clicWidget */,
 				B73766EC1F03D0650063B268 /* Products */,
 				B737670B1F03DF200063B268 /* Frameworks */,
 			);
@@ -153,6 +191,7 @@
 				B73766EB1F03D0650063B268 /* gg-lean.app */,
 				DE2B99C91F0E6968002CE4F3 /* Intent Handler.appex */,
 				DE2B99D21F0E6969002CE4F3 /* Intent HandlerUI.appex */,
+				4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +216,7 @@
 				B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */,
 				B737670C1F03DF200063B268 /* CloudKit.framework */,
 				DE2B99D31F0E6969002CE4F3 /* IntentsUI.framework */,
+				4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -186,6 +226,7 @@
 			children = (
 				B737671F1F0673F90063B268 /* TimeCounter.swift */,
 				B73767121F043C730063B268 /* Task.swift */,
+				4D0B19FC1F169A850022E408 /* Cache.swift */,
 				B7E843B81F093C890041E634 /* Cell.swift */,
 				B737671E1F053C6E0063B268 /* Business */,
 				B73767191F04592E0063B268 /* Persistence */,
@@ -257,6 +298,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4D8B7E921F13FEA400FAB3F3 /* clicWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D8B7EA01F13FEA400FAB3F3 /* Build configuration list for PBXNativeTarget "clicWidget" */;
+			buildPhases = (
+				4D8B7E8F1F13FEA400FAB3F3 /* Sources */,
+				4D8B7E901F13FEA400FAB3F3 /* Frameworks */,
+				4D8B7E911F13FEA400FAB3F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = clicWidget;
+			productName = clicWidget;
+			productReference = 4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B73766EA1F03D0650063B268 /* gg-lean */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B73766FD1F03D0650063B268 /* Build configuration list for PBXNativeTarget "gg-lean" */;
@@ -272,6 +330,7 @@
 			dependencies = (
 				DE2B99DD1F0E6969002CE4F3 /* PBXTargetDependency */,
 				DE2B99E01F0E6969002CE4F3 /* PBXTargetDependency */,
+				4D8B7E9E1F13FEA400FAB3F3 /* PBXTargetDependency */,
 			);
 			name = "gg-lean";
 			productName = "gg-lean";
@@ -322,6 +381,11 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Bepid;
 				TargetAttributes = {
+					4D8B7E921F13FEA400FAB3F3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = GJ5VL7QF9C;
+						ProvisioningStyle = Automatic;
+					};
 					B73766EA1F03D0650063B268 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = GJ5VL7QF9C;
@@ -366,11 +430,20 @@
 				B73766EA1F03D0650063B268 /* gg-lean */,
 				DE2B99C81F0E6968002CE4F3 /* Intent Handler */,
 				DE2B99D11F0E6969002CE4F3 /* Intent HandlerUI */,
+				4D8B7E921F13FEA400FAB3F3 /* clicWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4D8B7E911F13FEA400FAB3F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D8B7E9B1F13FEA400FAB3F3 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B73766E91F03D0650063B268 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,6 +495,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D8B7E8F1F13FEA400FAB3F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B73766E71F03D0650063B268 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,6 +513,7 @@
 				9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */,
 				B73767201F0673F90063B268 /* TimeCounter.swift in Sources */,
 				B737671D1F053C670063B268 /* TimeLogic.swift in Sources */,
+				4D0B19FD1F169A850022E408 /* Cache.swift in Sources */,
 				9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */,
 				B73767031F03D4B40063B268 /* taskView.swift in Sources */,
 				9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */,
@@ -460,6 +542,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4D8B7E9E1F13FEA400FAB3F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D8B7E921F13FEA400FAB3F3 /* clicWidget */;
+			targetProxy = 4D8B7E9D1F13FEA400FAB3F3 /* PBXContainerItemProxy */;
+		};
 		DE2B99DD1F0E6969002CE4F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DE2B99D11F0E6969002CE4F3 /* Intent HandlerUI */;
@@ -473,6 +560,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4D8B7E991F13FEA400FAB3F3 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D8B7E9A1F13FEA400FAB3F3 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		B73766F21F03D0650063B268 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -500,6 +595,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4D8B7EA11F13FEA400FAB3F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = GJ5VL7QF9C;
+				INFOPLIST_FILE = clicWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.gg-lean.clicWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4D8B7EA21F13FEA400FAB3F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = GJ5VL7QF9C;
+				INFOPLIST_FILE = clicWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.gg-lean.clicWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		B73766FB1F03D0650063B268 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -696,6 +821,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D8B7EA01F13FEA400FAB3F3 /* Build configuration list for PBXNativeTarget "clicWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D8B7EA11F13FEA400FAB3F3 /* Debug */,
+				4D8B7EA21F13FEA400FAB3F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B73766E61F03D0640063B268 /* Build configuration list for PBXProject "gg-lean" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

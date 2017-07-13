@@ -66,12 +66,16 @@ class DataBaseManager : NSObject {
         
         let name = record.value(forKey: "name") as! String
         let isSubtask = record.value(forKey: "isSubtask") as! Int
-        let totalTime = record.value(forKey: "totalTime") as! Int
+//        let totalTime = record.value(forKey: "totalTime") as! Int
         let isActive = record.value(forKey: "isActive") as! Int
         let id = record.value(forKey:"id") as! String
         let timeCountList = record.value(forKey: "timeCountList") as! [CKReference]
+        let finishedSessionTime = record.value(forKey: "totalTime") as! Int
+    
+        // TODO: guards for errors and nils
         
-        let task = Task(name: name, isSubtask: isSubtask, totalTime: totalTime, isActive: isActive, id:id)
+        let task = Task(name: name, isSubtask: isSubtask, isActive: isActive, id:id, finishedSessionTime: finishedSessionTime)
+        
         task.recordName = record.recordID.recordName
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
             task.sessions = taskSessionList
@@ -243,17 +247,22 @@ class DataBaseManager : NSObject {
         })
     }
     
+    // FIXME: discover why some attributes are missing during execution.
     
     /// The mapToTaskSession maps a TimeCount record into a TaskSession object
     ///
     /// - Parameter record: the TimeCount record to be mapped
     /// - Returns: a taskSession
-    func mapToTaskSession (_ record:CKRecord) -> TaskSession{
-        let startDate = record.value(forKey: "startDate") as! Date
-        let duration = record.value(forKey: "duration") as! Int
-        let recordID = record.recordID
+    func mapToTaskSession (_ record:CKRecord) -> TaskSession? {
         
-        return TaskSession(startDate: startDate, durationInSeconds: duration, recordID: recordID)
+        guard let startDate = record.value(forKey: "startDate") as? Date,
+            let stopDate = record.value(forKey: "stopDate") as? Date,
+            let duration = record.value(forKey: "duration") as? Int else {
+//                print("Attributes missing when mapping task session CKRecord to object.")
+                return nil
+        }
+        
+        return TaskSession(startDate: startDate, stopDate: stopDate, durationInSeconds: duration, recordID: record.recordID)
     }
 
     /// The mapToTaskSessionList transforms a reference list into a TaskSession list
@@ -276,7 +285,12 @@ class DataBaseManager : NSObject {
         op.perRecordCompletionBlock = { (record, recordID, error) in
             if error == nil{
                 if let result = record{
-                    taskSessionList.append(self.mapToTaskSession(result))
+                    if let taskSession = self.mapToTaskSession(result) {
+                        taskSessionList.append(taskSession)
+                    }
+//                    else {
+//                        print("Error when trying to map task session CKRecord to object.")
+//                    }
                 }
             }else{
                 print("Error in mapping to recordIDList: \(String(describing: error))")

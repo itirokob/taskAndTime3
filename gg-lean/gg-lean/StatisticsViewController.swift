@@ -10,14 +10,14 @@ import UIKit
 
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
-    let manager = DataBaseManager.shared
-    var tasksArray = [Task]()
+//    var Cache.shared().tasks  = {
+//        return Cache.shared().tasks
+//    }()
     var sendingTask: Task?
     var filteredTasks = [Task]()
     
     let searchController = UISearchController(searchResultsController: nil)
 
-    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -39,7 +39,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         super.viewWillAppear(animated)
         
         
-        self.loadTasks()
+//        print("Cache.shared().tasks in StatisticsViewController: \(Cache.shared().tasks)")
     }
 
     override func viewDidLoad() {
@@ -68,9 +68,9 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text!
         if searchText == "" {
-            filteredTasks = tasksArray
+            filteredTasks = Cache.shared().tasks
         }else{
-            filteredTasks = tasksArray.filter( { $0.name.lowercased().contains(searchText.lowercased()) } )
+            filteredTasks = Cache.shared().tasks.filter( { $0.name.lowercased().contains(searchText.lowercased()) } )
         }
         self.tableView.reloadData()
     }
