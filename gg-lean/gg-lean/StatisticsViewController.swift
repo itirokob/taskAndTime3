@@ -17,9 +17,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
     let searchController = UISearchController(searchResultsController: nil)
 
-    
     @IBOutlet weak var tableView: UITableView!
-    
     
     func loadTasks(){
         manager.getTasks { (tasks) in
@@ -41,8 +39,10 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
-        searchController.searchBar.barTintColor = .white
-        searchController.searchBar.backgroundColor = .clear
+        searchController.searchBar.barTintColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.placeholder =  "Search Activity"
         
         self.loadTasks()
     }

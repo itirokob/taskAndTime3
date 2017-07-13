@@ -47,11 +47,11 @@ class Cell:SwipeTableViewCell{
             print("task has been set to a cell")
             
             
-//            if task != nil {
-////                print("added observer")
-//                self.task.addObserver(self, forKeyPath: taskObserverPath, options: [.new], context: nil)
-//                hasObserver = true
-//            }
+            //            if task != nil {
+            ////                print("added observer")
+            //                self.task.addObserver(self, forKeyPath: taskObserverPath, options: [.new], context: nil)
+            //                hasObserver = true
+            //            }
         }
         willSet {
             if task != nil && hasObserver {
@@ -61,7 +61,7 @@ class Cell:SwipeTableViewCell{
         }
     }
     
-        
+    
     deinit {
         if task != nil && hasObserver {
             self.task.removeObserver(self, forKeyPath: taskObserverPath)
@@ -84,7 +84,7 @@ class Cell:SwipeTableViewCell{
     }
     
     @IBAction func togglePlayPauseButton(_ sender: Any) {
-//        isOn = !isOn
+        //        isOn = !isOn
         
         if isOn {
             stopTimer()
@@ -94,12 +94,14 @@ class Cell:SwipeTableViewCell{
         setViewProperties()
     }
     
-   
-
+    
+    
     
     func setViewProperties() {
         taskLabel.text = task.name
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
+        timeLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
+        taskLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
         taskViewContainer.backgroundColor = task.isRunning ? activeCellColor : unactiveCellColor
         playPauseButton.setImage(task.isRunning ? buttonPauseImage : buttonPlayImage, for: .normal)
     }
@@ -123,10 +125,10 @@ class Cell:SwipeTableViewCell{
     
     //Starting timer
     func startTimer(){
-//        if let cellDelegate = self.cellDelegate{
-//            cellDelegate.willStartTimer(cell: self)
-//        }
-//        self.task.isRunning = self.task.startSession(startDate: Date())
+        //        if let cellDelegate = self.cellDelegate{
+        //            cellDelegate.willStartTimer(cell: self)
+        //        }
+        //        self.task.isRunning = self.task.startSession(startDate: Date())
         TimeLogic.shared.playPressed(task: self.task)
         setViewProperties()
         initializeTimer()
