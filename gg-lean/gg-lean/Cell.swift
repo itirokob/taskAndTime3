@@ -88,10 +88,13 @@ class Cell:SwipeTableViewCell{
     /// The formattedTime returns the time into string given it's seconds
     fileprivate func formattedTime(seconds: Int) -> String{
         
-        let minutes :Int = seconds / 60
-        let seconds :Int = seconds - 60*minutes
+        let hours: Int = seconds/3600
         
-        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
+        let minutes :Int = (seconds % 3600) / 60
+        let seconds :Int = seconds - (3600 * hours) - (60 * minutes)
+        
+//        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
     //Starting timer
