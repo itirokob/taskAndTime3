@@ -25,7 +25,7 @@ protocol CellProtocol: NSObjectProtocol
     func willStopTimerBySiri(cell: Cell)
 }
 
-class Cell:SwipeTableViewCell{
+class Cell:UITableViewCell{
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!

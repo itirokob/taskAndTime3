@@ -29,6 +29,8 @@ class TasksViewController: UIViewController{
 
     var refresh: UIRefreshControl!
     
+    var initialIndexPath: IndexPath?
+    var cellSnapshot: UIView?
     func updateTasksNameArray(){
         var tasksNames = [String]()
         
@@ -37,7 +39,7 @@ class TasksViewController: UIViewController{
         }
         tasksNameArray = tasksNames
         
-        updateSiriVocabulary()
+        //updateSiriVocabulary()
     }
     
     func updateSiriVocabulary(){
@@ -50,6 +52,7 @@ class TasksViewController: UIViewController{
         tableView.separatorColor = UIColor(white: 0.95, alpha: 1)
         tableView.delegate = self
         tableView.dataSource = self
+        addLongPressGesture()
         self.tabBarController?.tabBar.barTintColor = UIColor.white
         self.tabBarController?.tabBar.tintColor = backgroundBlue
         
@@ -73,7 +76,6 @@ class TasksViewController: UIViewController{
             
         }
         updateTasksNameArray( )
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,10 +171,88 @@ extension TasksViewController: CellProtocol{
 
 }
 
+extension TasksViewController {
+
+    
+    func addLongPressGesture() {
+        let longpress = UILongPressGestureRecognizer(target: self, action: #selector(onLongPressGesture(sender:)))
+        tableView.addGestureRecognizer(longpress)
+    }
+    
+    func onLongPressGesture(sender: UILongPressGestureRecognizer) {
+        let locationInView = sender.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: locationInView)
+        
+        if sender.state == .began {
+            if indexPath != nil {
+                initialIndexPath = indexPath
+                let cell = tableView.cellForRow(at: indexPath!)
+                cellSnapshot = snapshotOfCell(inputView: cell!)
+                var center = cell?.center
+                cellSnapshot?.center = center!
+                cellSnapshot?.alpha = 0.0
+                tableView.addSubview(cellSnapshot!)
+                
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                    center?.y = locationInView.y
+                    self.cellSnapshot?.center = center!
+                    self.cellSnapshot?.transform = (self.cellSnapshot?.transform.scaledBy(x: 1.05, y: 1.05))!
+                    self.cellSnapshot?.alpha = 0.99
+                    cell?.alpha = 0.0
+                }, completion: { (finished) -> Void in
+                    if finished {
+                        cell?.isHidden = true
+                    }
+                })
+            }
+        } else if sender.state == .changed {
+            var center = cellSnapshot?.center
+            center?.y = locationInView.y
+            cellSnapshot?.center = center!
+            
+            if ((indexPath != nil) && (indexPath != initialIndexPath)) {
+                swap(&Cache.shared().tasks[indexPath!.row], &Cache.shared().tasks[initialIndexPath!.row])
+                tableView.moveRow(at: initialIndexPath!, to: indexPath!)
+                initialIndexPath = indexPath
+            }
+        } else if sender.state == .ended {
+            let cell = tableView.cellForRow(at: initialIndexPath!)
+            cell?.isHidden = false
+            cell?.alpha = 0.0
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                self.cellSnapshot?.center = (cell?.center)!
+                self.cellSnapshot?.transform = CGAffineTransform.identity
+                self.cellSnapshot?.alpha = 0.0
+                cell?.alpha = 1.0
+            }, completion: { (finished) -> Void in
+                if finished {
+                    self.initialIndexPath = nil
+                    self.cellSnapshot?.removeFromSuperview()
+                    self.cellSnapshot = nil
+                }
+            })
+        }
+    }
+    
+    func snapshotOfCell(inputView: UIView) -> UIView {
+        UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
+        inputView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let cellSnapshot = UIImageView(image: image)
+        cellSnapshot.layer.masksToBounds = false
+        cellSnapshot.layer.cornerRadius = 0.0
+        cellSnapshot.layer.shadowOffset = CGSize(width: -5.0, height: 0.0)
+        cellSnapshot.layer.shadowRadius = 5.0
+        cellSnapshot.layer.shadowOpacity = 0.4
+        return cellSnapshot
+    }
+}
 
 
 // MARK: Table View Extensions
-extension TasksViewController: UITableViewDelegate, UITableViewDataSource, SwipeTableViewCellDelegate{
+extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Cache.shared().tasks.count
@@ -202,19 +282,12 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         let task = Cache.shared().tasks[indexPath.row]
-        
-        
-
-        
-        cell.delegate = self
+    
         cell.cellDelegate = self
         cell.task = task
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-        
-        
-        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
@@ -244,91 +317,48 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         return true
     }
 
-
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-//            self.manager.delete(self.Cache.shared().tasks[indexPath.row].id, completion: {
-//                OperationQueue.main.addOperation({
-//                    self.Cache.shared().tasks.remove(at: indexPath.row)
-//                    tableView.deleteRows(at: [indexPath], with: .fade)
-//                    self.tableView.isEditing=false
-//                })
-//            })
-//        }
-//        
-//        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-//            // Preciso de uma tela de edit
-//        }
-//        
-//        edit.backgroundColor = UIColor.blue
-//        
-//        return [delete, edit]
-//    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .left else { return nil }
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "               ") { action, indexPath in
+            self.manager.delete(Cache.shared().tasks[indexPath.row].id, completion: {
+                OperationQueue.main.addOperation({
+                    Cache.shared().tasks.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.tableView.isEditing=false
+                })
+            })
+        }
+        delete.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
+        delete.backgroundColor = UIColor(patternImage: UIImage(named: "trashCan")!)
         
-        let completeAction = SwipeAction(style: .default , title: "Done") { action, indexPath in
+        let archive = UITableViewRowAction(style: .default, title: "            ") { (action, indexPath) in
             Cache.shared().tasks[indexPath.row].isActive = 0
             self.manager.saveTask(task: Cache.shared().tasks[indexPath.row], completion: { (task, error) in
                 OperationQueue.main.addOperation({
                     Cache.shared().tasks.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.tableView.isEditing=false
                     self.tableView.isEditing = false
                 })
             })
         }
-        
-        // customize the action appearance
-        completeAction.image = UIImage(named: "Complete")
-        completeAction.backgroundColor = UIColor.green
-        
-        return [completeAction]
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-        var options = SwipeTableOptions()
-        options.expansionStyle = .fill
-        options.transitionStyle = .border
-        return options
-    }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-//        //guard orientation == .right else { return nil }
-//        
-//        if (orientation == .right) {
-//        
-//        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-//            // handle action by updating model with deletion
-//        }
-//        
-//        var options = SwipeTableOptions()
-//        options.expansionStyle = SwipeExpansionStyle.selection
-//        
-//        // customize the action appearance
-//        deleteAction.image = UIImage(named: "delete")
-//        
-//        return [deleteAction]
-//        } else {
-//            let otherAction = SwipeAction(style: .default, title: "Ahhhh") { action, indexPath in
-//                // handle action by updating model with deletion
-//            }
-//            
-//            let secondAction = SwipeAction(style: .default, title: "Blehhh") { action, indexPath in
-//                // handle action by updating model with deletion
-//            }
-//            
-//            secondAction.backgroundColor = UIColor.yellow
-//            
-//            return [otherAction, secondAction]
-//        }
-//    }
-//    
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-//        var options = SwipeTableOptions()
-//            options.expansionStyle = .selection
-//        options.transitionStyle = orientation == .left ? .reveal : .border
-//        return options
-//    }
+        archive.backgroundColor = UIColor(patternImage: UIImage(named: "archive")!)
 
+        return [delete, archive]
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
