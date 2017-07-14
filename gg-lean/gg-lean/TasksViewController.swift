@@ -256,7 +256,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
 //    }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .normal, title: "             ") { action, indexPath in
+        let delete = UITableViewRowAction(style: .normal, title: "            ") { action, indexPath in
             self.manager.delete(Cache.shared().tasks[indexPath.row].id, completion: {
                 OperationQueue.main.addOperation({
                     Cache.shared().tasks.remove(at: indexPath.row)
