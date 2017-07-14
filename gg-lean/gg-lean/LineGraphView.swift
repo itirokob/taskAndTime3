@@ -102,8 +102,12 @@ protocol LineGraphProtocol : NSObjectProtocol{
         var maximumSample:Float = taskValueArray.max() ?? 1.0
         var minimumSample:Float = taskValueArray.min() ?? 0.0
         if maximumSample == minimumSample {
-            maximumSample = maximumSample * 1.5
-            minimumSample = minimumSample / 1.5
+            if maximumSample == 0{
+                maximumSample = 1
+            } else {
+                maximumSample = maximumSample * 1.5
+                minimumSample = minimumSample / 1.5
+            }
         }
         
         var x: CGFloat = 0
@@ -225,7 +229,6 @@ protocol LineGraphProtocol : NSObjectProtocol{
         let textSize:CGSize = middleLabel.size(attributes: textFontAttributes)
         
         // Desenha o texto
-
         middleLabel.draw(in:  CGRect(x: 5, y: (self.bounds.height / 2.0), width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
         upLabel.draw(in: CGRect(x: 5, y: textSize.height, width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
         lowLabel.draw(in: CGRect(x: 5, y: (self.bounds.height - textSize.height - 6.0), width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
