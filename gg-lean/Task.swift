@@ -72,6 +72,7 @@ class Task: NSObject {
         print("Play \(self.name)")
         
         self.currentSession = TaskSession(startDate: startDate, stopDate: nil, durationInSeconds: 0, recordID:nil)
+        self.isRunning = true
         
         print("currentSession is now: \(String(describing: self.currentSession))")
         return true
@@ -94,8 +95,8 @@ class Task: NSObject {
         self.finishedSessionTime += currentSession!.durationInSeconds
         let cs = currentSession
         
-        currentSession = nil
-        isRunning = false
+        self.currentSession = nil
+        self.isRunning = false
         
         return cs
 

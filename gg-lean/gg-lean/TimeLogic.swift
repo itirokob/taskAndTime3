@@ -18,7 +18,6 @@ class TimeLogic:NSObject{
     func playPressed(task:Task){
         let sessionStarted = task.startSession(startDate: Date())
         
-        task.isRunning = (task.currentSession != nil)
         
         if task.currentSession != nil && sessionStarted {
             manager.addTimeCount(session: task.currentSession!) { (recordID) in
@@ -50,6 +49,8 @@ class TimeLogic:NSObject{
         manager.saveTask(task: task, completion: { (task, error) in
             if error != nil{
                 print("Error when updating task session record in pausePressed: \(String(describing: error))")
+            } else {
+                print("Task updated on Cloudkit.")
             }
         })
         

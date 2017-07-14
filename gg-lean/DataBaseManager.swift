@@ -53,6 +53,8 @@ class DataBaseManager : NSObject {
                 print("Error obtaining recordID from currentRecord in mapToCKRecord method.")
                 ckRecordTask["currentSession"] = nil
             }
+        } else {
+            ckRecordTask["currentSession"] = nil
         }
         
         ckRecordTask["isRunning"] = (objectTask.isRunning ? 1 : 0) as CKRecordValue
@@ -117,10 +119,10 @@ class DataBaseManager : NSObject {
         let task = Task(name: name, isSubtask: isSubtask, isActive: isActive, id:id, finishedSessionTime: finishedSessionTime)
         
         task.recordName = record.recordID.recordName
-        task.isRunning = (isRunning == 1)
+        task.isRunning = (isRunning == 1 || currentSession != nil)
         
         if currentSession != nil {
-            print("currentSession on CloudKit!")
+//            print("currentSession on CloudKit!")
             self.getCurrentSession(currSessionID: currentSession!.recordID, completionHandler: { (currSession) in
                 if let currSession = currSession {
                     task.currentSession = currSession
