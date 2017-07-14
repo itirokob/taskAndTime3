@@ -225,9 +225,10 @@ protocol LineGraphProtocol : NSObjectProtocol{
         let textSize:CGSize = middleLabel.size(attributes: textFontAttributes)
         
         // Desenha o texto
-        middleLabel.draw(in: self.bounds.insetBy(dx: 5, dy: (self.bounds.height/2 - textSize.height/2)),withAttributes: textFontAttributes)
-        upLabel.draw(in: self.bounds.insetBy(dx: 5, dy: textSize.height/2),withAttributes: textFontAttributes)
-        lowLabel.draw(in: self.bounds.insetBy(dx: 5, dy: (self.bounds.height - textSize.height)),withAttributes: textFontAttributes)
+
+        middleLabel.draw(in:  CGRect(x: 5, y: (self.bounds.height / 2.0), width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
+        upLabel.draw(in: CGRect(x: 5, y: textSize.height, width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
+        lowLabel.draw(in: CGRect(x: 5, y: (self.bounds.height - textSize.height - 6.0), width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
     }
     
 }
