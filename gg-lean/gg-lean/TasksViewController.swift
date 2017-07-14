@@ -32,11 +32,14 @@ class TasksViewController: UIViewController{
     var initialIndexPath: IndexPath?
     var cellSnapshot: UIView?
     func updateTasksNameArray(){
+        var tasksNames = [String]()
         
         for task in Cache.shared().tasks {
-            tasksNameArray.append(task.name)
+            tasksNames.append(task.name)
         }
-        //updateSiriVocabulary( )
+        tasksNameArray = tasksNames
+        
+        updateSiriVocabulary()
     }
     
     func updateSiriVocabulary(){
@@ -82,21 +85,20 @@ class TasksViewController: UIViewController{
         super.viewWillAppear(animated)
         
         self.loadTasks()
-        
-//        print("Cache.shared().tasks in TasksViewController: \(Cache.shared().tasks)")
     }
     
     //Loads all the active tasks from the dataBase
     func loadTasks(){
-        manager.getTasks { (tasks) in
-            Cache.shared().tasks = tasks
-
-            OperationQueue.main.addOperation({ 
+        
+        Cache.shared().updateTasks(active: true){ (tasks) in
+            OperationQueue.main.addOperation({
                 self.tableView.reloadData()
                 self.refresh.endRefreshing()
                 self.updateTasksNameArray()
             })
         }
+
+        
     }
     
     //Action from the done button (which replaces the "return" button from the keyboard)
