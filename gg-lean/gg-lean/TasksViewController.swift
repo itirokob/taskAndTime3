@@ -75,13 +75,14 @@ class TasksViewController: UIViewController{
         INPreferences.requestSiriAuthorization { (status) in
             
         }
+        self.loadTasks()
         updateTasksNameArray( )
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.loadTasks()
+//        self.loadTasks()
     }
     
     //Loads all the active tasks from the dataBase
@@ -145,30 +146,6 @@ class TasksViewController: UIViewController{
 // MARK: Cell Protocol
 extension TasksViewController: CellProtocol{
     
-//    func willStartTimer(cell: Cell){
-//        timeLogic.playPressed(task: cell.task)
-//        print("Play \(Cache.shared().tasks[cell.tag].name)")
-//    }
-//    
-//    func willStartTimerBySiri(cell: Cell){
-//        cell.startTimer()
-//        print("Play \(Cache.shared().tasks[cell.tag].name)")
-//    }
-//    
-//    func willStopTimer(cell: Cell){
-//        timeLogic.pausePressed(task: cell.task)
-//        print("Pause \(Cache.shared().tasks[cell.tag].name)")
-//    }
-//    
-//    func willStopTimerBySiri(cell: Cell){
-//        cell.stopTimer()
-//        print("Play \(Cache.shared().tasks[cell.tag].name)")
-//    }
-//    
-//    func timerDidTick(cell: Cell){
-//        cell.task.updateCurrentSessionDuration()
-//    }
-
 }
 
 extension TasksViewController {
@@ -288,6 +265,8 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
+
+        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
@@ -304,6 +283,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     //Essa função está aqui por enquanto.... ela ativa um timer, mas deveria collapsar uma célula no futuro
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! Cell
+        
         if cell.isOn == false{
             cell.startTimer()
             //willStartTimerBySiri(cell: cell)

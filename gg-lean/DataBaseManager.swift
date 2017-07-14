@@ -42,12 +42,19 @@ class DataBaseManager : NSObject {
             ckRecordTask.setObject(objectInfo[i] as? CKRecordValue, forKey: self.tasksFields[i])
         }
         
-        if let currentSession = objectTask.currentSession, let recordID = currentSession.recordID {
-            //Creating the currentSession in reference
-            // FIXME: quickly press play/pause crashes because recordID isn't created in time.
-            ckRecordTask["currentSession"] = CKReference(recordID: recordID, action: CKReferenceAction.none)
+
+        if let currentSession = objectTask.currentSession{
+            
+            if let recordID = currentSession.recordID {
+                
+                //Creating the currentSession in reference
+                // FIXME: quickly press play/pause crashes because recordID isn't created in time.
+                ckRecordTask["currentSession"] = CKReference(recordID: recordID, action: CKReferenceAction.none)
+            } else {
+                print("Error obtaining recordID from currentRecord in mapToCKRecord method.")
+                ckRecordTask["currentSession"] = nil
+            }
         } else {
-            print("Error obtaining recordID from currentRecord in mapToCKRecord method.")
             ckRecordTask["currentSession"] = nil
         }
         
@@ -65,17 +72,30 @@ class DataBaseManager : NSObject {
             }
         }
         
-        
-//        ckRecordTask["sessions"] = timeCountList as CKRecordValue
-        
+        // TODO: remove duplicates using sets (better performance).
+        // Gets sessions from CloudKit, without dupicates.
         if var sessionRecords = (ckRecordTask["sessions"] as? [CKReference]) {
-            sessionRecords.append(contentsOf: timeCountList)
-            ckRecordTask["sessions"] = sessionRecords as CKRecordValue
-        } else {
-            ckRecordTask["sessions"] = timeCountList as CKRecordValue
+            sessionRecords.append(contentsOf: timeCountList.filter{
+                if sessionRecords.contains($0) {
+                    return false
+                } else {
+                    return true
+                }
+            })
+            
+            timeCountList = sessionRecords
         }
-
         
+        var set = Set<CKReference>()
+        let result = timeCountList.filter {
+            guard !set.contains($0) else {
+                return false
+            }
+            set.insert($0)
+            return true
+        }
+        
+        ckRecordTask["sessions"] = result as CKRecordValue
     }
     
     func getCurrentSession(currSessionID:CKRecordID, completionHandler: @escaping (TaskSession?) -> Swift.Void ){
@@ -90,6 +110,16 @@ class DataBaseManager : NSObject {
                 print("Error in getCurrentSession: \(String(describing: error))")
             }
         }
+    }
+    
+    func containsSession(sessions: [TaskSession], session: TaskSession) -> Bool {
+        for s in sessions {
+            if s.recordID == session.recordID {
+                return true
+            }
+        }
+        
+        return false
     }
     
     /// The mapToObject function returns a Task object given a CKRecord
@@ -113,10 +143,10 @@ class DataBaseManager : NSObject {
         let task = Task(name: name, isSubtask: isSubtask, isActive: isActive, id:id, finishedSessionTime: finishedSessionTime)
         
         task.recordName = record.recordID.recordName
-        task.isRunning = (isRunning == 1)
+        task.isRunning = (isRunning == 1 || currentSession != nil)
         
         if currentSession != nil {
-            print("currentSession on CloudKit!")
+//            print("currentSession on CloudKit!")
             self.getCurrentSession(currSessionID: currentSession!.recordID, completionHandler: { (currSession) in
                 if let currSession = currSession {
                     task.currentSession = currSession
@@ -128,7 +158,15 @@ class DataBaseManager : NSObject {
         }
         
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
-            task.sessions = taskSessionList
+
+            task.sessions = taskSessionList.filter {
+                if self.containsSession(sessions: task.sessions, session: $0) {
+                    return false
+                } else {
+                    return true
+                }
+            }
+
         }
         
         return task
@@ -226,7 +264,7 @@ class DataBaseManager : NSObject {
     /// - Parameters:
     ///   - task: task to be updated
     ///   - completion: do things when the function ends
-    func updateTask(task:Task, completion:@escaping (CKRecord?,Error?) -> Void){
+    fileprivate func updateTask(task:Task, completion:@escaping (CKRecord?,Error?) -> Void){
         publicData.fetch(withRecordID: CKRecordID(recordName: task.recordName!)) { (record, error) in
             if (error == nil) {
                 if let databaseRecord = record {
@@ -299,6 +337,37 @@ class DataBaseManager : NSObject {
         })
     }
     
+    func updateSession(session: TaskSession) {
+        
+        guard let recordID = session.recordID, let stopDate = session.stopDate else {
+            print("Session is missing a CKRecord ID or stopDate to be updated.")
+            return
+        }
+        
+        publicData.fetch(withRecordID: recordID) { (record, error) in
+            
+            guard error == nil, let record = record else {
+                print("Error when fetching session from CK")
+                return
+            }
+            
+            record["stopDate"] = stopDate as CKRecordValue
+            
+            self.publicData.save(record) {
+                (savedRecord, error) in
+                
+                if error != nil {
+                    print("Error when updating session record. Error when saving the record to CK.")
+                } else {
+                    print("Session updated on CloudKit.")
+                }
+                
+            }
+        }
+        
+        
+    }
+    
     // FIXME: discover why some attributes are missing during execution.
     
     /// The mapToTaskSession maps a TimeCount record into a TaskSession object
@@ -307,13 +376,20 @@ class DataBaseManager : NSObject {
     /// - Returns: a taskSession
     func mapToTaskSession (_ record:CKRecord) -> TaskSession? {
 
-        let stopDate = record.value(forKey: "stopDate") as? Date
+        
         
         guard let startDate = record.value(forKey: "startDate") as? Date,
-            let duration = record.value(forKey: "duration") as? Int else {
+            var duration  = record.value(forKey: "duration") as? Int else {
                 print("Attributes missing when mapping task session CKRecord to object.")
                 return nil
         }
+        
+        let stopDate = record.value(forKey: "stopDate") as? Date
+        
+        if stopDate != nil {
+            duration = Int(DateInterval(start: startDate, end: stopDate!).duration)
+        }
+        
         
         return TaskSession(startDate: startDate, stopDate: stopDate, durationInSeconds: duration, recordID: record.recordID)
     }

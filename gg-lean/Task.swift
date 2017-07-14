@@ -60,10 +60,14 @@ class Task: NSObject {
     /// - Parameter startDate: task's startDate
     func startSession(startDate:Date) -> Bool{
         guard self.currentSession == nil else {
-            print("Can't start another session when one is already running1")
+            print("Can't start another session when one is already running!")
             return false
         }
+        
+        print("Play \(self.name)")
+        
         self.currentSession = TaskSession(startDate: startDate, stopDate: nil, durationInSeconds: 0, recordID:nil)
+        self.isRunning = true
         
         print("currentSession is now: \(String(describing: self.currentSession))")
         return true
@@ -74,28 +78,28 @@ class Task: NSObject {
             print("no current session to be stopped")
             return nil
         }
+        
+        print("Pause \(self.name)")
+        
         currentSession!.stopDate = Date()
         updateCurrentSessionDuration()
         
         
-        if currentSession != nil {
-            
-            // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
-            sessions.append(currentSession!)
-            self.finishedSessionTime += currentSession!.durationInSeconds
-            let cs = currentSession
-            currentSession = nil
-            return cs
-        } else {
-            print("currentSession couldnt be stopped because it's nil after it should have been updated!")
-            return nil
-        }
-    
+        // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
+        sessions.append(currentSession!)
+        self.finishedSessionTime += currentSession!.durationInSeconds
+        let cs = currentSession
+        
+        self.currentSession = nil
+        self.isRunning = false
+        
+        return cs
+
     }
     
     func updateCurrentSessionDuration() {
         guard var currentSession = self.currentSession else {
-            print("currentSession is nil!")
+            print("currentSession from task \(self.name) is nil!")
             return
         }
         let components = Calendar.current.dateComponents([.second], from: currentSession.startDate, to: Date())
@@ -104,19 +108,7 @@ class Task: NSObject {
         
         self.currentSession = currentSession // update the instance variable
     }
-    
-//    func updateSessionDuration(){
-//        let currSession = sessions.count > 0 ? sessions.count - 1 : 0
-//        
-//        
-//        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: sessions[currSession].startDate, to: Date())
-//
-//        sessions[currSession].durationInSeconds = components.second!
-//                
-//        //Feels like migué
-//        self.totalTime += 1
-//    }
-    
+
     func getTotalTime()->Int{
         return totalTime
     }
@@ -125,12 +117,14 @@ class Task: NSObject {
         return sessions.count
     }
     
-    func getTimeString() -> String{
+    func getTimeString(active: Bool = true) -> String{
+        var seconds = active ? totalTime : finishedSessionTime
         
-        // Using finishedSessionTime because the statistics view should't consider currentSession when displaying the total time.
-        let minutes :Int = finishedSessionTime / 60
-        let seconds :Int = finishedSessionTime - 60*minutes
+        let hours: Int = seconds/3600
         
-        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
+        let minutes :Int = (seconds % 3600) / 60
+        seconds = seconds - (3600 * hours) - (60 * minutes)
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

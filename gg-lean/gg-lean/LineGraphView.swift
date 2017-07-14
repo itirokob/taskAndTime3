@@ -29,6 +29,11 @@ protocol LineGraphProtocol : NSObjectProtocol{
     
     var lineGraphDataSource : LineGraphProtocol?
     
+    //Subtitles
+    var lowValueSubtitle = UILabel()
+    var mediumValueSubtitle = UILabel()
+    var highValue = UILabel()
+    
     //Tell that you need to reload the view
     func reloadData(){
         
@@ -97,8 +102,12 @@ protocol LineGraphProtocol : NSObjectProtocol{
         var maximumSample:Float = taskValueArray.max() ?? 1.0
         var minimumSample:Float = taskValueArray.min() ?? 0.0
         if maximumSample == minimumSample {
-            maximumSample = maximumSample * 1.5
-            minimumSample = minimumSample / 1.5
+            if maximumSample == 0{
+                maximumSample = 1
+            } else {
+                maximumSample = maximumSample * 1.5
+                minimumSample = minimumSample / 1.5
+            }
         }
         
         var x: CGFloat = 0
@@ -115,7 +124,7 @@ protocol LineGraphProtocol : NSObjectProtocol{
             let normalizedX:CGFloat = x / count
             let normalizedY:CGFloat = 1 - CGFloat( (dataPoint - minimumSample) / (maximumSample - minimumSample))
             
-            let point = CGPoint(x: normalizedX, y: normalizedY)
+            let point = CGPoint(x: normalizedX + 0.05 , y: normalizedY)
             
             if (x == 0) {
                 graphPath.move(to: point)
@@ -126,7 +135,7 @@ protocol LineGraphProtocol : NSObjectProtocol{
                 graphPath.addLine(to: point)
             }
             
-            let circle = UIBezierPath(ovalIn: CGRect(x: normalizedX - (circleWidth/2), y: normalizedY - (circleHeight/2), width: circleWidth, height: circleHeight))
+            let circle = UIBezierPath(ovalIn: CGRect(x: normalizedX - (circleWidth/2) + 0.05, y: normalizedY - (circleHeight/2), width: circleWidth, height: circleHeight))
             circles.append(circle)
             
             x += 1
@@ -171,7 +180,7 @@ protocol LineGraphProtocol : NSObjectProtocol{
         ctx.restoreGState()
         // Draw Horizontal Lines
         let linePath = UIBezierPath()
-        let linesRect = CGRect(origin: CGPoint(x:margin,y:margin), size: desiredGraphSize)
+        let linesRect = CGRect(origin: CGPoint(x:self.bounds.size.width * 1/20 ,y:margin), size: CGSize(width: self.bounds.size.width * 14/15 , height: desiredGraphSize.height))
         
         // upline
         var y = linesRect.origin.y
@@ -197,6 +206,32 @@ protocol LineGraphProtocol : NSObjectProtocol{
         linePath.lineWidth = 1.0
         linePath.stroke()
         
+        //Drawing subtitles
+        let middleLabel : String = "\(maximumSample/2)"
+        let upLabel : String = "\(maximumSample)"
+        let lowLabel : String = "\(minimumSample)"
+        
+        // Alinhamento do texto
+        let textStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        textStyle.alignment = .left
+        textStyle.lineBreakMode = .byClipping
+        
+        // Atritutos da fonte
+        let textFontAttributes = [
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12),
+            NSForegroundColorAttributeName: pencilColor,
+            NSBackgroundColorAttributeName: UIColor.clear,
+            NSBaselineOffsetAttributeName: 0,
+            NSParagraphStyleAttributeName: textStyle
+            ] as [String : Any]
+        
+        // Calcula o tamanho mínimo para o texto ser exibido
+        let textSize:CGSize = middleLabel.size(attributes: textFontAttributes)
+        
+        // Desenha o texto
+        middleLabel.draw(in:  CGRect(x: 5, y: (self.bounds.height / 2.0), width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
+        upLabel.draw(in: CGRect(x: 5, y: textSize.height, width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
+        lowLabel.draw(in: CGRect(x: 5, y: (self.bounds.height - textSize.height - 6.0), width: self.bounds.width, height: self.bounds.height),withAttributes: textFontAttributes)
     }
     
 }
