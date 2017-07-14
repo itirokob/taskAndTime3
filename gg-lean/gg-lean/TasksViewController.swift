@@ -147,6 +147,7 @@ class TasksViewController: UIViewController{
 extension TasksViewController: CellProtocol{
     
     func willStartTimer(cell: Cell){
+
 //        timeLogic.playPressed(task: cell.task)
 //        print("Play \(Cache.shared().tasks[cell.tag].name)")
     }
@@ -289,6 +290,8 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
+
+        
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri
         if let acName = TasksViewController.startedActivityOnInit{
