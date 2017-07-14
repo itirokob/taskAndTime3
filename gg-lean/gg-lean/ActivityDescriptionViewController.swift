@@ -92,7 +92,6 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
     func getGraphValueArray() -> [Float] {
         
         var dataPoints = [Float]()
-        print("task \(describedTask)'s sessions: \(describedTask.sessions)")
         for session in describedTask.sessions{
             dataPoints.append(Float(session.durationInSeconds))
         }

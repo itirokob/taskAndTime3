@@ -92,7 +92,6 @@ class Cell:UITableViewCell{
         // TODO: activity indicator in button is causing bugs. Going to implement it later...
         TimeLogic.shared.playPressed(task: self.task, completionHandler: {
             self.isUserInteractionEnabled = true
-            print("Finished creating session. Interaction enabled again.")
         })
         setViewProperties()
         initializeTimer()

@@ -49,7 +49,6 @@ class TimeLogic: NSObject {
             return
         }
         
-        print("Finished session started at \(finishedSession.startDate) from task \(task.name)")
         
         manager.updateSession(session: finishedSession) // Update session record in CK.
         
@@ -57,8 +56,6 @@ class TimeLogic: NSObject {
         manager.saveTask(task: task, completion: { (task, error) in
             if error != nil{
                 print("Error when updating task session record in pausePressed: \(String(describing: error))")
-            } else {
-                print("Task updated on Cloudkit.")
             }
         })
         

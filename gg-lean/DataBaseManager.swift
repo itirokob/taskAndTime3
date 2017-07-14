@@ -354,10 +354,7 @@ class DataBaseManager : NSObject {
                 
                 if error != nil {
                     print("Error when updating session record. Error when saving the record to CK.")
-                } else {
-                    print("Session updated on CloudKit.")
-                }
-                
+                }                 
             }
         }
         
