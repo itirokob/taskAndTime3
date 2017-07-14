@@ -81,7 +81,7 @@ class Cell:UITableViewCell{
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
-        cellDelegate?.timerDidTick(cell: self)
+//        cellDelegate?.timerDidTick(cell: self)
     }
     
     
@@ -100,10 +100,6 @@ class Cell:UITableViewCell{
     //Starting timer
     func startTimer(){
 
-        //        if let cellDelegate = self.cellDelegate{
-        //            cellDelegate.willStartTimer(cell: self)
-        //        }
-        //        self.task.isRunning = self.task.startSession(startDate: Date())
         TimeLogic.shared.playPressed(task: self.task)
         setViewProperties()
         initializeTimer()
@@ -111,9 +107,8 @@ class Cell:UITableViewCell{
     
     //Stoping timer
     func stopTimer(){
-        if let cellDelegate = self.cellDelegate{
-            cellDelegate.willStopTimer(cell: self)
-        }
+
+        TimeLogic.shared.pausePressed(task: self.task)
         setViewProperties()
         timerInvalidate()
     }

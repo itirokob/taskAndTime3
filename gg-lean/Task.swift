@@ -65,10 +65,14 @@ class Task: NSObject {
     /// - Parameter startDate: task's startDate
     func startSession(startDate:Date) -> Bool{
         guard self.currentSession == nil else {
-            print("Can't start another session when one is already running1")
+            print("Can't start another session when one is already running!")
             return false
         }
+        
+        print("Play \(self.name)")
+        
         self.currentSession = TaskSession(startDate: startDate, stopDate: nil, durationInSeconds: 0, recordID:nil)
+        self.isRunning = true
         
         print("currentSession is now: \(String(describing: self.currentSession))")
         return true
@@ -79,23 +83,23 @@ class Task: NSObject {
             print("no current session to be stopped")
             return nil
         }
+        
+        print("Pause \(self.name)")
+        
         currentSession!.stopDate = Date()
         updateCurrentSessionDuration()
         
         
-        if currentSession != nil {
-            
-            // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
-            sessions.append(currentSession!)
-            self.finishedSessionTime += currentSession!.durationInSeconds
-            let cs = currentSession
-            currentSession = nil
-            return cs
-        } else {
-            print("currentSession couldnt be stopped because it's nil after it should have been updated!")
-            return nil
-        }
-    
+        // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
+        sessions.append(currentSession!)
+        self.finishedSessionTime += currentSession!.durationInSeconds
+        let cs = currentSession
+        
+        self.currentSession = nil
+        self.isRunning = false
+        
+        return cs
+
     }
     
     func updateCurrentSessionDuration() {
