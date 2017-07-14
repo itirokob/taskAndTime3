@@ -115,19 +115,7 @@ class Task: NSObject {
         
         self.currentSession = currentSession // update the instance variable
     }
-    
-//    func updateSessionDuration(){
-//        let currSession = sessions.count > 0 ? sessions.count - 1 : 0
-//        
-//        
-//        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: sessions[currSession].startDate, to: Date())
-//
-//        sessions[currSession].durationInSeconds = components.second!
-//                
-//        //Feels like migué
-//        self.totalTime += 1
-//    }
-    
+
     func getTotalTime()->Int{
         return totalTime
     }
@@ -136,12 +124,14 @@ class Task: NSObject {
         return sessions.count
     }
     
-    func getTimeString() -> String{
+    func getTimeString(active: Bool = true) -> String{
+        var seconds = active ? totalTime : finishedSessionTime
         
-        // Using finishedSessionTime because the statistics view should't consider currentSession when displaying the total time.
-        let minutes :Int = finishedSessionTime / 60
-        let seconds :Int = finishedSessionTime - 60*minutes
+        let hours: Int = seconds/3600
         
-        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
+        let minutes :Int = (seconds % 3600) / 60
+        seconds = seconds - (3600 * hours) - (60 * minutes)
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

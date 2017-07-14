@@ -50,13 +50,14 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell", for: indexPath)
         
         //Get and formatt the sessin time
-        let sessionDate = describedTask.sessions[indexPath.row].startDate
+        let session = describedTask.sessions[indexPath.row]
+        let sessionDate = session.startDate
         let dateFormate = DateFormatter()
         dateFormate.dateStyle = .medium
         dateFormate.timeStyle = .short
         
         cell.textLabel?.text = dateFormate.string(from: sessionDate)
-        let durationInSeconds = describedTask.sessions[indexPath.row].durationInSeconds
+        let durationInSeconds = session.durationInSeconds
         cell.detailTextLabel?.text = getTimeString(time: durationInSeconds)
         
         //Creating Selection Style to tableView cell
@@ -74,12 +75,12 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
     
     // Format a given time to mm:ss
     func getTimeString(time: Int) -> String{
+        let hours: Int = time/3600
         
-        let minutes :Int = time / 60
-        let seconds :Int = time - 60*minutes
+        let minutes :Int = (time % 3600) / 60
+        let seconds = time - (3600 * hours) - (60 * minutes)
         
-        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
-    }
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)    }
 
 }
 

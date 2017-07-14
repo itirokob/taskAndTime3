@@ -75,13 +75,14 @@ class TasksViewController: UIViewController{
         INPreferences.requestSiriAuthorization { (status) in
             
         }
+        self.loadTasks()
         updateTasksNameArray( )
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.loadTasks()
+//        self.loadTasks()
     }
     
     //Loads all the active tasks from the dataBase
