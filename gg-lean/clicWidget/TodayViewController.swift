@@ -115,7 +115,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDeleg
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let myCell = cell as! Cell
         
-        myCell.timeLabel.text = myCell.task.getTimeString()
+//        myCell.timeLabel.text = myCell.task.getTimeString()
+        
+        myCell.setViewProperties()
         
         if(myCell.task.isRunning) {
             myCell.initializeTimer()
