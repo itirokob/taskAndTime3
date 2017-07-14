@@ -81,14 +81,46 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDeleg
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! Cell
+        
+        if cell.isOn == false{
+            cell.startTimer()
+            //willStartTimerBySiri(cell: cell)
+        }
+        else{
+            cell.stopTimer()
+            //willStopTimerBySiri(cell: cell)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "widgetCell", for: indexPath) as! Cell
         let task = self.tasks[indexPath.row]
         
         cell.task = task
+        cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let myCell = cell as! Cell
+        
+        myCell.timerInvalidate()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let myCell = cell as! Cell
+        
+        myCell.timeLabel.text = myCell.task.getTimeString()
+        
+        if(myCell.task.isRunning) {
+            myCell.initializeTimer()
+        }
+        
     }
 
 }

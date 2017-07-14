@@ -58,7 +58,7 @@ class Cell:UITableViewCell{
     
     func setViewProperties() {
         taskLabel.text = task.name
-        timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
+        timeLabel.text = self.task.getTimeString()
         timeLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
         taskLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
         playPauseButton.setImage(task.isRunning ? buttonPauseImage : buttonPlayImage, for: .normal)
@@ -71,9 +71,8 @@ class Cell:UITableViewCell{
     
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
-        timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
-        self.task.updateCurrentSessionDuration()
-
+        timeLabel.text = self.task.getTimeString()
+//        self.task.updateCurrentSessionDuration()
     }
     
     

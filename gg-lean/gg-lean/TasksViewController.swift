@@ -249,6 +249,8 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let myCell = cell as! Cell
         
+        myCell.timeLabel.text = myCell.task.getTimeString()
+        
         if(myCell.task.isRunning) {
             myCell.initializeTimer()
         }
