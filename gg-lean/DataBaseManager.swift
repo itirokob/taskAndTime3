@@ -72,17 +72,30 @@ class DataBaseManager : NSObject {
             }
         }
         
-        
-//        ckRecordTask["sessions"] = timeCountList as CKRecordValue
-        
+        // TODO: remove duplicates using sets (better performance).
+        // Gets sessions from CloudKit, without dupicates.
         if var sessionRecords = (ckRecordTask["sessions"] as? [CKReference]) {
-            sessionRecords.append(contentsOf: timeCountList)
-            ckRecordTask["sessions"] = sessionRecords as CKRecordValue
-        } else {
-            ckRecordTask["sessions"] = timeCountList as CKRecordValue
+            sessionRecords.append(contentsOf: timeCountList.filter{
+                if sessionRecords.contains($0) {
+                    return false
+                } else {
+                    return true
+                }
+            })
+            
+            timeCountList = sessionRecords
         }
-
         
+        var set = Set<CKReference>()
+        let result = timeCountList.filter {
+            guard !set.contains($0) else {
+                return false
+            }
+            set.insert($0)
+            return true
+        }
+        
+        ckRecordTask["sessions"] = result as CKRecordValue
     }
     
     func getCurrentSession(currSessionID:CKRecordID, completionHandler: @escaping (TaskSession?) -> Swift.Void ){
@@ -97,6 +110,16 @@ class DataBaseManager : NSObject {
                 print("Error in getCurrentSession: \(String(describing: error))")
             }
         }
+    }
+    
+    func containsSession(sessions: [TaskSession], session: TaskSession) -> Bool {
+        for s in sessions {
+            if s.recordID == session.recordID {
+                return true
+            }
+        }
+        
+        return false
     }
     
     /// The mapToObject function returns a Task object given a CKRecord
@@ -135,7 +158,15 @@ class DataBaseManager : NSObject {
         }
         
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
-            task.sessions = taskSessionList
+
+            task.sessions = taskSessionList.filter {
+                if self.containsSession(sessions: task.sessions, session: $0) {
+                    return false
+                } else {
+                    return true
+                }
+            }
+
         }
         
         return task
