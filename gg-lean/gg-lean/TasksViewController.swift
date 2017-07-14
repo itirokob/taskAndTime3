@@ -269,11 +269,17 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         delete.backgroundColor = UIColor(patternImage: UIImage(named: "trashCan")!)
         
         let archive = UITableViewRowAction(style: .default, title: "            ") { (action, indexPath) in
-            
+            Cache.shared().tasks[indexPath.row].isActive = 0
+            self.manager.saveTask(task: Cache.shared().tasks[indexPath.row], completion: { (task, error) in
+                OperationQueue.main.addOperation({
+                    Cache.shared().tasks.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.tableView.isEditing=false
+                    self.tableView.isEditing = false
+                })
+            })
         }
-        
-        //archive.backgroundColor = UIColor.init(red: 38, green: 147, blue: 186, alpha: 0)
-
+    
         archive.backgroundColor = UIColor(patternImage: UIImage(named: "archive")!)
 
         return [delete, archive]
