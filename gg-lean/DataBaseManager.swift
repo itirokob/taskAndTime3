@@ -42,17 +42,22 @@ class DataBaseManager : NSObject {
             ckRecordTask.setObject(objectInfo[i] as? CKRecordValue, forKey: self.tasksFields[i])
         }
         
-        if let currentSession = objectTask.currentSession {
+
+        if let currentSession = objectTask.currentSession{
+            
             if let recordID = currentSession.recordID {
+                
                 //Creating the currentSession in reference
                 // FIXME: quickly press play/pause crashes because recordID isn't created in time.
                 ckRecordTask["currentSession"] = CKReference(recordID: recordID, action: CKReferenceAction.none)
-            }
-            else {
+            } else {
                 print("Error obtaining recordID from currentRecord in mapToCKRecord method.")
                 ckRecordTask["currentSession"] = nil
             }
+        } else {
+            ckRecordTask["currentSession"] = nil
         }
+        
         ckRecordTask["isRunning"] = (objectTask.isRunning ? 1 : 0) as CKRecordValue
         //ckRecordTask.setObject(objectTask.isRunning ? 1 : 0 as! CKRecordValue, forKey: "isRunning")
         
@@ -115,10 +120,10 @@ class DataBaseManager : NSObject {
         let task = Task(name: name, isSubtask: isSubtask, isActive: isActive, id:id, finishedSessionTime: finishedSessionTime)
         
         task.recordName = record.recordID.recordName
-        task.isRunning = (isRunning == 1)
+        task.isRunning = (isRunning == 1 || currentSession != nil)
         
         if currentSession != nil {
-            print("currentSession on CloudKit!")
+//            print("currentSession on CloudKit!")
             self.getCurrentSession(currSessionID: currentSession!.recordID, completionHandler: { (currSession) in
                 if let currSession = currSession {
                     task.currentSession = currSession
@@ -228,7 +233,7 @@ class DataBaseManager : NSObject {
     /// - Parameters:
     ///   - task: task to be updated
     ///   - completion: do things when the function ends
-    func updateTask(task:Task, completion:@escaping (CKRecord?,Error?) -> Void){
+    fileprivate func updateTask(task:Task, completion:@escaping (CKRecord?,Error?) -> Void){
         publicData.fetch(withRecordID: CKRecordID(recordName: task.recordName!)) { (record, error) in
             if (error == nil) {
                 if let databaseRecord = record {
@@ -299,6 +304,37 @@ class DataBaseManager : NSObject {
                 completionHandler((record?.recordID)!)
             }
         })
+    }
+    
+    func updateSession(session: TaskSession) {
+        
+        guard let recordID = session.recordID, let stopDate = session.stopDate else {
+            print("Session is missing a CKRecord ID or stopDate to be updated.")
+            return
+        }
+        
+        publicData.fetch(withRecordID: recordID) { (record, error) in
+            
+            guard error == nil, let record = record else {
+                print("Error when fetching session from CK")
+                return
+            }
+            
+            record["stopDate"] = stopDate as CKRecordValue
+            
+            self.publicData.save(record) {
+                (savedRecord, error) in
+                
+                if error != nil {
+                    print("Error when updating session record. Error when saving the record to CK.")
+                } else {
+                    print("Session updated on CloudKit.")
+                }
+                
+            }
+        }
+        
+        
     }
     
     // FIXME: discover why some attributes are missing during execution.

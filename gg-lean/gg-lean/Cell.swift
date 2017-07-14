@@ -25,7 +25,7 @@ protocol CellProtocol: NSObjectProtocol
     func willStopTimerBySiri(cell: Cell)
 }
 
-class Cell:SwipeTableViewCell{
+class Cell:UITableViewCell{
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
@@ -106,16 +106,15 @@ class Cell:SwipeTableViewCell{
             self.isUserInteractionEnabled = true
             print("Finished creating session. Interaction enabled again.")
         })
-        
+
         setViewProperties()
         initializeTimer()
     }
     
     //Stoping timer
     func stopTimer(){
-        if let cellDelegate = self.cellDelegate{
-            cellDelegate.willStopTimer(cell: self)
-        }
+
+        TimeLogic.shared.pausePressed(task: self.task)
         setViewProperties()
         timerInvalidate()
     }

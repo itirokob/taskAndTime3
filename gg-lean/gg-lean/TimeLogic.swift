@@ -33,6 +33,7 @@ class TimeLogic: NSObject {
                         completionHandler()
                     })
                 }
+
             }
             
         } else {
@@ -51,14 +52,16 @@ class TimeLogic: NSObject {
             return
         }
         
-        task.isRunning = false
+        print("Finished session started at \(finishedSession.startDate) from task \(task.name)")
         
-        print("Finished session \(finishedSession) in task \(task.name)")
+        manager.updateSession(session: finishedSession) // Update session record in CK.
         
-        manager.addTimeCount(session: finishedSession, completionHandler: { (recordID) in
-            if(task.sessions.count > 0) {
-                task.sessions[task.getSessionsSize() - 1].recordID = recordID
-                self.manager.saveTask(task: task, completion: { (task, error) in })
+        // Update Task record in CK.
+        manager.saveTask(task: task, completion: { (task, error) in
+            if error != nil{
+                print("Error when updating task session record in pausePressed: \(String(describing: error))")
+            } else {
+                print("Task updated on Cloudkit.")
             }
         })
         
