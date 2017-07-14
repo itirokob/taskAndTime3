@@ -212,8 +212,8 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
         cell.tag = indexPath.row
         cell.selectionStyle = .none
         cell.contentView.backgroundColor = .clear
-        cell.playPauseButton.hideLoading()
-        cell.isUserInteractionEnabled = true
+//        cell.playPauseButton.hideLoading()
+//        cell.isUserInteractionEnabled = true
         
         
         //Verifica se a task dessa célula foi inicilizada por um comando da Siri

@@ -100,7 +100,7 @@ class Task: NSObject {
     
     func updateCurrentSessionDuration() {
         guard var currentSession = self.currentSession else {
-            print("currentSession is nil!")
+            print("currentSession from task \(self.name) is nil!")
             return
         }
         let components = Calendar.current.dateComponents([.second], from: currentSession.startDate, to: Date())

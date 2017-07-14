@@ -16,22 +16,28 @@ class TimeLogic: NSObject {
 
     //Em timelogic, recebo a informação que o botão play foi pressionado e guardo a data que foi iniciado. A cada um segundo, eu faço dataAtual - dataInicio
     func playPressed(task:Task, completionHandler: @escaping () -> Void){
-        task.isRunning = task.startSession(startDate: Date())
+        let sessionStarted = task.startSession(startDate: Date())
         
-        if task.currentSession != nil && task.isRunning {
-            manager.addTimeCount(session: task.currentSession!) { (recordID) in
-                task.currentSession!.recordID = recordID
-                
-                
-                self.manager.saveTask(task: task, completion: { (task, error) in
-                    if error != nil{
-                        print("Error in playPressed: \(String(describing: error))")
-                    }
-                    completionHandler()
-                })
+        if task.currentSession != nil {
+            task.isRunning = true
+            
+            if sessionStarted {
+                manager.addTimeCount(session: task.currentSession!) { (recordID) in
+                    task.currentSession!.recordID = recordID
+                    
+                    
+                    self.manager.saveTask(task: task, completion: { (task, error) in
+                        if error != nil{
+                            print("Error in playPressed: \(String(describing: error))")
+                        }
+                        completionHandler()
+                    })
+                }
             }
+            
         } else {
-            pausePressed(task: task)
+//            pausePressed(task: task)
+            print("task \(task.name) already has a running session.")
             completionHandler()
         }
     }

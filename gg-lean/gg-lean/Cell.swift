@@ -30,7 +30,7 @@ class Cell:SwipeTableViewCell{
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var taskViewContainer: taskView!
-    @IBOutlet weak var playPauseButton: LoadingButton!
+    @IBOutlet weak var playPauseButton: UIButton!
     
     fileprivate var timer: Timer?
     var isOn : Bool  {
@@ -81,7 +81,7 @@ class Cell:SwipeTableViewCell{
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
-        cellDelegate?.timerDidTick(cell: self)
+//        cellDelegate?.timerDidTick(cell: self)
     }
     
     
@@ -100,13 +100,10 @@ class Cell:SwipeTableViewCell{
     //Starting timer
     func startTimer(){
         self.isUserInteractionEnabled = false
-//        self.playPauseButton.showLoading()
         
         // TODO: activity indicator in button is causing bugs. Going to implement it later...
         TimeLogic.shared.playPressed(task: self.task, completionHandler: {
             self.isUserInteractionEnabled = true
-//            self.playPauseButton.hideLoading()
-//            self.playPauseButton.setImage(buttonPauseImage, for: .normal)
             print("Finished creating session. Interaction enabled again.")
         })
         
