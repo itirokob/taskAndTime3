@@ -283,7 +283,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         let task = Cache.shared().tasks[indexPath.row]
     
-        cell.cellDelegate = self
+        //cell.cellDelegate = self
         cell.task = task
         cell.tag = indexPath.row
         cell.selectionStyle = .none

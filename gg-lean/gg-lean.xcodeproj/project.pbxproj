@@ -35,6 +35,11 @@
 		B73767131F043C730063B268 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
 		B737671D1F053C670063B268 /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
 		B73767201F0673F90063B268 /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671F1F0673F90063B268 /* TimeCounter.swift */; };
+		B743974E1F19373E003603BD /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E843B81F093C890041E634 /* Cell.swift */; };
+		B743974F1F19375D003603BD /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
+		B74397501F19376F003603BD /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671F1F0673F90063B268 /* TimeCounter.swift */; };
+		B74397511F193794003603BD /* taskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767021F03D4B40063B268 /* taskView.swift */; };
+		B74397521F19386F003603BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B73766F51F03D0650063B268 /* Assets.xcassets */; };
 		B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B7E3888A1F13FF8600C42A26 /* Cartfile */; };
 		B7E3888D1F14002700C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
 		B7E3888E1F14009400C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
@@ -184,9 +189,9 @@
 			children = (
 				B7E3888A1F13FF8600C42A26 /* Cartfile */,
 				B73766ED1F03D0650063B268 /* gg-lean */,
+				4D8B7E961F13FEA400FAB3F3 /* clicWidget */,
 				DE2B99CA1F0E6968002CE4F3 /* Intent Handler */,
 				DE2B99D51F0E6969002CE4F3 /* Intent HandlerUI */,
-				4D8B7E961F13FEA400FAB3F3 /* clicWidget */,
 				B73766EC1F03D0650063B268 /* Products */,
 				B737670B1F03DF200063B268 /* Frameworks */,
 			);
@@ -393,6 +398,9 @@
 						DevelopmentTeam = GJ5VL7QF9C;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -406,6 +414,9 @@
 						DevelopmentTeam = GJ5VL7QF9C;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -455,6 +466,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B74397521F19386F003603BD /* Assets.xcassets in Resources */,
 				4D8B7E9B1F13FEA400FAB3F3 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,9 +527,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D9356C51F17BE44002CCE18 /* DataBaseManager.swift in Sources */,
+				B743974F1F19375D003603BD /* TimeLogic.swift in Sources */,
 				4D9356C31F17BC44002CCE18 /* Cache.swift in Sources */,
+				B743974E1F19373E003603BD /* Cell.swift in Sources */,
 				4D9356C41F17BC4E002CCE18 /* Task.swift in Sources */,
+				B74397501F19376F003603BD /* TimeCounter.swift in Sources */,
 				4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */,
+				B74397511F193794003603BD /* taskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +761,7 @@
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = "gg-lean/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.gg-lean";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -762,6 +779,7 @@
 				DEVELOPMENT_TEAM = GJ5VL7QF9C;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = "gg-lean/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.org.eldorado.bepid.gg-lean";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwipeCellKit
 
 //Cell properties
 let activeCellColor     = UIColor(red: 247/255, green: 153/255, blue: 41/255, alpha: 1)
@@ -28,7 +27,7 @@ protocol CellProtocol: NSObjectProtocol
 class Cell:UITableViewCell{
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
-    @IBOutlet weak var taskViewContainer: taskView!
+    @IBOutlet weak var taskViewContainer: taskView?
     @IBOutlet weak var playPauseButton: UIButton!
     
     fileprivate var timer: Timer?
@@ -62,8 +61,11 @@ class Cell:UITableViewCell{
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
         timeLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
         taskLabel.textColor = task.isRunning ? UIColor.white : UIColor.black
-        taskViewContainer.backgroundColor = task.isRunning ? activeCellColor : unactiveCellColor
         playPauseButton.setImage(task.isRunning ? buttonPauseImage : buttonPlayImage, for: .normal)
+        
+        if taskViewContainer != nil{
+            taskViewContainer?.backgroundColor = task.isRunning ? activeCellColor : unactiveCellColor
+        }
     }
     
     

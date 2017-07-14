@@ -25,17 +25,12 @@ class Task: NSObject {
     private var finishedSessionTime: Int
     public var totalTime:Int {
         get {
-            
             if let currentSession = self.currentSession {
-//                updateCurrentSessionDuration()
-//                print("startDate: \(currentSession.startDate)")
                 let interval = Int(DateInterval(start: currentSession.startDate, end: Date()).duration)
-//                print(interval)
                 return finishedSessionTime + interval
             } else {
                 return finishedSessionTime
             }
-
         }
     }
     public var isActive:Int
@@ -105,9 +100,7 @@ class Task: NSObject {
         }
         let components = Calendar.current.dateComponents([.second], from: currentSession.startDate, to: Date())
         
-        
         currentSession.durationInSeconds = components.second ?? 0
-        
         
         self.currentSession = currentSession // update the instance variable
     }
