@@ -65,9 +65,12 @@ class Task: NSObject {
     /// - Parameter startDate: task's startDate
     func startSession(startDate:Date) -> Bool{
         guard self.currentSession == nil else {
-            print("Can't start another session when one is already running1")
+            print("Can't start another session when one is already running!")
             return false
         }
+        
+        print("Play \(self.name)")
+        
         self.currentSession = TaskSession(startDate: startDate, stopDate: nil, durationInSeconds: 0, recordID:nil)
         
         print("currentSession is now: \(String(describing: self.currentSession))")
@@ -79,6 +82,9 @@ class Task: NSObject {
             print("no current session to be stopped")
             return nil
         }
+        
+        print("Pause \(self.name)")
+        
         currentSession!.stopDate = Date()
         updateCurrentSessionDuration()
         

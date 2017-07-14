@@ -16,9 +16,11 @@ class TimeLogic:NSObject{
 
     //Em timelogic, recebo a informação que o botão play foi pressionado e guardo a data que foi iniciado. A cada um segundo, eu faço dataAtual - dataInicio
     func playPressed(task:Task){
-        task.isRunning = task.startSession(startDate: Date())
+        let sessionStarted = task.startSession(startDate: Date())
         
-        if task.currentSession != nil && task.isRunning {
+        task.isRunning = (task.currentSession != nil)
+        
+        if task.currentSession != nil && sessionStarted {
             manager.addTimeCount(session: task.currentSession!) { (recordID) in
                 task.currentSession!.recordID = recordID
                 
@@ -40,14 +42,14 @@ class TimeLogic:NSObject{
             return
         }
         
-        task.isRunning = false
+        print("Finished session started at \(finishedSession.startDate) from task \(task.name)")
         
-        print("Finished session \(finishedSession) in task \(task.name)")
+        manager.updateSession(session: finishedSession) // Update session record in CK.
         
-        manager.addTimeCount(session: finishedSession, completionHandler: { (recordID) in
-            if(task.sessions.count > 0) {
-                task.sessions[task.getSessionsSize() - 1].recordID = recordID
-                self.manager.saveTask(task: task, completion: { (task, error) in })
+        // Update Task record in CK.
+        manager.saveTask(task: task, completion: { (task, error) in
+            if error != nil{
+                print("Error when updating task session record in pausePressed: \(String(describing: error))")
             }
         })
         

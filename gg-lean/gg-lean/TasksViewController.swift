@@ -150,7 +150,7 @@ extension TasksViewController: CellProtocol{
     
     func willStartTimerBySiri(cell: Cell){
         cell.startTimer()
-        print("Play \(cell.task.name)")
+        
     }
     
     func willStopTimer(cell: Cell){
@@ -160,7 +160,7 @@ extension TasksViewController: CellProtocol{
     
     func willStopTimerBySiri(cell: Cell){
         cell.stopTimer()
-        print("Pause \(cell.task.name)")
+        
     }
     
     func timerDidTick(cell: Cell){

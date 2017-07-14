@@ -100,10 +100,6 @@ class Cell:SwipeTableViewCell{
     //Starting timer
     func startTimer(){
 
-        //        if let cellDelegate = self.cellDelegate{
-        //            cellDelegate.willStartTimer(cell: self)
-        //        }
-        //        self.task.isRunning = self.task.startSession(startDate: Date())
         TimeLogic.shared.playPressed(task: self.task)
         setViewProperties()
         initializeTimer()
@@ -111,9 +107,7 @@ class Cell:SwipeTableViewCell{
     
     //Stoping timer
     func stopTimer(){
-//        if let cellDelegate = self.cellDelegate{
-//            cellDelegate.willStopTimer(cell: self)
-//        }
+
         TimeLogic.shared.pausePressed(task: self.task)
         setViewProperties()
         timerInvalidate()
