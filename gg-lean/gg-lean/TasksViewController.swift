@@ -144,23 +144,23 @@ class TasksViewController: UIViewController{
 extension TasksViewController: CellProtocol{
     
     func willStartTimer(cell: Cell){
-        timeLogic.playPressed(task: cell.task)
-        print("Play \(Cache.shared().tasks[cell.tag].name)")
+//        timeLogic.playPressed(task: cell.task)
+//        print("Play \(Cache.shared().tasks[cell.tag].name)")
     }
     
     func willStartTimerBySiri(cell: Cell){
         cell.startTimer()
-        print("Play \(Cache.shared().tasks[cell.tag].name)")
+        print("Play \(cell.task.name)")
     }
     
     func willStopTimer(cell: Cell){
-        timeLogic.pausePressed(task: cell.task)
-        print("Pause \(Cache.shared().tasks[cell.tag].name)")
+//        timeLogic.pausePressed(task: cell.task)
+//        print("Pause \(Cache.shared().tasks[cell.tag].name)")
     }
     
     func willStopTimerBySiri(cell: Cell){
         cell.stopTimer()
-        print("Play \(Cache.shared().tasks[cell.tag].name)")
+        print("Pause \(cell.task.name)")
     }
     
     func timerDidTick(cell: Cell){
@@ -230,6 +230,7 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource, Swipe
     //Essa função está aqui por enquanto.... ela ativa um timer, mas deveria collapsar uma célula no futuro
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! Cell
+        
         if cell.isOn == false{
             willStartTimerBySiri(cell: cell)
         }

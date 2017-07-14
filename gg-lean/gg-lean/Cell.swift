@@ -81,7 +81,7 @@ class Cell:SwipeTableViewCell{
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
-        cellDelegate?.timerDidTick(cell: self)
+//        cellDelegate?.timerDidTick(cell: self)
     }
     
     
@@ -111,9 +111,10 @@ class Cell:SwipeTableViewCell{
     
     //Stoping timer
     func stopTimer(){
-        if let cellDelegate = self.cellDelegate{
-            cellDelegate.willStopTimer(cell: self)
-        }
+//        if let cellDelegate = self.cellDelegate{
+//            cellDelegate.willStopTimer(cell: self)
+//        }
+        TimeLogic.shared.pausePressed(task: self.task)
         setViewProperties()
         timerInvalidate()
     }

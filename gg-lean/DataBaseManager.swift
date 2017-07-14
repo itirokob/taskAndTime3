@@ -299,6 +299,37 @@ class DataBaseManager : NSObject {
         })
     }
     
+    func updateSession(session: TaskSession) {
+        
+        guard let recordID = session.recordID, let stopDate = session.stopDate else {
+            print("Session is missing a CKRecord ID or stopDate to be updated.")
+            return
+        }
+        
+        publicData.fetch(withRecordID: recordID) { (record, error) in
+            
+            guard error == nil, let record = record else {
+                print("Error when fetching session from CK")
+                return
+            }
+            
+            record["stopDate"] = stopDate as CKRecordValue
+            
+            self.publicData.save(record) {
+                (savedRecord, error) in
+                
+                if error != nil {
+                    print("Error when updating session record. Error when saving the record to CK.")
+                } else {
+                    print("Session updated on CloudKit.")
+                }
+                
+            }
+        }
+        
+        
+    }
+    
     // FIXME: discover why some attributes are missing during execution.
     
     /// The mapToTaskSession maps a TimeCount record into a TaskSession object

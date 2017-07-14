@@ -83,19 +83,16 @@ class Task: NSObject {
         updateCurrentSessionDuration()
         
         
-        if currentSession != nil {
-            
-            // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
-            sessions.append(currentSession!)
-            self.finishedSessionTime += currentSession!.durationInSeconds
-            let cs = currentSession
-            currentSession = nil
-            return cs
-        } else {
-            print("currentSession couldnt be stopped because it's nil after it should have been updated!")
-            return nil
-        }
-    
+        // Add it to the array only after the end, because it's a struct and it's passed by value, not reference. If we add it to the array first and modify it, we won't be updating the one in the the array?
+        sessions.append(currentSession!)
+        self.finishedSessionTime += currentSession!.durationInSeconds
+        let cs = currentSession
+        
+        currentSession = nil
+        isRunning = false
+        
+        return cs
+
     }
     
     func updateCurrentSessionDuration() {
