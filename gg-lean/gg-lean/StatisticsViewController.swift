@@ -8,6 +8,8 @@
 
 import UIKit
 
+let backCellBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
 //    var Cache.shared().tasks  = {
@@ -20,30 +22,54 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var refresh: UIRefreshControl!
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadTasks()
+    }
+
+    //Loads all the active tasks from the dataBase
+    func loadTasks(){
+        Cache.shared().updateTasks(active: false){ (tasks) in
+            
+            self.filteredTasks = tasks
+            
+            OperationQueue.main.addOperation({
+                self.tableView.reloadData()
+                self.refresh.endRefreshing()
+            })
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        filteredTasks = Cache.shared().tasks
+        filteredTasks = Cache.shared().tasks.filter{ $0.isRunning }
+        
+
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
         searchController.searchBar.barTintColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
+        searchController.searchBar.backgroundColor = .clear
         searchController.searchBar.tintColor = .white
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.placeholder =  "Search Activity"
         
-//        print("Cache.shared().tasks in StatisticsViewController: \(Cache.shared().tasks)")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+        //Pull to refresh
+        refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresh.addTarget(self, action: #selector(StatisticsViewController.loadTasks), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresh)
         
-        // Do any additional setup after loading the view.
+        loadTasks()
     }
+    
+ 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,6 +110,10 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
         
         cell.textLabel?.text = task.name
         cell.detailTextLabel?.text = task.getTimeString()
+        
+        //Creating Selection Style
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = backCellBlue
         
         return cell
     }
