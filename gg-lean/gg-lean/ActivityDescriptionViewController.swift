@@ -58,8 +58,7 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         dateFormate.timeStyle = .short
         
         cell.textLabel?.text = dateFormate.string(from: sessionDate)
-        let durationInSeconds = session.durationInSeconds
-        cell.detailTextLabel?.text = getTimeString(time: durationInSeconds)
+        cell.detailTextLabel?.text = getTimeString(time: session.durationInSeconds)
         
         //Creating Selection Style to tableView cell
         cell.selectedBackgroundView = UIView ()
@@ -81,7 +80,8 @@ extension ActivityDescriptionViewController: UITableViewDelegate, UITableViewDat
         let minutes :Int = (time % 3600) / 60
         let seconds = time - (3600 * hours) - (60 * minutes)
         
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)    }
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
 
 }
 

@@ -376,13 +376,20 @@ class DataBaseManager : NSObject {
     /// - Returns: a taskSession
     func mapToTaskSession (_ record:CKRecord) -> TaskSession? {
 
-        let stopDate = record.value(forKey: "stopDate") as? Date
+        
         
         guard let startDate = record.value(forKey: "startDate") as? Date,
-            let duration = record.value(forKey: "duration") as? Int else {
+            var duration  = record.value(forKey: "duration") as? Int else {
                 print("Attributes missing when mapping task session CKRecord to object.")
                 return nil
         }
+        
+        let stopDate = record.value(forKey: "stopDate") as? Date
+        
+        if stopDate != nil {
+            duration = Int(DateInterval(start: startDate, end: stopDate!).duration)
+        }
+        
         
         return TaskSession(startDate: startDate, stopDate: stopDate, durationInSeconds: duration, recordID: record.recordID)
     }
