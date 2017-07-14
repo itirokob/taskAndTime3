@@ -19,11 +19,7 @@ class TasksViewController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addTaskField: UITextField!
-    
-//    var Cache.shared().tasks  = {
-//        return Cache.shared().tasks
-//    }()
-    
+
     var tasksNameArray: [String] = []
     public static var startedActivityOnInit:String?
 
@@ -39,7 +35,7 @@ class TasksViewController: UIViewController{
         }
         tasksNameArray = tasksNames
         
-        //updateSiriVocabulary()
+        updateSiriVocabulary()
     }
     
     func updateSiriVocabulary(){
@@ -81,8 +77,6 @@ class TasksViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        self.loadTasks()
     }
     
     //Loads all the active tasks from the dataBase
@@ -142,11 +136,6 @@ class TasksViewController: UIViewController{
 }
 
 
-
-// MARK: Cell Protocol
-extension TasksViewController: CellProtocol{
-    
-}
 
 extension TasksViewController {
 
@@ -262,7 +251,6 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         let cell:Cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Cell
         let task = Cache.shared().tasks[indexPath.row]
     
-        //cell.cellDelegate = self
         cell.task = task
         cell.tag = indexPath.row
         cell.selectionStyle = .none
@@ -275,7 +263,6 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
             if cell.taskLabel.text == acName{
                 TasksViewController.startedActivityOnInit = nil
                 cell.startTimer()
-                //willStartTimerBySiri(cell: cell)
             }
         }
         
@@ -288,11 +275,9 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         
         if cell.isOn == false{
             cell.startTimer()
-            //willStartTimerBySiri(cell: cell)
         }
         else{
             cell.stopTimer()
-            //willStopTimerBySiri(cell: cell)
         }
     }
     

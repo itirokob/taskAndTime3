@@ -34,10 +34,8 @@
 		B73767111F04220D0063B268 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767101F04220D0063B268 /* DataBaseManager.swift */; };
 		B73767131F043C730063B268 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
 		B737671D1F053C670063B268 /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
-		B73767201F0673F90063B268 /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671F1F0673F90063B268 /* TimeCounter.swift */; };
 		B743974E1F19373E003603BD /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E843B81F093C890041E634 /* Cell.swift */; };
 		B743974F1F19375D003603BD /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
-		B74397501F19376F003603BD /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671F1F0673F90063B268 /* TimeCounter.swift */; };
 		B74397511F193794003603BD /* taskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767021F03D4B40063B268 /* taskView.swift */; };
 		B74397521F19386F003603BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B73766F51F03D0650063B268 /* Assets.xcassets */; };
 		B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B7E3888A1F13FF8600C42A26 /* Cartfile */; };
@@ -121,7 +119,6 @@
 		B73767101F04220D0063B268 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBaseManager.swift; path = ../DataBaseManager.swift; sourceTree = "<group>"; };
 		B73767121F043C730063B268 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Task.swift; sourceTree = "<group>"; };
 		B737671C1F053C670063B268 /* TimeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogic.swift; sourceTree = "<group>"; };
-		B737671F1F0673F90063B268 /* TimeCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCounter.swift; sourceTree = "<group>"; };
 		B7E3888A1F13FF8600C42A26 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
 		B7E843B81F093C890041E634 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -236,7 +233,6 @@
 		B73767141F043C840063B268 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B737671F1F0673F90063B268 /* TimeCounter.swift */,
 				B73767121F043C730063B268 /* Task.swift */,
 				4D0B19FC1F169A850022E408 /* Cache.swift */,
 				B7E843B81F093C890041E634 /* Cell.swift */,
@@ -531,7 +527,6 @@
 				4D9356C31F17BC44002CCE18 /* Cache.swift in Sources */,
 				B743974E1F19373E003603BD /* Cell.swift in Sources */,
 				4D9356C41F17BC4E002CCE18 /* Task.swift in Sources */,
-				B74397501F19376F003603BD /* TimeCounter.swift in Sources */,
 				4D8B7E981F13FEA400FAB3F3 /* TodayViewController.swift in Sources */,
 				B74397511F193794003603BD /* taskView.swift in Sources */,
 			);
@@ -545,7 +540,6 @@
 				B73767011F03D2D90063B268 /* TasksViewController.swift in Sources */,
 				9B3183301F14030700E49B38 /* PizzaGraphView.swift in Sources */,
 				9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */,
-				B73767201F0673F90063B268 /* TimeCounter.swift in Sources */,
 				B737671D1F053C670063B268 /* TimeLogic.swift in Sources */,
 				4D0B19FD1F169A850022E408 /* Cache.swift in Sources */,
 				9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */,

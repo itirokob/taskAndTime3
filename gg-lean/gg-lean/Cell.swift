@@ -38,7 +38,6 @@ class Cell:UITableViewCell{
     }
     
     var timeLogic = TimeLogic.shared
-    weak var cellDelegate: CellProtocol?
     var hasObserver: Bool = false
     let taskObserverPath: String = "sessions"
     var task: Task! {
@@ -72,7 +71,6 @@ class Cell:UITableViewCell{
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         timeLabel.text = self.task.getTimeString()
-//        self.task.updateCurrentSessionDuration()
     }
     
     

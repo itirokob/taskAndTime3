@@ -12,9 +12,6 @@ let backCellBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, 
 
 class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
-//    var Cache.shared().tasks  = {
-//        return Cache.shared().tasks
-//    }()
     var sendingTask: Task?
     var filteredTasks = [Task]()
     

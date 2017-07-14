@@ -43,7 +43,6 @@ class Task: NSObject {
     init(name:String, isSubtask:Int, isActive:Int = 0, id:String, finishedSessionTime: Int){
         self.name = name
         self.isSubtask = isSubtask
-//        self.totalTime = totalTime
         self.isActive = isActive
         self.id = id
         self.finishedSessionTime = finishedSessionTime

@@ -86,11 +86,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDeleg
         
         if cell.isOn == false{
             cell.startTimer()
-            //willStartTimerBySiri(cell: cell)
         }
         else{
             cell.stopTimer()
-            //willStopTimerBySiri(cell: cell)
         }
     }
     
@@ -114,8 +112,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let myCell = cell as! Cell
-        
-//        myCell.timeLabel.text = myCell.task.getTimeString()
         
         myCell.setViewProperties()
         
