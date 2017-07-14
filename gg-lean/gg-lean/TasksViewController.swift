@@ -145,29 +145,29 @@ class TasksViewController: UIViewController{
 // MARK: Cell Protocol
 extension TasksViewController: CellProtocol{
     
-    func willStartTimer(cell: Cell){
-        timeLogic.playPressed(task: cell.task)
-        print("Play \(Cache.shared().tasks[cell.tag].name)")
-    }
-    
-    func willStartTimerBySiri(cell: Cell){
-        cell.startTimer()
-        print("Play \(Cache.shared().tasks[cell.tag].name)")
-    }
-    
-    func willStopTimer(cell: Cell){
-        timeLogic.pausePressed(task: cell.task)
-        print("Pause \(Cache.shared().tasks[cell.tag].name)")
-    }
-    
-    func willStopTimerBySiri(cell: Cell){
-        cell.stopTimer()
-        print("Play \(Cache.shared().tasks[cell.tag].name)")
-    }
-    
-    func timerDidTick(cell: Cell){
-        cell.task.updateCurrentSessionDuration()
-    }
+//    func willStartTimer(cell: Cell){
+//        timeLogic.playPressed(task: cell.task)
+//        print("Play \(Cache.shared().tasks[cell.tag].name)")
+//    }
+//    
+//    func willStartTimerBySiri(cell: Cell){
+//        cell.startTimer()
+//        print("Play \(Cache.shared().tasks[cell.tag].name)")
+//    }
+//    
+//    func willStopTimer(cell: Cell){
+//        timeLogic.pausePressed(task: cell.task)
+//        print("Pause \(Cache.shared().tasks[cell.tag].name)")
+//    }
+//    
+//    func willStopTimerBySiri(cell: Cell){
+//        cell.stopTimer()
+//        print("Play \(Cache.shared().tasks[cell.tag].name)")
+//    }
+//    
+//    func timerDidTick(cell: Cell){
+//        cell.task.updateCurrentSessionDuration()
+//    }
 
 }
 
@@ -293,21 +293,24 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource{
         if let acName = TasksViewController.startedActivityOnInit{
             if cell.taskLabel.text == acName{
                 TasksViewController.startedActivityOnInit = nil
-                willStartTimerBySiri(cell: cell)
+                cell.startTimer()
+                //willStartTimerBySiri(cell: cell)
             }
         }
         
         return cell
-        }
+    }
     
     //Essa função está aqui por enquanto.... ela ativa um timer, mas deveria collapsar uma célula no futuro
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! Cell
         if cell.isOn == false{
-            willStartTimerBySiri(cell: cell)
+            cell.startTimer()
+            //willStartTimerBySiri(cell: cell)
         }
         else{
-            willStopTimerBySiri(cell: cell)
+            cell.stopTimer()
+            //willStopTimerBySiri(cell: cell)
         }
     }
     

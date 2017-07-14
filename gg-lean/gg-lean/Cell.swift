@@ -18,15 +18,14 @@ let buttonPauseImage : UIImage = UIImage(named: "pause")!
 
 protocol CellProtocol: NSObjectProtocol
 {
-    func willStartTimer(cell: Cell)
-    func willStopTimer(cell: Cell)
-    func timerDidTick(cell: Cell)
-    func willStartTimerBySiri(cell: Cell)
-    func willStopTimerBySiri(cell: Cell)
+    //func willStartTimer(cell: Cell)
+    //func willStopTimer(cell: Cell)
+    //func timerDidTick(cell: Cell)
+    //func willStartTimerBySiri(cell: Cell)
+    //func willStopTimerBySiri(cell: Cell)
 }
 
 class Cell:UITableViewCell{
-    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var taskViewContainer: taskView!
@@ -49,14 +48,7 @@ class Cell:UITableViewCell{
         }
     }
     
-    
-    
-    
-   
-    
     @IBAction func togglePlayPauseButton(_ sender: Any) {
-        //        isOn = !isOn
-        
         if isOn {
             stopTimer()
         } else {
@@ -64,9 +56,6 @@ class Cell:UITableViewCell{
         }
         setViewProperties()
     }
-    
-    
-    
     
     func setViewProperties() {
         taskLabel.text = task.name
@@ -81,7 +70,9 @@ class Cell:UITableViewCell{
     /// The updateTimers function is called everytime the Timer calls (every 1 second)
     func timerTick(){
         timeLabel.text = self.formattedTime(seconds: self.task.totalTime)
-        cellDelegate?.timerDidTick(cell: self)
+        self.task.updateCurrentSessionDuration()
+
+        //cellDelegate?.timerDidTick(cell: self)
     }
     
     
@@ -93,17 +84,11 @@ class Cell:UITableViewCell{
         let minutes :Int = (seconds % 3600) / 60
         let seconds :Int = seconds - (3600 * hours) - (60 * minutes)
         
-//        return "\(String(format: "%02d", minutes)):\(String(format: "%02d", seconds))"
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
     //Starting timer
     func startTimer(){
-
-        //        if let cellDelegate = self.cellDelegate{
-        //            cellDelegate.willStartTimer(cell: self)
-        //        }
-        //        self.task.isRunning = self.task.startSession(startDate: Date())
         TimeLogic.shared.playPressed(task: self.task)
         setViewProperties()
         initializeTimer()
@@ -111,9 +96,7 @@ class Cell:UITableViewCell{
     
     //Stoping timer
     func stopTimer(){
-        if let cellDelegate = self.cellDelegate{
-            cellDelegate.willStopTimer(cell: self)
-        }
+        TimeLogic.shared.pausePressed(task: self.task)
         setViewProperties()
         timerInvalidate()
     }
