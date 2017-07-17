@@ -62,7 +62,8 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         refresh.addTarget(self, action: #selector(StatisticsViewController.loadTasks), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresh)
         
-//        loadTasks()
+        self.filteredTasks = Cache.shared().tasks
+        tableView.reloadData()
     }
     
  
