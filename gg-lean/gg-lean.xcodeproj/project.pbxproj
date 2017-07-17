@@ -16,6 +16,7 @@
 		4D9356C41F17BC4E002CCE18 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
 		4D9356C51F17BE44002CCE18 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767101F04220D0063B268 /* DataBaseManager.swift */; };
 		4D9356C71F17BEB4002CCE18 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B737670C1F03DF200063B268 /* CloudKit.framework */; };
+		4DA3463F1F1CFC49004A3D54 /* PopulateTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA3463E1F1CFC49004A3D54 /* PopulateTasks.swift */; };
 		9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */; };
 		9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183211F139EB100E49B38 /* Settings.storyboard */; };
 		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
@@ -98,6 +99,7 @@
 		4D8B7E9A1F13FEA400FAB3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D9356C61F17BEAA002CCE18 /* clicWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = clicWidget.entitlements; sourceTree = "<group>"; };
+		4DA3463E1F1CFC49004A3D54 /* PopulateTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateTasks.swift; sourceTree = "<group>"; };
 		9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Estatisticas.storyboard; sourceTree = "<group>"; };
 		9B3183211F139EB100E49B38 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
@@ -181,6 +183,14 @@
 			path = clicWidget;
 			sourceTree = "<group>";
 		};
+		4DA3463D1F1CFC22004A3D54 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				4DA3463E1F1CFC49004A3D54 /* PopulateTasks.swift */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
 		B73766E21F03D0640063B268 = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +223,7 @@
 				B73767141F043C840063B268 /* Model */,
 				B73767161F043C960063B268 /* Controllers */,
 				B73766F51F03D0650063B268 /* Assets.xcassets */,
+				4DA3463D1F1CFC22004A3D54 /* Test */,
 				B73766FA1F03D0650063B268 /* Info.plist */,
 				B737670A1F03DF1F0063B268 /* gg-lean.entitlements */,
 			);
@@ -545,6 +556,7 @@
 				9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */,
 				B73767031F03D4B40063B268 /* taskView.swift in Sources */,
 				9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */,
+				4DA3463F1F1CFC49004A3D54 /* PopulateTasks.swift in Sources */,
 				B7E843B91F093C890041E634 /* Cell.swift in Sources */,
 				B73767131F043C730063B268 /* Task.swift in Sources */,
 				B73767111F04220D0063B268 /* DataBaseManager.swift in Sources */,

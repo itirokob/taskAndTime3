@@ -40,7 +40,7 @@ class Task: NSObject {
     
     public var recordName:String?
     
-    init(name:String, isSubtask:Int, isActive:Int = 0, id:String, finishedSessionTime: Int){
+    init(name:String, isSubtask:Int, isActive:Int = 0, id:String, finishedSessionTime: Int = 0){
         self.name = name
         self.isSubtask = isSubtask
         self.isActive = isActive
