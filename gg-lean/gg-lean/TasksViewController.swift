@@ -45,7 +45,7 @@ class TasksViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let populator = PopulateTasks()
+        let populator = PopulateTasks()
 //        populator.populateTasks()
 //        populator.deleteAllRecords()
 

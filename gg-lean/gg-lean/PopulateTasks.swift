@@ -13,14 +13,20 @@ import CloudKit
  To create mock Task and TaskSession objects, just execute the populateTasks() method **once**.
  To delete all records, call the deleteAllRecords() method (you may need to execute it twice due to the DB dependecies and relations).
  */
+
+let taskNames = ["Gym", "Study", "Soccer", "Calculus", "Sleep", "Piano", "Literature", "Work on Clic", "History paper"]
+let TASK_NUMBER = taskNames.count
+let MAX_MINUTES_SESSION = 60
+let SESSIONS_PER_TASK = 20
+
 class PopulateTasks: NSObject {
     
     private var startDates: [Date] = [Date]()
-    let SESSIONS_NUMBER = 200
-    let MAX_MINUTES_SESSION = 60
+    let SESSIONS_NUMBER = TASK_NUMBER * SESSIONS_PER_TASK
+    
     
     func populateTasks() {
-        let taskNames = ["Gym", "Study", "Soccer", "Calculus", "Sleep", "Piano", "Literature", "Work on Clic", "History paper"]
+        
         
 
         var tasks = [Task]()
@@ -43,6 +49,8 @@ class PopulateTasks: NSObject {
         for session in sessions {
             saveSession(session: session)
         }
+        
+        print("Saved mock sessions to CK")
 
         
         
@@ -79,7 +87,7 @@ class PopulateTasks: NSObject {
             }
         })
         
-        print("Saved mock sessions to CK")
+        
 
     }
     
