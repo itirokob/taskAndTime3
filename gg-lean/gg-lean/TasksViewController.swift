@@ -45,6 +45,11 @@ class TasksViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let populator = PopulateTasks()
+//        populator.populateTasks()
+//        populator.deleteAllRecords()
+
+        
         tableView.separatorColor = UIColor(white: 0.95, alpha: 1)
         tableView.delegate = self
         tableView.dataSource = self
@@ -73,6 +78,9 @@ class TasksViewController: UIViewController{
         }
         self.loadTasks()
         updateTasksNameArray( )
+        
+//        populator.deleteAllRecords()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +108,7 @@ class TasksViewController: UIViewController{
         } else {
             //We want tasksDates and tasksTimes empty arrays because it will only receive values when the pause button is reached
             
+            // TODO: default value for unique ID should be in the constructor.
             let task = Task(name: addTaskField.text!, isSubtask: -1, isActive: 1, id: UUID().uuidString, finishedSessionTime: 0)
             
             manager.saveTask(task: task, completion: { (task2, error) in

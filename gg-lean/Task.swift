@@ -14,6 +14,18 @@ struct TaskSession {
     var stopDate: Date?
     var durationInSeconds:Int
     var recordID:CKRecordID?
+    
+    func getTimeString() -> String {
+        var seconds = durationInSeconds
+        
+        let hours: Int = seconds/3600
+        
+        let minutes :Int = (seconds % 3600) / 60
+        seconds = seconds - (3600 * hours) - (60 * minutes)
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
 }
 
 class Task: NSObject {
@@ -22,7 +34,7 @@ class Task: NSObject {
     var currentSession: TaskSession?
     public var name:String
     public var isSubtask:Int
-    private var finishedSessionTime: Int
+    public var finishedSessionTime: Int
     public var totalTime:Int {
         get {
             if let currentSession = self.currentSession {
@@ -40,7 +52,7 @@ class Task: NSObject {
     
     public var recordName:String?
     
-    init(name:String, isSubtask:Int, isActive:Int = 0, id:String, finishedSessionTime: Int){
+    init(name:String, isSubtask:Int, isActive:Int = 1, id:String, finishedSessionTime: Int = 0){
         self.name = name
         self.isSubtask = isSubtask
         self.isActive = isActive

@@ -45,6 +45,18 @@ protocol LineGraphProtocol : NSObjectProtocol{
         self.setNeedsDisplay()
     }
     
+    func getTimeString(durationInSeconds: Float) -> String {
+        var seconds = Int(durationInSeconds)
+        
+        let hours: Int = seconds/3600
+        
+        let minutes :Int = (seconds % 3600) / 60
+        seconds = seconds - (3600 * hours) - (60 * minutes)
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -207,9 +219,9 @@ protocol LineGraphProtocol : NSObjectProtocol{
         linePath.stroke()
         
         //Drawing subtitles
-        let middleLabel : String = "\(maximumSample/2)"
-        let upLabel : String = "\(maximumSample)"
-        let lowLabel : String = "\(minimumSample)"
+        let middleLabel : String = getTimeString(durationInSeconds: maximumSample/2)
+        let upLabel : String = getTimeString(durationInSeconds: maximumSample)
+        let lowLabel : String = getTimeString(durationInSeconds: minimumSample)
         
         // Alinhamento do texto
         let textStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle

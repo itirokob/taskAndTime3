@@ -155,13 +155,9 @@ class DataBaseManager : NSObject {
         
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
 
-            task.sessions = taskSessionList.filter {
-                if self.containsSession(sessions: task.sessions, session: $0) {
-                    return false
-                } else {
-                    return true
-                }
-            }
+            task.sessions.append(contentsOf: taskSessionList.filter {
+                return !self.containsSession(sessions: task.sessions, session: $0)
+            })
 
         }
         
@@ -403,8 +399,12 @@ class DataBaseManager : NSObject {
         
         op.perRecordCompletionBlock = { (record, recordID, error) in
             if error == nil{
-                if let result = record, let taskSession = self.mapToTaskSession(result){
-                    taskSessionList.append(taskSession)
+                if let result = record {
+                    if let taskSession = self.mapToTaskSession(result){
+                        taskSessionList.append(taskSession)
+                    } else {
+                        print("No task session record found.")
+                    }
                 }
             } else {
                 print("Error in mapping to recordIDList: \(String(describing: error))")
