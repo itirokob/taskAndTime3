@@ -14,6 +14,18 @@ struct TaskSession {
     var stopDate: Date?
     var durationInSeconds:Int
     var recordID:CKRecordID?
+    
+    func getTimeString() -> String {
+        var seconds = durationInSeconds
+        
+        let hours: Int = seconds/3600
+        
+        let minutes :Int = (seconds % 3600) / 60
+        seconds = seconds - (3600 * hours) - (60 * minutes)
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
 }
 
 class Task: NSObject {
