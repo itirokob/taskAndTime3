@@ -155,13 +155,9 @@ class DataBaseManager : NSObject {
         
         self.mapToTaskSessionList(referenceList: timeCountList) { (taskSessionList) in
 
-            task.sessions = taskSessionList.filter {
-                if self.containsSession(sessions: task.sessions, session: $0) {
-                    return false
-                } else {
-                    return true
-                }
-            }
+            task.sessions.append(contentsOf: taskSessionList.filter {
+                return !self.containsSession(sessions: task.sessions, session: $0)
+            })
 
         }
         
