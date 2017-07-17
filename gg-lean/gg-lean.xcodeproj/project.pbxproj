@@ -39,9 +39,6 @@
 		B743974F1F19375D003603BD /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
 		B74397511F193794003603BD /* taskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767021F03D4B40063B268 /* taskView.swift */; };
 		B74397521F19386F003603BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B73766F51F03D0650063B268 /* Assets.xcassets */; };
-		B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B7E3888A1F13FF8600C42A26 /* Cartfile */; };
-		B7E3888D1F14002700C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
-		B7E3888E1F14009400C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
 		B7E843B91F093C890041E634 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E843B81F093C890041E634 /* Cell.swift */; };
 		DE2B99CC1F0E6968002CE4F3 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2B99CB1F0E6968002CE4F3 /* IntentHandler.swift */; };
 		DE2B99D41F0E6969002CE4F3 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2B99D31F0E6969002CE4F3 /* IntentsUI.framework */; };
@@ -121,8 +118,6 @@
 		B73767101F04220D0063B268 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBaseManager.swift; path = ../DataBaseManager.swift; sourceTree = "<group>"; };
 		B73767121F043C730063B268 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Task.swift; sourceTree = "<group>"; };
 		B737671C1F053C670063B268 /* TimeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogic.swift; sourceTree = "<group>"; };
-		B7E3888A1F13FF8600C42A26 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
 		B7E843B81F093C890041E634 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		DE2B99C91F0E6968002CE4F3 /* Intent Handler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Intent Handler.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE2B99CB1F0E6968002CE4F3 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
@@ -149,7 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737670D1F03DF200063B268 /* CloudKit.framework in Frameworks */,
-				B7E3888D1F14002700C42A26 /* SwipeCellKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +151,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7E3888E1F14009400C42A26 /* SwipeCellKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +187,6 @@
 		B73766E21F03D0640063B268 = {
 			isa = PBXGroup;
 			children = (
-				B7E3888A1F13FF8600C42A26 /* Cartfile */,
 				B73766ED1F03D0650063B268 /* gg-lean */,
 				4D8B7E961F13FEA400FAB3F3 /* clicWidget */,
 				DE2B99CA1F0E6968002CE4F3 /* Intent Handler */,
@@ -233,7 +225,6 @@
 		B737670B1F03DF200063B268 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */,
 				B737670C1F03DF200063B268 /* CloudKit.framework */,
 				DE2B99D31F0E6969002CE4F3 /* IntentsUI.framework */,
 				4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */,
@@ -342,7 +333,6 @@
 				B73766E81F03D0650063B268 /* Frameworks */,
 				B73766E91F03D0650063B268 /* Resources */,
 				DE2B99E81F0E6969002CE4F3 /* Embed App Extensions */,
-				B7E3888F1F1400F500C42A26 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -482,7 +472,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */,
 				B73766F91F03D0650063B268 /* LaunchScreen.storyboard in Resources */,
 				9B31832E1F1402F100E49B38 /* PizzaGraph.xib in Resources */,
 				B73766F61F03D0650063B268 /* Assets.xcassets in Resources */,
@@ -509,24 +498,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B7E3888F1F1400F500C42A26 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwipeCellKit.framework",
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwipeCellKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D8B7E8F1F13FEA400FAB3F3 /* Sources */ = {
