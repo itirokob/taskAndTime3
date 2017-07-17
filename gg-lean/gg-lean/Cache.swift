@@ -10,6 +10,11 @@ import UIKit
 
 // TODO: target memebership
 
+protocol CacheObserver {
+    func newData() // Should be called in the main thread, because they're UI related.
+    func removeFromObservers()
+}
+
 class Cache: NSObject {
     private let manager = DataBaseManager.shared
 
@@ -24,10 +29,22 @@ class Cache: NSObject {
     
     public var tasks: [Task]
     public var allTasks: [Task]
+    public var observers: [CacheObserver]
     
     private override init() {
         self.tasks = [Task]()
         self.allTasks = [Task]()
+        self.observers = [CacheObserver]()
+    }
+    
+    // Notifies observers that the sessions were updated.
+    private func notifiyObservers() {
+        
+        for obs in self.observers {
+            OperationQueue.main.addOperation({
+                obs.newData()
+            })
+        }
     }
     
     //Loads all the active tasks from the dataBase
@@ -38,6 +55,7 @@ class Cache: NSObject {
             } else {
                 Cache.shared().allTasks = tasks
             }
+            
             completionHandler(tasks)
         }
     }

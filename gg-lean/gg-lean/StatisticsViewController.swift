@@ -10,7 +10,7 @@ import UIKit
 
 let backCellBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
 
-class StatisticsViewController: UIViewController, UISearchResultsUpdating {
+class StatisticsViewController: UIViewController, UISearchResultsUpdating, CacheObserver {
     
     var sendingTask: Task?
     var filteredTasks = [Task]()
@@ -24,6 +24,32 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Cache.shared().observers.append(self)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.removeFromObservers()
+    }
+    
+    func removeFromObservers() {
+        var index: Int?
+        
+        for i in 0..<Cache.shared().observers.count {
+            if let viewController = (Cache.shared().observers[i] as? UIViewController), viewController == self {
+                index = i
+            }
+        }
+        if let index = index {
+            Cache.shared().observers.remove(at: index)
+        }
+
+    }
+    
+    func newData() {        
+        filteredTasks = Cache.shared().tasks.filter{ $0.isRunning }
+        self.tableView.reloadData()
     }
 
     //Loads all the active tasks from the dataBase
@@ -41,6 +67,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         filteredTasks = Cache.shared().tasks.filter{ $0.isRunning }
         
@@ -62,7 +89,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         refresh.addTarget(self, action: #selector(StatisticsViewController.loadTasks), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresh)
         
-//        loadTasks()
+        loadTasks()
     }
     
  

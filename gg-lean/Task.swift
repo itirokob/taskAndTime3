@@ -9,6 +9,11 @@
 import UIKit
 import CloudKit
 
+protocol SessionsObserver {
+    func newData() // Should be called in the main thread, because they're UI related.
+    func removeFromObservers()
+}
+
 struct TaskSession {
     var startDate:Date
     var stopDate: Date?
@@ -30,7 +35,11 @@ struct TaskSession {
 
 class Task: NSObject {
     //No vetor sessions, a última posição será a sessão atual
-    var sessions: [TaskSession] = [TaskSession]()
+    var sessions: [TaskSession] = [TaskSession]() {
+        didSet {
+            notifiyObservers()
+        }
+    }
     var currentSession: TaskSession?
     public var name:String
     public var isSubtask:Int
@@ -52,6 +61,8 @@ class Task: NSObject {
     
     public var recordName:String?
     
+    public var sessionsObservers: [SessionsObserver] = [SessionsObserver]()
+    
     init(name:String, isSubtask:Int, isActive:Int = 1, id:String, finishedSessionTime: Int = 0){
         self.name = name
         self.isSubtask = isSubtask
@@ -64,6 +75,15 @@ class Task: NSObject {
         self.sessions = sessionsArray
     }
     
+    // Notifies observers that the sessions were updated.
+    private func notifiyObservers() {
+        
+        for obs in self.sessionsObservers {
+            OperationQueue.main.addOperation({
+                obs.newData()
+            })
+        }
+    }
 
     
     /// The startSession function starts a session

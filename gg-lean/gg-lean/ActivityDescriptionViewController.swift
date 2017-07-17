@@ -8,16 +8,19 @@
 
 import UIKit
 
-class ActivityDescriptionViewController: UIViewController {
+class ActivityDescriptionViewController: UIViewController, SessionsObserver {
     
     var describedTask : Task!
     var selectedRow : Int = -1
     @IBOutlet weak var graphView: LineGraphView!
     @IBOutlet weak var nodataWarning: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        describedTask.sessionsObservers.append(self)
         
         self.navigationItem.title = describedTask.name
         graphView.lineGraphDataSource = self as LineGraphProtocol
@@ -31,6 +34,37 @@ class ActivityDescriptionViewController: UIViewController {
         descriptionLabel.text = ""
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        removeFromObservers()
+    }
+    
+    func removeFromObservers() {
+        var index: Int?
+        
+        for i in 0..<describedTask.sessionsObservers.count {
+            if let viewController = (describedTask.sessionsObservers[i] as? UIViewController), viewController == self {
+                index = i
+            }
+        }
+        if let index = index {
+            describedTask.sessionsObservers.remove(at: index)
+        }
+        
+    }
+    
+    func newData() {
+        self.tableView.reloadData()
+        graphView.setNeedsDisplay()
+        
+        if describedTask.sessions.count == 0{
+            nodataWarning.text = "No data to display"
+        } else{
+            nodataWarning.text = ""
+        }
+    }
+
 
 }
 
