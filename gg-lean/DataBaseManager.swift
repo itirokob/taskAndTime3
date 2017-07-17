@@ -403,8 +403,12 @@ class DataBaseManager : NSObject {
         
         op.perRecordCompletionBlock = { (record, recordID, error) in
             if error == nil{
-                if let result = record, let taskSession = self.mapToTaskSession(result){
-                    taskSessionList.append(taskSession)
+                if let result = record {
+                    if let taskSession = self.mapToTaskSession(result){
+                        taskSessionList.append(taskSession)
+                    } else {
+                        print("No task session record found.")
+                    }
                 }
             } else {
                 print("Error in mapping to recordIDList: \(String(describing: error))")

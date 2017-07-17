@@ -22,7 +22,7 @@ class Task: NSObject {
     var currentSession: TaskSession?
     public var name:String
     public var isSubtask:Int
-    private var finishedSessionTime: Int
+    public var finishedSessionTime: Int
     public var totalTime:Int {
         get {
             if let currentSession = self.currentSession {
@@ -40,7 +40,7 @@ class Task: NSObject {
     
     public var recordName:String?
     
-    init(name:String, isSubtask:Int, isActive:Int = 0, id:String, finishedSessionTime: Int = 0){
+    init(name:String, isSubtask:Int, isActive:Int = 1, id:String, finishedSessionTime: Int = 0){
         self.name = name
         self.isSubtask = isSubtask
         self.isActive = isActive
