@@ -9,6 +9,10 @@
 import UIKit
 import CloudKit
 
+/**
+ To create mock Task and TaskSession objects, just execute the populateTasks() method **once**.
+ To delete all records, call the deleteAllRecords() method (you may need to execute it twice due to the DB dependecies and relations).
+ */
 class PopulateTasks: NSObject {
     
     private var startDates: [Date] = [Date]()
