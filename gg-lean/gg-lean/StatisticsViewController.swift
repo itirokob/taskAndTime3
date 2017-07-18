@@ -145,6 +145,7 @@ extension StatisticsViewController : UITableViewDelegate, UITableViewDataSource{
         
         sendingTask = filteredTasks[indexPath.row]
         performSegue(withIdentifier: "showDescription", sender: self)
+        tableView.cellForRow(at: indexPath)?.isSelected = false
         
     }
 

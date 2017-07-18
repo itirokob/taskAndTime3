@@ -8,7 +8,6 @@
 
 import UIKit
 import Intents
-import SwipeCellKit
 
 let backgroundBlue : UIColor = UIColor(red: 34/255, green: 128/255, blue:171/255, alpha: 1)
 
