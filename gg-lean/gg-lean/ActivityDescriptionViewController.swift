@@ -16,6 +16,7 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
     @IBOutlet weak var nodataWarning: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,26 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
         } else{
             nodataWarning.text = ""
         }
+    }
+    
+    //Changing Segmented Control Value
+    @IBAction func segmentedControlValueChanged(_ sender: Any) {
+        
+        switch segmentedControl.selectedSegmentIndex{
+            
+        case 0:
+            print("Daily")
+            
+        case 1:
+            print("Weekly")
+            
+        case 3:
+            print("15 days")
+            
+        default:
+                break
+        }
+        
     }
 
 

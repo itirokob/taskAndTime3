@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -114,39 +114,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h2x-sR-5oa" customClass="LineGraphView" customModule="gg_lean" customModuleProvider="target">
-                                <rect key="frame" x="28" y="20" width="319" height="171"/>
+                                <rect key="frame" x="28" y="43" width="319" height="171"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nodataWarningLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlC-4T-cBS">
-                                <rect key="frame" x="109" y="95" width="157" height="21"/>
+                                <rect key="frame" x="109" y="118" width="157" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Ez-lO-xzB">
-                                <rect key="frame" x="0.0" y="220" width="375" height="334"/>
+                                <rect key="frame" x="0.0" y="238" width="375" height="316"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="334" id="Q79-TA-c5k"/>
+                                    <constraint firstAttribute="height" constant="316" id="Q79-TA-c5k"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="descriptionCell" textLabel="IuE-wd-g1L" detailTextLabel="G92-TC-RhL" style="IBUITableViewCellStyleValue1" id="LLE-wd-7l1">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LLE-wd-7l1" id="ubi-zU-nh9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Task Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IuE-wd-g1L">
-                                                    <rect key="frame" x="15" y="12" width="88.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="12" width="88" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Elapsed Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G92-TC-RhL">
-                                                    <rect key="frame" x="257" y="12" width="103" height="20.5"/>
+                                                    <rect key="frame" x="257" y="12" width="103" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -162,8 +162,20 @@
                                     <outlet property="delegate" destination="wfg-Ui-4ww" id="Hs3-2g-cfv"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eOD-0H-qAo">
+                                <rect key="frame" x="68" y="0.0" width="238" height="29"/>
+                                <segments>
+                                    <segment title="Daily"/>
+                                    <segment title="Weekly"/>
+                                    <segment title="15 days"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="segmentedControlValueChanged:" destination="wfg-Ui-4ww" eventType="valueChanged" id="sli-ok-NxL"/>
+                                </connections>
+                            </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJS-PR-P2P">
-                                <rect key="frame" x="115" y="191" width="232" height="17"/>
+                                <rect key="frame" x="115" y="216" width="232" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="232" id="qgb-HP-Ot4"/>
                                 </constraints>
@@ -176,13 +188,16 @@
                         <constraints>
                             <constraint firstItem="XlC-4T-cBS" firstAttribute="centerY" secondItem="h2x-sR-5oa" secondAttribute="centerY" id="9c9-dJ-sXF"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leadingMargin" constant="12" id="Cvg-1u-WKd"/>
+                            <constraint firstItem="h2x-sR-5oa" firstAttribute="top" secondItem="eOD-0H-qAo" secondAttribute="bottom" constant="15" id="DQd-vw-3Fe"/>
+                            <constraint firstItem="eOD-0H-qAo" firstAttribute="centerX" secondItem="XlC-4T-cBS" secondAttribute="centerX" id="Rq1-4n-RsM"/>
                             <constraint firstAttribute="trailing" secondItem="4Ez-lO-xzB" secondAttribute="trailing" id="VW9-jO-r9U"/>
+                            <constraint firstItem="eOD-0H-qAo" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leadingMargin" constant="52" id="Vjr-qA-LYt"/>
+                            <constraint firstItem="eOD-0H-qAo" firstAttribute="top" secondItem="hPc-SY-T1n" secondAttribute="bottom" id="YuO-81-SDs"/>
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leading" id="ZGz-T9-gZN"/>
                             <constraint firstItem="XlC-4T-cBS" firstAttribute="centerX" secondItem="h2x-sR-5oa" secondAttribute="centerX" id="ap4-sm-ZSZ"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="centerX" secondItem="4Ez-lO-xzB" secondAttribute="centerX" id="bzs-W6-eNC"/>
-                            <constraint firstItem="GJS-PR-P2P" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" id="f1O-c0-plF"/>
-                            <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="29" id="jgy-k5-Bqk"/>
-                            <constraint firstItem="h2x-sR-5oa" firstAttribute="top" secondItem="Yna-pY-awM" secondAttribute="top" constant="20" symbolic="YES" id="m6l-mu-WmQ"/>
+                            <constraint firstItem="GJS-PR-P2P" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="2" id="f1O-c0-plF"/>
+                            <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="GJS-PR-P2P" secondAttribute="bottom" constant="5" id="hPW-0M-hHq"/>
                             <constraint firstItem="GJS-PR-P2P" firstAttribute="trailing" secondItem="h2x-sR-5oa" secondAttribute="trailing" id="n7z-xT-QNg"/>
                             <constraint firstItem="0CZ-IH-keL" firstAttribute="top" secondItem="4Ez-lO-xzB" secondAttribute="bottom" id="vW8-zJ-Ysm"/>
                         </constraints>
@@ -191,6 +206,7 @@
                         <outlet property="descriptionLabel" destination="GJS-PR-P2P" id="LDb-JA-pwz"/>
                         <outlet property="graphView" destination="h2x-sR-5oa" id="voY-PI-9AK"/>
                         <outlet property="nodataWarning" destination="XlC-4T-cBS" id="CHy-0i-m2E"/>
+                        <outlet property="segmentedControl" destination="eOD-0H-qAo" id="Njm-FY-g3K"/>
                         <outlet property="tableView" destination="4Ez-lO-xzB" id="kww-Hz-GTY"/>
                     </connections>
                 </viewController>
