@@ -12,6 +12,7 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
     
     var describedTask : Task!
     var selectedRow : Int = -1
+    var dataPoints : [Float] = [Float]()
     @IBOutlet weak var graphView: LineGraphView!
     @IBOutlet weak var nodataWarning: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -26,11 +27,7 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
         self.navigationItem.title = describedTask.name
         graphView.lineGraphDataSource = self as LineGraphProtocol
         
-        if describedTask.sessions.count == 0{
-            nodataWarning.text = "No data to display"
-        } else{
-            nodataWarning.text = ""
-        }
+        updateWarningLabel( )
         selectedRow = -1
         descriptionLabel.text = ""
         
@@ -59,9 +56,13 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
         self.tableView.reloadData()
         graphView.setNeedsDisplay()
         
+        updateWarningLabel()
+    }
+    
+    func updateWarningLabel ( ){
         if describedTask.sessions.count == 0{
             nodataWarning.text = "No data to display"
-        } else{
+        }else{
             nodataWarning.text = ""
         }
     }
@@ -130,7 +131,7 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
     // This method needs to return a [Float] with the time of the sessions of the describedTask
     func getGraphValueArray() -> [Float] {
         
-        var dataPoints = [Float]()
+        dataPoints = [Float]()
         for session in describedTask.sessions{
             
             switch segmentedControl.selectedSegmentIndex{
@@ -152,7 +153,6 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
                 
             default: break
                 //This value shouldn't have happend. Go home iPhone, you're drunk.
-            
             }
         }
         
