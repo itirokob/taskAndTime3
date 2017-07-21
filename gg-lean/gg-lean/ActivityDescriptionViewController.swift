@@ -66,26 +66,10 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
         }
     }
     
-    //Changing Segmented Control Value
+    //Changing Segmented Control Value - tells graph view ro redraw itself
     @IBAction func segmentedControlValueChanged(_ sender: Any) {
-        
-        switch segmentedControl.selectedSegmentIndex{
-            
-        case 0:
-            print("Daily")
-            
-        case 1:
-            print("Weekly")
-            
-        case 3:
-            print("15 days")
-            
-        default:
-                break
-        }
-        
+        graphView.setNeedsDisplay()
     }
-
 
 }
 
@@ -148,7 +132,28 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
         
         var dataPoints = [Float]()
         for session in describedTask.sessions{
-            dataPoints.append(Float(session.durationInSeconds))
+            
+            switch segmentedControl.selectedSegmentIndex{
+            
+            case 0: //Daily
+                if session.startDate.timeIntervalSinceNow > -86400{
+                    dataPoints.append(Float(session.durationInSeconds))
+                }
+                
+            case 1: //Weekly
+                if session.startDate.timeIntervalSinceNow > -604800{
+                    dataPoints.append(Float(session.durationInSeconds))
+                }
+                
+            case 2: //Last 15 days
+                if session.startDate.timeIntervalSinceNow > -1296000{
+                    dataPoints.append(Float(session.durationInSeconds))
+                }
+                
+            default: break
+                //This value shouldn't have happend. Go home iPhone, you're drunk.
+            
+            }
         }
         
         return dataPoints
