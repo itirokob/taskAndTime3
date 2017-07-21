@@ -151,7 +151,7 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
                     dataPoints.append(Float(session.durationInSeconds))
                 }
                 
-            case 3:
+            case 3: //Last Month
                 if session.startDate.timeIntervalSinceNow > -2592000{
                     dataPoints.append(Float(session.durationInSeconds))
                 }

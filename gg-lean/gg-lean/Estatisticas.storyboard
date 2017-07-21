@@ -199,6 +199,7 @@
                             <constraint firstItem="GJS-PR-P2P" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="2" id="f1O-c0-plF"/>
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="GJS-PR-P2P" secondAttribute="bottom" constant="5" id="hPW-0M-hHq"/>
                             <constraint firstItem="eOD-0H-qAo" firstAttribute="centerX" secondItem="Yna-pY-awM" secondAttribute="centerX" id="hRf-vF-1yD"/>
+                            <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="24" id="llI-Vy-Bdb"/>
                             <constraint firstItem="GJS-PR-P2P" firstAttribute="trailing" secondItem="h2x-sR-5oa" secondAttribute="trailing" id="n7z-xT-QNg"/>
                             <constraint firstItem="0CZ-IH-keL" firstAttribute="top" secondItem="4Ez-lO-xzB" secondAttribute="bottom" id="vW8-zJ-Ysm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eOD-0H-qAo" secondAttribute="trailing" constant="10" id="xA0-OA-Wfn"/>
