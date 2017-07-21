@@ -151,6 +151,11 @@ extension ActivityDescriptionViewController : LineGraphProtocol{
                     dataPoints.append(Float(session.durationInSeconds))
                 }
                 
+            case 3:
+                if session.startDate.timeIntervalSinceNow > -2592000{
+                    dataPoints.append(Float(session.durationInSeconds))
+                }
+                
             default: break
                 //This value shouldn't have happend. Go home iPhone, you're drunk.
             }

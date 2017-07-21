@@ -135,18 +135,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LLE-wd-7l1" id="ubi-zU-nh9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Task Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IuE-wd-g1L">
-                                                    <rect key="frame" x="15" y="12" width="88" height="21"/>
+                                                    <rect key="frame" x="15" y="12" width="88.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Elapsed Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G92-TC-RhL">
-                                                    <rect key="frame" x="257" y="12" width="103" height="21"/>
+                                                    <rect key="frame" x="257" y="12" width="103" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -163,11 +163,12 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eOD-0H-qAo">
-                                <rect key="frame" x="68" y="0.0" width="238" height="29"/>
+                                <rect key="frame" x="26" y="0.0" width="323" height="29"/>
                                 <segments>
                                     <segment title="Daily"/>
                                     <segment title="Weekly"/>
                                     <segment title="15 days"/>
+                                    <segment title="Monthly"/>
                                 </segments>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -189,17 +190,18 @@
                             <constraint firstItem="XlC-4T-cBS" firstAttribute="centerY" secondItem="h2x-sR-5oa" secondAttribute="centerY" id="9c9-dJ-sXF"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leadingMargin" constant="12" id="Cvg-1u-WKd"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="top" secondItem="eOD-0H-qAo" secondAttribute="bottom" constant="15" id="DQd-vw-3Fe"/>
-                            <constraint firstItem="eOD-0H-qAo" firstAttribute="centerX" secondItem="XlC-4T-cBS" secondAttribute="centerX" id="Rq1-4n-RsM"/>
                             <constraint firstAttribute="trailing" secondItem="4Ez-lO-xzB" secondAttribute="trailing" id="VW9-jO-r9U"/>
-                            <constraint firstItem="eOD-0H-qAo" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leadingMargin" constant="52" id="Vjr-qA-LYt"/>
+                            <constraint firstItem="eOD-0H-qAo" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leadingMargin" constant="10" id="Vjr-qA-LYt"/>
                             <constraint firstItem="eOD-0H-qAo" firstAttribute="top" secondItem="hPc-SY-T1n" secondAttribute="bottom" id="YuO-81-SDs"/>
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="leading" secondItem="Yna-pY-awM" secondAttribute="leading" id="ZGz-T9-gZN"/>
                             <constraint firstItem="XlC-4T-cBS" firstAttribute="centerX" secondItem="h2x-sR-5oa" secondAttribute="centerX" id="ap4-sm-ZSZ"/>
                             <constraint firstItem="h2x-sR-5oa" firstAttribute="centerX" secondItem="4Ez-lO-xzB" secondAttribute="centerX" id="bzs-W6-eNC"/>
                             <constraint firstItem="GJS-PR-P2P" firstAttribute="top" secondItem="h2x-sR-5oa" secondAttribute="bottom" constant="2" id="f1O-c0-plF"/>
                             <constraint firstItem="4Ez-lO-xzB" firstAttribute="top" secondItem="GJS-PR-P2P" secondAttribute="bottom" constant="5" id="hPW-0M-hHq"/>
+                            <constraint firstItem="eOD-0H-qAo" firstAttribute="centerX" secondItem="Yna-pY-awM" secondAttribute="centerX" id="hRf-vF-1yD"/>
                             <constraint firstItem="GJS-PR-P2P" firstAttribute="trailing" secondItem="h2x-sR-5oa" secondAttribute="trailing" id="n7z-xT-QNg"/>
                             <constraint firstItem="0CZ-IH-keL" firstAttribute="top" secondItem="4Ez-lO-xzB" secondAttribute="bottom" id="vW8-zJ-Ysm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eOD-0H-qAo" secondAttribute="trailing" constant="10" id="xA0-OA-Wfn"/>
                         </constraints>
                     </view>
                     <connections>
