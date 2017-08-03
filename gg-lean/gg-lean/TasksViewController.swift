@@ -63,7 +63,7 @@ class TasksViewController: UIViewController{
     
         //Pull to refresh
         refresh = UIRefreshControl()
-        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresh.attributedTitle = NSAttributedString(string: NSLocalizedString("Pull to refresh", comment: "Pull to refresh"))
         refresh.addTarget(self, action: #selector(TasksViewController.loadTasks), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresh)
 

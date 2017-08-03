@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "Elapsed Time"; ObjectID = "G92-TC-RhL"; */
+"G92-TC-RhL.text" = "Tempo decorrido";
+
+/* Class = "UILabel"; text = "Description Label"; ObjectID = "GJS-PR-P2P"; */
+"GJS-PR-P2P.text" = "Label de Descrição";
+
+/* Class = "UILabel"; text = "Task Name"; ObjectID = "IuE-wd-g1L"; */
+"IuE-wd-g1L.text" = "Nome da tarefa";
+
+/* Class = "UINavigationItem"; title = "Statistics"; ObjectID = "W0b-WH-7lV"; */
+"W0b-WH-7lV.title" = "Estatísticas";
+
+/* Class = "UILabel"; text = "nodataWarningLabel"; ObjectID = "XlC-4T-cBS"; */
+"XlC-4T-cBS.text" = "semDadosWarningLabel";
+
+/* Class = "UILabel"; text = "Elapsed Time"; ObjectID = "mwP-3U-FST"; */
+"mwP-3U-FST.text" = "Tempo decorrido";
+
+/* Class = "UITabBarItem"; title = "Statistics"; ObjectID = "tDb-Sg-tnU"; */
+"tDb-Sg-tnU.title" = "Estatísticas";
+
+/* Class = "UILabel"; text = "Task Name"; ObjectID = "ubg-m1-1Ey"; */
+"ubg-m1-1Ey.text" = "Nome da tarefa";

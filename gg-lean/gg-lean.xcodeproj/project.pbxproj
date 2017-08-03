@@ -16,8 +16,6 @@
 		4D9356C41F17BC4E002CCE18 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767121F043C730063B268 /* Task.swift */; };
 		4D9356C51F17BE44002CCE18 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767101F04220D0063B268 /* DataBaseManager.swift */; };
 		4D9356C71F17BEB4002CCE18 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B737670C1F03DF200063B268 /* CloudKit.framework */; };
-		9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */; };
-		9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3183211F139EB100E49B38 /* Settings.storyboard */; };
 		9B3183261F13A6B200E49B38 /* LineGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183251F13A6B200E49B38 /* LineGraphView.swift */; };
 		9B31832A1F13D8A400E49B38 /* ActivityDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */; };
 		9B31832C1F13DAAC00E49B38 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */; };
@@ -38,6 +36,9 @@
 		B743974F1F19375D003603BD /* TimeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737671C1F053C670063B268 /* TimeLogic.swift */; };
 		B74397511F193794003603BD /* taskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73767021F03D4B40063B268 /* taskView.swift */; };
 		B74397521F19386F003603BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B73766F51F03D0650063B268 /* Assets.xcassets */; };
+		B7D284151F338206000B2238 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7D284171F338206000B2238 /* Localizable.strings */; };
+		B7D284221F338752000B2238 /* Estatisticas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D284241F338752000B2238 /* Estatisticas.storyboard */; };
+		B7D284271F3387D5000B2238 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D284291F3387D5000B2238 /* Settings.storyboard */; };
 		B7E3888B1F13FF8600C42A26 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = B7E3888A1F13FF8600C42A26 /* Cartfile */; };
 		B7E3888D1F14002700C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
 		B7E3888E1F14009400C42A26 /* SwipeCellKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */; };
@@ -98,8 +99,6 @@
 		4D8B7E9A1F13FEA400FAB3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4D8B7E9C1F13FEA400FAB3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D9356C61F17BEAA002CCE18 /* clicWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = clicWidget.entitlements; sourceTree = "<group>"; };
-		9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Estatisticas.storyboard; sourceTree = "<group>"; };
-		9B3183211F139EB100E49B38 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9B3183251F13A6B200E49B38 /* LineGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphView.swift; sourceTree = "<group>"; };
 		9B3183291F13D8A400E49B38 /* ActivityDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDescriptionViewController.swift; sourceTree = "<group>"; };
 		9B31832B1F13DAAC00E49B38 /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +118,16 @@
 		B73767101F04220D0063B268 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBaseManager.swift; path = ../DataBaseManager.swift; sourceTree = "<group>"; };
 		B73767121F043C730063B268 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = ../Task.swift; sourceTree = "<group>"; };
 		B737671C1F053C670063B268 /* TimeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLogic.swift; sourceTree = "<group>"; };
+		B7D284191F33821F000B2238 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B7D2841A1F338241000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B7D2841B1F338241000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		B7D2841C1F338241000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		B7D2841D1F338241000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		B7D2841E1F338241000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B7D284231F338752000B2238 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Estatisticas.storyboard; sourceTree = "<group>"; };
+		B7D284261F338757000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Estatisticas.strings"; sourceTree = "<group>"; };
+		B7D284281F3387D5000B2238 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		B7D2842B1F3387D7000B2238 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Settings.strings"; sourceTree = "<group>"; };
 		B7E3888A1F13FF8600C42A26 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		B7E3888C1F14002700C42A26 /* SwipeCellKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwipeCellKit.framework; path = Carthage/Build/iOS/SwipeCellKit.framework; sourceTree = "<group>"; };
 		B7E843B81F093C890041E634 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -208,6 +217,7 @@
 		B73766ED1F03D0650063B268 /* gg-lean */ = {
 			isa = PBXGroup;
 			children = (
+				B7D284171F338206000B2238 /* Localizable.strings */,
 				B73766EE1F03D0650063B268 /* AppDelegate.swift */,
 				B73767171F043CA90063B268 /* View */,
 				B73767141F043C840063B268 /* Model */,
@@ -259,8 +269,8 @@
 				B73766F21F03D0650063B268 /* Main.storyboard */,
 				B73767021F03D4B40063B268 /* taskView.swift */,
 				B73767061F03DC500063B268 /* taskView.xib */,
-				9B31831F1F139DD800E49B38 /* Estatisticas.storyboard */,
-				9B3183211F139EB100E49B38 /* Settings.storyboard */,
+				B7D284241F338752000B2238 /* Estatisticas.storyboard */,
+				B7D284291F3387D5000B2238 /* Settings.storyboard */,
 				9B3183251F13A6B200E49B38 /* LineGraphView.swift */,
 				9B31832D1F1402F100E49B38 /* PizzaGraph.xib */,
 				9B31832F1F14030700E49B38 /* PizzaGraphView.swift */,
@@ -443,6 +453,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = B73766E21F03D0640063B268;
 			productRefGroup = B73766EC1F03D0650063B268 /* Products */;
@@ -475,8 +486,9 @@
 				B73766F91F03D0650063B268 /* LaunchScreen.storyboard in Resources */,
 				9B31832E1F1402F100E49B38 /* PizzaGraph.xib in Resources */,
 				B73766F61F03D0650063B268 /* Assets.xcassets in Resources */,
-				9B3183201F139DD800E49B38 /* Estatisticas.storyboard in Resources */,
-				9B3183221F139EB100E49B38 /* Settings.storyboard in Resources */,
+				B7D284151F338206000B2238 /* Localizable.strings in Resources */,
+				B7D284221F338752000B2238 /* Estatisticas.storyboard in Resources */,
+				B7D284271F3387D5000B2238 /* Settings.storyboard in Resources */,
 				B73766F41F03D0650063B268 /* Main.storyboard in Resources */,
 				B73767071F03DC500063B268 /* taskView.xib in Resources */,
 			);
@@ -592,6 +604,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4D8B7E9A1F13FEA400FAB3F3 /* Base */,
+				B7D2841C1F338241000B2238 /* pt-BR */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -600,6 +613,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B73766F31F03D0650063B268 /* Base */,
+				B7D2841B1F338241000B2238 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -608,14 +622,44 @@
 			isa = PBXVariantGroup;
 			children = (
 				B73766F81F03D0650063B268 /* Base */,
+				B7D2841A1F338241000B2238 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B7D284171F338206000B2238 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7D284191F33821F000B2238 /* en */,
+				B7D2841E1F338241000B2238 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B7D284241F338752000B2238 /* Estatisticas.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7D284231F338752000B2238 /* Base */,
+				B7D284261F338757000B2238 /* pt-BR */,
+			);
+			name = Estatisticas.storyboard;
+			sourceTree = "<group>";
+		};
+		B7D284291F3387D5000B2238 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7D284281F3387D5000B2238 /* Base */,
+				B7D2842B1F3387D7000B2238 /* pt-BR */,
+			);
+			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
 		DE2B99D81F0E6969002CE4F3 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DE2B99D91F0E6969002CE4F3 /* Base */,
+				B7D2841D1F338241000B2238 /* pt-BR */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -659,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -708,6 +753,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

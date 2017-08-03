@@ -33,8 +33,8 @@
                                     <navigationItem title="Clic" id="Si2-NR-kpK"/>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V5c-Gn-aai">
-                                <rect key="frame" x="44" y="74" width="303" height="42"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add task" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V5c-Gn-aai">
+                                <rect key="frame" x="8" y="74" width="359" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -42,17 +42,8 @@
                                     <action selector="doneAction:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="8u0-Ri-ZpF"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jio-sT-lDw">
-                                <rect key="frame" x="16" y="75" width="17" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="17" id="vP6-E3-Sdx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PiB-9T-noN">
-                                <rect key="frame" x="0.0" y="124" width="375" height="494"/>
+                                <rect key="frame" x="0.0" y="112" width="375" height="506"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="92" id="4aP-Vl-Rul" customClass="Cell" customModule="gg_lean" customModuleProvider="target">
@@ -137,19 +128,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.50196078431372548" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="V5c-Gn-aai" firstAttribute="leading" secondItem="jio-sT-lDw" secondAttribute="trailing" constant="11" id="BzO-m4-MBb"/>
                             <constraint firstItem="PiB-9T-noN" firstAttribute="top" secondItem="V5c-Gn-aai" secondAttribute="bottom" constant="8" symbolic="YES" id="Ni0-9H-z5F"/>
                             <constraint firstAttribute="trailing" secondItem="7hp-sO-McK" secondAttribute="trailing" id="VpE-1Y-haP"/>
-                            <constraint firstItem="jio-sT-lDw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="WjF-ws-utY"/>
-                            <constraint firstItem="jio-sT-lDw" firstAttribute="top" secondItem="7hp-sO-McK" secondAttribute="bottom" constant="11" id="fVp-2L-8fj"/>
                             <constraint firstItem="7hp-sO-McK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hfv-DG-xsZ"/>
                             <constraint firstItem="7hp-sO-McK" firstAttribute="leading" secondItem="PiB-9T-noN" secondAttribute="leading" id="iPR-j4-CAv"/>
                             <constraint firstItem="7hp-sO-McK" firstAttribute="trailing" secondItem="PiB-9T-noN" secondAttribute="trailing" id="kcQ-io-cBO"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PiB-9T-noN" secondAttribute="bottom" id="lZA-Eu-KE7"/>
                             <constraint firstItem="V5c-Gn-aai" firstAttribute="top" secondItem="7hp-sO-McK" secondAttribute="bottom" constant="10" id="noe-QE-RBk"/>
                             <constraint firstItem="7hp-sO-McK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="tSB-uI-XlX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="V5c-Gn-aai" secondAttribute="trailing" constant="12" id="w8u-qe-0uz"/>
-                            <constraint firstItem="PiB-9T-noN" firstAttribute="top" secondItem="jio-sT-lDw" secondAttribute="bottom" constant="14" id="xha-kC-Diz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="V5c-Gn-aai" secondAttribute="trailing" constant="-8" id="w8u-qe-0uz"/>
+                            <constraint firstItem="V5c-Gn-aai" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-7" id="wkM-NJ-0k1"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Activities" image="notActiveWatch" selectedImage="activeWatch" id="B1O-GJ-tSe"/>

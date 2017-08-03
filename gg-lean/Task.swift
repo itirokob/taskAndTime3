@@ -90,7 +90,6 @@ class Task: NSObject {
         self.isRunning = false
         
         return cs
-
     }
     
     func updateCurrentSessionDuration() {
