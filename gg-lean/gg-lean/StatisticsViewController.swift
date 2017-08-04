@@ -54,7 +54,7 @@ class StatisticsViewController: UIViewController, UISearchResultsUpdating {
         searchController.searchBar.backgroundColor = .clear
         searchController.searchBar.tintColor = .white
         searchController.searchBar.isTranslucent = false
-        searchController.searchBar.placeholder =  "Search Activity"
+        searchController.searchBar.placeholder =  NSLocalizedString("Search activity", comment: "search activity")
         
         //Pull to refresh
         refresh = UIRefreshControl()

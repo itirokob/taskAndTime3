@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "8h8-nk-aIC"; */
+"8h8-nk-aIC.text" = "00:00:00";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "92o-l6-34X"; */
+"92o-l6-34X.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "Activities"; ObjectID = "B1O-GJ-tSe"; */
+"B1O-GJ-tSe.title" = "Actividades";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "FTY-U3-S9m"; */
+"FTY-U3-S9m.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "Clic"; ObjectID = "Si2-NR-kpK"; */
+"Si2-NR-kpK.title" = "Clic";
+
+/* Class = "UITextField"; placeholder = "Add task"; ObjectID = "V5c-Gn-aai"; */
+"V5c-Gn-aai.placeholder"= "Agregar tarea";
+
+/* Class = "UILabel"; text = "Tasks"; ObjectID = "doP-kK-e2u"; */
+"doP-kK-e2u.text" = "Tareas";

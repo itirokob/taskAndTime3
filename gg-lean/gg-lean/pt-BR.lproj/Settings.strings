@@ -1,0 +1,51 @@
+
+/* Class = "UILabel"; text = "Share"; ObjectID = "0pF-BQ-T7G"; */
+"0pF-BQ-T7G.text" = "Compartilhe";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "5l0-8r-C9k"; */
+"5l0-8r-C9k.text" = "Sobre";
+
+/* Class = "UITableViewSection"; headerTitle = "About this Application"; ObjectID = "65Z-Ed-Ssu"; */
+"65Z-Ed-Ssu.headerTitle" = "Sobre esse app";
+
+/* Class = "UILabel"; text = "Clic was created by a group of friends"; ObjectID = "6zO-Po-IpC"; */
+"6zO-Po-IpC.text" = "Clic foi criado por um grupo de amigos";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "BZ9-sD-qbJ"; */
+"BZ9-sD-qbJ.title" = "Configurações";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "Khq-7p-ahQ"; */
+"Khq-7p-ahQ.title" = "Configurações";
+
+/* Class = "UILabel"; text = "Something here too"; ObjectID = "Vbf-ii-v0s"; */
+"Vbf-ii-v0s.text" = "Algo aqui";
+
+/* Class = "UILabel"; text = "Bianca Itiroko"; ObjectID = "VcH-GM-diR"; */
+"VcH-GM-diR.text" = "Bianca Itiroko";
+
+/* Class = "UILabel"; text = "Something here too 2"; ObjectID = "Yab-iv-4DU"; */
+"Yab-iv-4DU.text" = "Algo aqui também 2";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "jBn-mF-H9S"; */
+"jBn-mF-H9S.title" = "Voltar";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "kc2-Q1-gja"; */
+"kc2-Q1-gja.title" = "Configurações";
+
+/* Class = "UILabel"; text = "Something Here"; ObjectID = "kl2-pW-tsr"; */
+"kl2-pW-tsr.text" = "Algo aqui";
+
+/* Class = "UILabel"; text = "We hope you enjoy using the app! <3"; ObjectID = "lDy-e3-8gY"; */
+"lDy-e3-8gY.text" = "Esperamos que goste do app! <3";
+
+/* Class = "UILabel"; text = "Giovani Pereira"; ObjectID = "mHW-nP-8br"; */
+"mHW-nP-8br.text" = "Giovani Pereira";
+
+/* Class = "UILabel"; text = "Rate"; ObjectID = "oz1-kF-ofO"; */
+"oz1-kF-ofO.text" = "Avalie";
+
+/* Class = "UILabel"; text = "Gustavo Avena"; ObjectID = "wEb-rb-ePi"; */
+"wEb-rb-ePi.text" = "Gustavo Avena";
+
+/* Class = "UILabel"; text = "Jéssica Cherque"; ObjectID = "zBO-YV-elb"; */
+"zBO-YV-elb.text" = "Jéssica Cherque";

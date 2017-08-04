@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Elapsed Time"; ObjectID = "G92-TC-RhL"; */
+"G92-TC-RhL.text" = "Tiempo Transcurrido";
+
+/* Class = "UINavigationItem"; title = "Statistics"; ObjectID = "W0b-WH-7lV"; */
+"W0b-WH-7lV.title" = "Estadísticas";
+
+/* Class = "UILabel"; text = "nodataWarningLabel"; ObjectID = "XlC-4T-cBS"; */
+"XlC-4T-cBS.text" = "nodataWarningLabel";
+
+/* Class = "UILabel"; text = "Elapsed Time"; ObjectID = "mwP-3U-FST"; */
+"mwP-3U-FST.text" = "Tiempo Transcurrido";
+
+/* Class = "UITabBarItem"; title = "Statistics"; ObjectID = "tDb-Sg-tnU"; */
+"tDb-Sg-tnU.title" = "Estadísticas";
