@@ -64,6 +64,7 @@ class ActivityDescriptionViewController: UIViewController, SessionsObserver {
             nodataWarning.text = "No data to display"
         }else{
             nodataWarning.text = ""
+            describedTask.sessions = describedTask.sessions.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending }) // FIXME: not the best way to order it.
         }
     }
     
