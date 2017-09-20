@@ -90,6 +90,7 @@
 
 /* Begin PBXFileReference section */
 		4D0B19FC1F169A850022E408 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		4D1BB3B81F7296F700120E7D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4D8B7E931F13FEA400FAB3F3 /* clicWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = clicWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8B7E941F13FEA400FAB3F3 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		4D8B7E971F13FEA400FAB3F3 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +188,7 @@
 		B73766E21F03D0640063B268 = {
 			isa = PBXGroup;
 			children = (
+				4D1BB3B81F7296F700120E7D /* README.md */,
 				B73766ED1F03D0650063B268 /* gg-lean */,
 				4D8B7E961F13FEA400FAB3F3 /* clicWidget */,
 				DE2B99CA1F0E6968002CE4F3 /* Intent Handler */,
